@@ -11,15 +11,17 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.common;
 
 public class EmailInfo {
-  public String email;
-  public Boolean preferred;
-  public Boolean pendingConfirmation;
 
-  public void preferred(String e) {
-    this.preferred = e != null && e.equals(email) ? true : null;
-  }
+    public String email;
+
+    public Boolean preferred;
+
+    public Boolean pendingConfirmation;
+
+    public void preferred(String e) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

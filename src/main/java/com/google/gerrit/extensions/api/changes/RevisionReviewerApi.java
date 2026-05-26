@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.changes;
 
 import com.google.gerrit.extensions.restapi.NotImplementedException;
@@ -19,30 +18,32 @@ import com.google.gerrit.extensions.restapi.RestApiException;
 import java.util.Map;
 
 public interface RevisionReviewerApi {
-  Map<String, Short> votes() throws RestApiException;
 
-  void deleteVote(String label) throws RestApiException;
+    Map<String, Short> votes() throws RestApiException;
 
-  void deleteVote(DeleteVoteInput input) throws RestApiException;
+    void deleteVote(String label) throws RestApiException;
 
-  /**
-   * A default implementation which allows source compatibility when adding new methods to the
-   * interface.
-   */
-  class NotImplemented implements RevisionReviewerApi {
-    @Override
-    public Map<String, Short> votes() throws RestApiException {
-      throw new NotImplementedException();
+    void deleteVote(DeleteVoteInput input) throws RestApiException;
+
+    /**
+     * A default implementation which allows source compatibility when adding new methods to the
+     * interface.
+     */
+    class NotImplemented implements RevisionReviewerApi {
+
+        @Override
+        public Map<String, Short> votes() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void deleteVote(String label) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void deleteVote(DeleteVoteInput input) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
-
-    @Override
-    public void deleteVote(String label) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void deleteVote(DeleteVoteInput input) throws RestApiException {
-      throw new NotImplementedException();
-    }
-  }
 }

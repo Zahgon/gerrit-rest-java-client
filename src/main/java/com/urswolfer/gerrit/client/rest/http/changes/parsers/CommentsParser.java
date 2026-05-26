@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.changes.parsers;
 
 import com.google.common.reflect.TypeToken;
@@ -22,7 +21,6 @@ import com.google.gerrit.extensions.common.CommentInfo;
 import com.google.gerrit.extensions.common.RobotCommentInfo;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.SortedMap;
@@ -34,9 +32,15 @@ import java.util.TreeMap;
  * @author Thomas Forrer
  */
 public class CommentsParser {
-    private static final Type COMMENT_TYPE = new TypeToken<TreeMap<String, List<CommentInfo>>>() {}.getType();
-    private static final Type ROBOT_COMMENT_TYPE = new TypeToken<TreeMap<String, List<RobotCommentInfo>>>() {}.getType();
-    private static final Type CHANGE_MESSAGE_TYPE = new TypeToken<List<ChangeMessageInfo>>() {}.getType();
+
+    private static final Type COMMENT_TYPE = new TypeToken<TreeMap<String, List<CommentInfo>>>() {
+    }.getType();
+
+    private static final Type ROBOT_COMMENT_TYPE = new TypeToken<TreeMap<String, List<RobotCommentInfo>>>() {
+    }.getType();
+
+    private static final Type CHANGE_MESSAGE_TYPE = new TypeToken<List<ChangeMessageInfo>>() {
+    }.getType();
 
     private final Gson gson;
 
@@ -45,26 +49,26 @@ public class CommentsParser {
     }
 
     public SortedMap<String, List<CommentInfo>> parseCommentInfos(JsonElement result) {
-        return gson.fromJson(result, COMMENT_TYPE);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public CommentInfo parseSingleCommentInfo(JsonElement result) {
-        return gson.fromJson(result, CommentInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public SortedMap<String, List<RobotCommentInfo>> parseRobotCommentInfos(JsonElement result) {
-        return gson.fromJson(result, ROBOT_COMMENT_TYPE);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public RobotCommentInfo parseSingleRobotCommentInfo(JsonElement result) {
-        return gson.fromJson(result, RobotCommentInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<ChangeMessageInfo> parseChangeMessageInfos(JsonElement result) {
-        return gson.fromJson(result, CHANGE_MESSAGE_TYPE);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public ChangeMessageInfo parseSingleChangeMessageInfo(JsonElement result) {
-        return gson.fromJson(result, ChangeMessageInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

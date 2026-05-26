@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http;
 
 import static com.urswolfer.gerrit.client.rest.http.PreemptiveAuthHttpRequestInterceptor.PREEMPTIVE_AUTH;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static org.apache.http.HttpStatus.SC_OK;
-
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -67,7 +65,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -79,126 +76,98 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 /**
  * @author Urs Wolfer
  */
 public class GerritRestClient implements RestClient {
 
     private static final String JSON_MIME_TYPE = ContentType.APPLICATION_JSON.getMimeType();
+
     private static final Pattern GERRIT_AUTH_PATTERN = Pattern.compile(".*?xGerritAuth=\"(.+?)\"");
+
     private static final int CONNECTION_TIMEOUT_MS = 300000;
+
     private static final Gson GSON = GsonFactory.create();
+
     private static final RequestConfig REQUEST_CONFIG = RequestConfig.custom().setNormalizeUri(false).build();
 
     private final GerritAuthData authData;
+
     private final HttpRequestExecutor httpRequestExecutor;
+
     private final List<HttpClientBuilderExtension> httpClientBuilderExtensions;
 
     private final BasicCookieStore cookieStore;
+
     private final LoginCache loginCache;
 
-    public GerritRestClient(GerritAuthData authData,
-                            HttpRequestExecutor httpRequestExecutor,
-                            HttpClientBuilderExtension... httpClientBuilderExtensions) {
+    public GerritRestClient(GerritAuthData authData, HttpRequestExecutor httpRequestExecutor, HttpClientBuilderExtension... httpClientBuilderExtensions) {
         this.authData = authData;
         this.httpRequestExecutor = httpRequestExecutor;
         this.httpClientBuilderExtensions = Arrays.asList(httpClientBuilderExtensions);
-
         cookieStore = new BasicCookieStore();
         loginCache = new LoginCache(authData, cookieStore);
     }
 
     @Override
     public Gson getGson() {
-        return GSON;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public JsonElement getRequest(String path) throws RestApiException {
-        return requestJson(path, null, HttpVerb.GET);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public JsonElement postRequest(String path) throws RestApiException {
-        return postRequest(path, null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public JsonElement postRequest(String path, String requestBody) throws RestApiException {
-        return requestJson(path, requestBody, HttpVerb.POST);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public JsonElement putRequest(String path) throws RestApiException {
-        return putRequest(path, null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public JsonElement putRequest(String path, String requestBody) throws RestApiException {
-        return requestJson(path, requestBody, HttpVerb.PUT);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public JsonElement deleteRequest(String path) throws RestApiException {
-        return requestJson(path, null, HttpVerb.DELETE);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public JsonElement requestJson(String path, String requestBody, HttpVerb verb) throws RestApiException {
-        try {
-            HttpResponse response = requestRest(path, requestBody, verb);
-
-            HttpEntity entity = response.getEntity();
-            if (entity == null) {
-                return null;
-            }
-
-            checkContentType(entity);
-
-            JsonElement ret = parseResponse(entity.getContent());
-            if (ret.isJsonNull()) {
-                throw RestApiException.wrap("Unexpectedly empty response.", null);
-            }
-            return ret;
-        } catch (IOException e) {
-            throw RestApiException.wrap("Request failed.", e);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public HttpResponse requestRest(String path,
-                                    String requestBody,
-                                    HttpVerb verb) throws IOException, HttpStatusException {
-        return requestRest(path, requestBody, verb, false);
+    public HttpResponse requestRest(String path, String requestBody, HttpVerb verb) throws IOException, HttpStatusException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    private HttpResponse requestRest(String path,
-                                     String requestBody,
-                                     HttpVerb verb,
-                                     boolean isRetry) throws IOException, HttpStatusException {
+    private HttpResponse requestRest(String path, String requestBody, HttpVerb verb, boolean isRetry) throws IOException, HttpStatusException {
         BasicHeader acceptHeader = new BasicHeader("Accept", JSON_MIME_TYPE);
         return request(path, requestBody, verb, isRetry, acceptHeader);
     }
 
     @Override
-    public HttpResponse request(String path,
-                                String requestBody,
-                                HttpVerb verb,
-                                Header... headers) throws IOException, HttpStatusException {
-        return request(path, requestBody, verb, false, headers);
+    public HttpResponse request(String path, String requestBody, HttpVerb verb, Header... headers) throws IOException, HttpStatusException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    private HttpResponse request(String path,
-                                 String requestBody,
-                                 HttpVerb verb,
-                                 boolean isRetry,
-                                 Header... headers) throws IOException, HttpStatusException {
+    private HttpResponse request(String path, String requestBody, HttpVerb verb, boolean isRetry, Header... headers) throws IOException, HttpStatusException {
         HttpContext httpContext = new BasicHttpContext();
         HttpClientBuilder client = getHttpClient(httpContext);
-
         Optional<String> gerritAuthOptional = updateGerritAuthWhenRequired(httpContext, client);
-
         String uri = authData.getHost();
         // only use /a when http login is required (i.e. we haven't got a gerrit-auth cookie)
         // it would work in most cases also with /a, but it breaks with HTTP digest auth ("Forbidden" returned)
@@ -206,9 +175,8 @@ public class GerritRestClient implements RestClient {
             uri += "/a";
         }
         uri += path;
-
         HttpRequestBase method;
-        switch (verb) {
+        switch(verb) {
             case POST:
                 method = new HttpPost(uri);
                 setRequestBody(requestBody, method);
@@ -237,23 +205,18 @@ public class GerritRestClient implements RestClient {
         if (gerritAuthOptional.isPresent()) {
             method.addHeader("X-Gerrit-Auth", gerritAuthOptional.get());
         }
-
         for (Header header : headers) {
             method.addHeader(header);
         }
-
         method.setConfig(REQUEST_CONFIG);
         HttpResponse response = httpRequestExecutor.execute(client, method, httpContext);
-
         if (!isRetry && response.getStatusLine().getStatusCode() == SC_FORBIDDEN && loginCache.getGerritAuthOptional().isPresent()) {
             // handle expired sessions: try again with a fresh login
             loginCache.invalidate();
             EntityUtils.consumeQuietly(response.getEntity());
             response = requestRest(path, requestBody, verb, true);
         }
-
         checkStatusCode(response);
-
         return response;
     }
 
@@ -284,26 +247,21 @@ public class GerritRestClient implements RestClient {
             // lock the account.
             return Optional.absent();
         }
-
         if (loginCache.isGithubOAuthDetected()) {
             // When Gerrit is configured with GitHub/OAuth authentication, do not keep on
             // trying the /login page as it would just result in a continuous loop of failed
             // login attempts.
             return Optional.absent();
         }
-
         Optional<Cookie> gerritAccountCookie = findGerritAccountCookie();
-        if (!gerritAccountCookie.isPresent()
-            || gerritAccountCookie.get().isExpired(new Date())
-            || !isSessionValid(client, httpContext)) {
+        if (!gerritAccountCookie.isPresent() || gerritAccountCookie.get().isExpired(new Date()) || !isSessionValid(client, httpContext)) {
             return updateGerritAuth(httpContext, client);
         }
         return loginCache.getGerritAuthOptional();
     }
 
     private Optional<String> updateGerritAuth(HttpContext httpContext, HttpClientBuilder client) throws IOException, HttpStatusException {
-        Optional<String> gerritAuthOptional = tryGerritHttpAuth(client, httpContext)
-            .or(tryGerritHttpFormAuth(client, httpContext));
+        Optional<String> gerritAuthOptional = tryGerritHttpAuth(client, httpContext).or(tryGerritHttpFormAuth(client, httpContext));
         loginCache.setGerritAuthOptional(gerritAuthOptional);
         return gerritAuthOptional;
     }
@@ -317,10 +275,7 @@ public class GerritRestClient implements RestClient {
         }
         String loginUrl = authData.getHost() + "/login/";
         HttpPost method = new HttpPost(loginUrl);
-        List<BasicNameValuePair> parameters = Lists.newArrayList(
-            new BasicNameValuePair("username", authData.getLogin()),
-            new BasicNameValuePair("password", authData.getPassword())
-        );
+        List<BasicNameValuePair> parameters = Lists.newArrayList(new BasicNameValuePair("username", authData.getLogin()), new BasicNameValuePair("password", authData.getPassword()));
         method.setEntity(new UrlEncodedFormEntity(parameters, Consts.UTF_8));
         HttpResponse loginResponse = httpRequestExecutor.execute(client, method, httpContext);
         return extractGerritAuth(loginResponse, httpContext);
@@ -378,7 +333,6 @@ public class GerritRestClient implements RestClient {
         return Optional.absent();
     }
 
-
     /**
      * In Gerrit < 2.12 the XSRF token was included in the start page HTML.
      */
@@ -400,48 +354,38 @@ public class GerritRestClient implements RestClient {
     private Optional<Cookie> findCookie(final String cookieName) {
         List<Cookie> cookies = cookieStore.getCookies();
         return Iterables.tryFind(cookies, new Predicate<Cookie>() {
+
             @Override
             public boolean apply(Cookie cookie) {
-                return cookie.getName().equals(cookieName);
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
         });
     }
 
     private HttpClientBuilder getHttpClient(HttpContext httpContext) {
         HttpClientBuilder client = HttpClients.custom();
-
-        client.useSystemProperties(); // see also: com.intellij.util.net.ssl.CertificateManager
-
+        // see also: com.intellij.util.net.ssl.CertificateManager
+        client.useSystemProperties();
         // we need to get redirected result after login (which is done with POST) for extracting xGerritAuth
         client.setRedirectStrategy(new LaxRedirectStrategy());
-
         httpContext.setAttribute(HttpClientContext.COOKIE_STORE, cookieStore);
-
-        RequestConfig.Builder requestConfig = RequestConfig.custom()
-                .setConnectTimeout(CONNECTION_TIMEOUT_MS) // how long it takes to connect to remote host
-                .setSocketTimeout(CONNECTION_TIMEOUT_MS) // how long it takes to retrieve data from remote host
-                .setConnectionRequestTimeout(CONNECTION_TIMEOUT_MS);
+        RequestConfig.Builder requestConfig = RequestConfig.custom().setConnectTimeout(// how long it takes to connect to remote host
+        CONNECTION_TIMEOUT_MS).setSocketTimeout(// how long it takes to retrieve data from remote host
+        CONNECTION_TIMEOUT_MS).setConnectionRequestTimeout(CONNECTION_TIMEOUT_MS);
         client.setDefaultRequestConfig(requestConfig.build());
-
         CredentialsProvider credentialsProvider = getCredentialsProvider();
         client.setDefaultCredentialsProvider(credentialsProvider);
-
         if (authData.isLoginAndPasswordAvailable()) {
-            credentialsProvider.setCredentials(AuthScope.ANY,
-                    new UsernamePasswordCredentials(authData.getLogin(), authData.getPassword()));
-
+            credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(authData.getLogin(), authData.getPassword()));
             BasicScheme basicAuth = new BasicScheme();
             httpContext.setAttribute(PREEMPTIVE_AUTH, basicAuth);
             client.addInterceptorFirst(new PreemptiveAuthHttpRequestInterceptor(authData));
         }
-
         client.addInterceptorLast(new UserAgentHttpRequestInterceptor());
-
         for (HttpClientBuilderExtension httpClientBuilderExtension : httpClientBuilderExtensions) {
             client = httpClientBuilderExtension.extend(client, authData);
             credentialsProvider = httpClientBuilderExtension.extendCredentialProvider(client, credentialsProvider, authData);
         }
-
         return client;
     }
 
@@ -452,15 +396,12 @@ public class GerritRestClient implements RestClient {
      */
     private BasicCredentialsProvider getCredentialsProvider() {
         return new BasicCredentialsProvider() {
+
             private Set<AuthScope> authAlreadyTried = Sets.newHashSet();
 
             @Override
             public Credentials getCredentials(AuthScope authscope) {
-                if (authAlreadyTried.contains(authscope)) {
-                    return null;
-                }
-                authAlreadyTried.add(authscope);
-                return super.getCredentials(authscope);
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
         };
     }
@@ -513,16 +454,14 @@ public class GerritRestClient implements RestClient {
         if (entity != null) {
             body = EntityUtils.toString(entity).trim();
         }
-        String message = String.format("Request not successful. Message: %s. Status-Code: %s. Content:%n%s.",
-                statusLine.getReasonPhrase(), statusLine.getStatusCode(), body);
+        String message = String.format("Request not successful. Message: %s. Status-Code: %s. Content:%n%s.", statusLine.getReasonPhrase(), statusLine.getStatusCode(), body);
         throw new HttpStatusException(statusLine.getStatusCode(), statusLine.getReasonPhrase(), message);
     }
 
     private void checkContentType(HttpEntity entity) throws RestApiException, IOException {
         Header contentType = entity.getContentType();
         if (contentType != null && !contentType.getValue().contains(JSON_MIME_TYPE)) {
-            throw RestApiException.wrap(String.format("Expected JSON but got '%s'. Content:%n%s",
-                contentType.getValue(), EntityUtils.toString(entity).trim()), null);
+            throw RestApiException.wrap(String.format("Expected JSON but got '%s'. Content:%n%s", contentType.getValue(), EntityUtils.toString(entity).trim()), null);
         }
     }
 }

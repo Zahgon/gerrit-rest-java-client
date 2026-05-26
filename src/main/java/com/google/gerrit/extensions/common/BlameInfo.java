@@ -11,33 +11,29 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.common;
 
 import java.util.List;
 
 public class BlameInfo {
-  public String author;
-  public String id;
-  public int time;
-  public String commitMsg;
-  public List<RangeInfo> ranges;
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+    public String author;
+
+    public String id;
+
+    public int time;
+
+    public String commitMsg;
+
+    public List<RangeInfo> ranges;
+
+    @Override
+    public boolean equals(Object o) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    BlameInfo blameInfo = (BlameInfo) o;
-
-    return id.equals(blameInfo.id);
-  }
-
-  @Override
-  public int hashCode() {
-    return id.hashCode();
-  }
 }

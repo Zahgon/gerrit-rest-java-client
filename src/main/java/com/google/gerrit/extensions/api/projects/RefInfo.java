@@ -11,22 +11,20 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.projects;
 
 import com.google.common.base.MoreObjects;
 
 public class RefInfo {
-  public String ref;
-  public String revision;
-  public Boolean canDelete;
 
-  @Override
-  public String toString() {
-    return MoreObjects.toStringHelper(this)
-        .add("ref", ref)
-        .add("revision", revision)
-        .add("canDelete", canDelete)
-        .toString();
-  }
+    public String ref;
+
+    public String revision;
+
+    public Boolean canDelete;
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

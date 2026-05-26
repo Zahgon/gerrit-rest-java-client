@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.plugins;
 
 import com.google.gerrit.extensions.common.PluginInfo;
@@ -24,116 +23,109 @@ import java.util.SortedMap;
 
 public interface Plugins {
 
-  ListRequest list() throws RestApiException;
+    ListRequest list() throws RestApiException;
 
-  PluginApi name(String name) throws RestApiException;
+    PluginApi name(String name) throws RestApiException;
 
-  @Deprecated
-  PluginApi install(String name, com.google.gerrit.extensions.common.InstallPluginInput input)
-      throws RestApiException;
-
-  PluginApi install(String name, InstallPluginInput input) throws RestApiException;
-
-  abstract class ListRequest {
-    private boolean all;
-    private int limit;
-    private int start;
-    private String substring;
-    private String prefix;
-    private String regex;
-
-    public List<PluginInfo> get() throws RestApiException {
-      Map<String, PluginInfo> map = getAsMap();
-      List<PluginInfo> result = new ArrayList<>(map.size());
-      for (Map.Entry<String, PluginInfo> e : map.entrySet()) {
-        result.add(e.getValue());
-      }
-      return result;
-    }
-
-    public abstract SortedMap<String, PluginInfo> getAsMap() throws RestApiException;
-
-    public ListRequest all() {
-      this.all = true;
-      return this;
-    }
-
-    public boolean getAll() {
-      return all;
-    }
-
-    public ListRequest limit(int limit) {
-      this.limit = limit;
-      return this;
-    }
-
-    public int getLimit() {
-      return limit;
-    }
-
-    public ListRequest start(int start) {
-      this.start = start;
-      return this;
-    }
-
-    public int getStart() {
-      return start;
-    }
-
-    public ListRequest substring(String substring) {
-      this.substring = substring;
-      return this;
-    }
-
-    public String getSubstring() {
-      return substring;
-    }
-
-    public ListRequest prefix(String prefix) {
-      this.prefix = prefix;
-      return this;
-    }
-
-    public String getPrefix() {
-      return prefix;
-    }
-
-    public ListRequest regex(String regex) {
-      this.regex = regex;
-      return this;
-    }
-
-    public String getRegex() {
-      return regex;
-    }
-  }
-
-  /**
-   * A default implementation which allows source compatibility when adding new methods to the
-   * interface.
-   */
-  class NotImplemented implements Plugins {
-    @Override
-    public ListRequest list() {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public PluginApi name(String name) {
-      throw new NotImplementedException();
-    }
-
-    @Override
     @Deprecated
-    public PluginApi install(
-        String name, com.google.gerrit.extensions.common.InstallPluginInput input)
-        throws RestApiException {
-      throw new NotImplementedException();
+    PluginApi install(String name, com.google.gerrit.extensions.common.InstallPluginInput input) throws RestApiException;
+
+    PluginApi install(String name, InstallPluginInput input) throws RestApiException;
+
+    abstract class ListRequest {
+
+        private boolean all;
+
+        private int limit;
+
+        private int start;
+
+        private String substring;
+
+        private String prefix;
+
+        private String regex;
+
+        public List<PluginInfo> get() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public abstract SortedMap<String, PluginInfo> getAsMap() throws RestApiException;
+
+        public ListRequest all() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public boolean getAll() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest limit(int limit) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public int getLimit() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest start(int start) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public int getStart() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest substring(String substring) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public String getSubstring() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest prefix(String prefix) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public String getPrefix() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest regex(String regex) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public String getRegex() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
 
-    @Override
-    public PluginApi install(String name, InstallPluginInput input) {
-      throw new NotImplementedException();
+    /**
+     * A default implementation which allows source compatibility when adding new methods to the
+     * interface.
+     */
+    class NotImplemented implements Plugins {
+
+        @Override
+        public ListRequest list() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public PluginApi name(String name) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        @Deprecated
+        public PluginApi install(String name, com.google.gerrit.extensions.common.InstallPluginInput input) throws RestApiException {
+            throw new NotImplementedException();
+        }
+
+        @Override
+        public PluginApi install(String name, InstallPluginInput input) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
-  }
 }

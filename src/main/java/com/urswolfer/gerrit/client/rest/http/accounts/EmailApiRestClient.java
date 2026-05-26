@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.accounts;
 
 import com.google.gerrit.extensions.api.accounts.EmailApi;
@@ -23,19 +22,17 @@ import com.google.gerrit.extensions.restapi.Url;
 import com.google.gson.JsonElement;
 import com.urswolfer.gerrit.client.rest.http.GerritRestClient;
 
-
 public class EmailApiRestClient extends EmailApi.NotImplemented implements EmailApi {
 
     private final AccountsParser accountsParser;
 
     private final GerritRestClient gerritRestClient;
+
     private final String name;
+
     private final String email;
 
-    public EmailApiRestClient(GerritRestClient gerritRestClient,
-                              AccountsParser accountsParser,
-                              String name,
-                              String email) {
+    public EmailApiRestClient(GerritRestClient gerritRestClient, AccountsParser accountsParser, String name, String email) {
         this.gerritRestClient = gerritRestClient;
         this.accountsParser = accountsParser;
         this.name = name;
@@ -44,18 +41,17 @@ public class EmailApiRestClient extends EmailApi.NotImplemented implements Email
 
     @Override
     public EmailInfo get() throws RestApiException {
-        JsonElement response = gerritRestClient.getRequest(getRequestPath());
-        return accountsParser.parseSingleEmailInfo(response);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void delete() throws  RestApiException {
-        gerritRestClient.deleteRequest(getRequestPath());
+    public void delete() throws RestApiException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void setPreferred() throws  RestApiException {
-        gerritRestClient.putRequest(getRequestPath() + "/preferred");
+    public void setPreferred() throws RestApiException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private String getRequestPath() {

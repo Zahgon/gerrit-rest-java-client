@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.changes;
 
 import com.google.gerrit.extensions.api.changes.CommentApi;
@@ -27,14 +26,14 @@ import com.urswolfer.gerrit.client.rest.http.changes.parsers.CommentsParser;
 public class CommentApiRestClient extends CommentApi.NotImplemented implements CommentApi {
 
     private final GerritRestClient gerritRestClient;
+
     private final RevisionApiRestClient revisionApiRestClient;
+
     private final CommentsParser commentsParser;
+
     private final String id;
 
-    public CommentApiRestClient(GerritRestClient gerritRestClient,
-                              RevisionApiRestClient revisionApiRestClient,
-                              CommentsParser commentsParser,
-                              String id) {
+    public CommentApiRestClient(GerritRestClient gerritRestClient, RevisionApiRestClient revisionApiRestClient, CommentsParser commentsParser, String id) {
         this.gerritRestClient = gerritRestClient;
         this.revisionApiRestClient = revisionApiRestClient;
         this.commentsParser = commentsParser;
@@ -43,18 +42,15 @@ public class CommentApiRestClient extends CommentApi.NotImplemented implements C
 
     @Override
     public CommentInfo get() throws RestApiException {
-        JsonElement response = gerritRestClient.getRequest(getRequestPath());
-        return commentsParser.parseSingleCommentInfo(response);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public CommentInfo delete(DeleteCommentInput input) throws RestApiException {
-        String body = gerritRestClient.getGson().toJson(input);
-        JsonElement response = gerritRestClient.postRequest(getRequestPath() + "/delete", body);
-        return commentsParser.parseSingleCommentInfo(response);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected String getRequestPath() {
-        return revisionApiRestClient.getRequestPath() + "/comments/" + id;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

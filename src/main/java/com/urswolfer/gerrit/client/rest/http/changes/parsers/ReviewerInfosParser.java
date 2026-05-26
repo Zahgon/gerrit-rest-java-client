@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.changes.parsers;
 
 import com.google.common.reflect.TypeToken;
@@ -22,7 +21,6 @@ import com.google.gerrit.extensions.api.changes.ReviewerInfo;
 import com.google.gerrit.extensions.common.SuggestedReviewerInfo;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-
 import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
@@ -34,8 +32,11 @@ import java.util.List;
  */
 public class ReviewerInfosParser {
 
-    private static final Type REVIEWER_INFO = new TypeToken<List<ReviewerInfo>>() {}.getType();
-    private static final Type SUGGESTED_REVIEWER_INFO = new TypeToken<List<SuggestedReviewerInfo>>() {}.getType();
+    private static final Type REVIEWER_INFO = new TypeToken<List<ReviewerInfo>>() {
+    }.getType();
+
+    private static final Type SUGGESTED_REVIEWER_INFO = new TypeToken<List<SuggestedReviewerInfo>>() {
+    }.getType();
 
     private final Gson gson;
 
@@ -44,20 +45,14 @@ public class ReviewerInfosParser {
     }
 
     public List<ReviewerInfo> parseReviewerInfos(JsonElement result) {
-        if (!result.isJsonArray()) {
-            return Collections.singletonList(gson.fromJson(result,  ReviewerInfo.class));
-        }
-        return gson.fromJson(result, REVIEWER_INFO);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<SuggestedReviewerInfo> parseSuggestReviewerInfos(JsonElement result) {
-        if (!result.isJsonArray()) {
-            return Collections.singletonList(gson.fromJson(result, SuggestedReviewerInfo.class));
-        }
-        return gson.fromJson(result, SUGGESTED_REVIEWER_INFO);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public AddReviewerResult parseAddReviewerResult(JsonElement result) {
-        return gson.fromJson(result, AddReviewerResult.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -11,37 +11,33 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.common;
 
 import java.util.Objects;
 
 public class FileInfo {
-  public Character status;
-  public Boolean binary;
-  public String oldPath;
-  public Integer linesInserted;
-  public Integer linesDeleted;
-  public long sizeDelta;
-  public long size;
 
-  @Override
-  public boolean equals(Object o) {
-    if (o instanceof FileInfo) {
-      FileInfo fileInfo = (FileInfo) o;
-      return Objects.equals(status, fileInfo.status)
-          && Objects.equals(binary, fileInfo.binary)
-          && Objects.equals(oldPath, fileInfo.oldPath)
-          && Objects.equals(linesInserted, fileInfo.linesInserted)
-          && Objects.equals(linesDeleted, fileInfo.linesDeleted)
-          && Objects.equals(sizeDelta, fileInfo.sizeDelta)
-          && Objects.equals(size, fileInfo.size);
+    public Character status;
+
+    public Boolean binary;
+
+    public String oldPath;
+
+    public Integer linesInserted;
+
+    public Integer linesDeleted;
+
+    public long sizeDelta;
+
+    public long size;
+
+    @Override
+    public boolean equals(Object o) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return false;
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(status, binary, oldPath, linesInserted, linesDeleted, sizeDelta, size);
-  }
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

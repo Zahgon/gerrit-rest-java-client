@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.changes;
 
 import com.google.common.collect.ListMultimap;
@@ -38,382 +37,386 @@ import java.util.Map;
 import java.util.Set;
 
 public interface RevisionApi {
-  @Deprecated
-  void delete() throws RestApiException;
-
-  String description() throws RestApiException;
-
-  void description(String description) throws RestApiException;
-
-  ReviewResult review(ReviewInput in) throws RestApiException;
-
-  default void submit() throws RestApiException {
-    SubmitInput in = new SubmitInput();
-    submit(in);
-  }
-
-  void submit(SubmitInput in) throws RestApiException;
-
-  default BinaryResult submitPreview() throws RestApiException {
-    return submitPreview("zip");
-  }
-
-  BinaryResult submitPreview(String format) throws RestApiException;
-
-  @Deprecated
-  void publish() throws RestApiException;
-
-  ChangeApi cherryPick(CherryPickInput in) throws RestApiException;
-
-  ChangeInfo cherryPickAsInfo(CherryPickInput in) throws RestApiException;
-
-  default ChangeApi rebase() throws RestApiException {
-    RebaseInput in = new RebaseInput();
-    return rebase(in);
-  }
-
-  ChangeApi rebase(RebaseInput in) throws RestApiException;
-
-  boolean canRebase() throws RestApiException;
-
-  RevisionReviewerApi reviewer(String id) throws RestApiException;
-
-  void setReviewed(String path, boolean reviewed) throws RestApiException;
-
-  Set<String> reviewed() throws RestApiException;
-
-  default Map<String, FileInfo> files() throws RestApiException {
-    return files(null);
-  }
-
-  Map<String, FileInfo> files(@Nullable String base) throws RestApiException;
-
-  Map<String, FileInfo> files(int parentNum) throws RestApiException;
-
-  List<String> queryFiles(String query) throws RestApiException;
-
-  FileApi file(String path);
-
-  CommitInfo commit(boolean addLinks) throws RestApiException;
-
-  MergeableInfo mergeable() throws RestApiException;
-
-  MergeableInfo mergeableOtherBranches() throws RestApiException;
-
-  Map<String, List<CommentInfo>> comments() throws RestApiException;
-
-  Map<String, List<RobotCommentInfo>> robotComments() throws RestApiException;
-
-  Map<String, List<CommentInfo>> drafts() throws RestApiException;
-
-  List<CommentInfo> commentsAsList() throws RestApiException;
-
-  List<CommentInfo> draftsAsList() throws RestApiException;
-
-  List<RobotCommentInfo> robotCommentsAsList() throws RestApiException;
-
-  /**
-   * Applies the indicated fix by creating a new change edit or integrating the fix with the
-   * existing change edit. If no change edit exists before this call, the fix must refer to the
-   * current patch set. If a change edit exists, the fix must refer to the patch set on which the
-   * change edit is based.
-   *
-   * @param fixId the ID of the fix which should be applied
-   * @throws RestApiException if the fix couldn't be applied
-   */
-  EditInfo applyFix(String fixId) throws RestApiException;
-
-  Map<String, DiffInfo> getFixPreview(String fixId) throws RestApiException;
-
-  DraftApi createDraft(DraftInput in) throws RestApiException;
-
-  DraftApi draft(String id) throws RestApiException;
-
-  CommentApi comment(String id) throws RestApiException;
-
-  RobotCommentApi robotComment(String id) throws RestApiException;
-
-  String etag() throws RestApiException;
-
-  /** Returns patch of revision. */
-  BinaryResult patch() throws RestApiException;
-
-  BinaryResult patch(String path) throws RestApiException;
-
-  Map<String, ActionInfo> actions() throws RestApiException;
-
-  SubmitType submitType() throws RestApiException;
-
-  SubmitType testSubmitType(TestSubmitRuleInput in) throws RestApiException;
-
-  TestSubmitRuleInfo testSubmitRule(TestSubmitRuleInput in) throws RestApiException;
-
-  MergeListRequest getMergeList() throws RestApiException;
-
-  RelatedChangesInfo related() throws RestApiException;
-
-  /** Returns votes on the revision. */
-  ListMultimap<String, ApprovalInfo> votes() throws RestApiException;
-
-  /**
-   * Retrieves the revision as an archive.
-   *
-   * @param format the format of the archive
-   * @return the archive as {@link BinaryResult}
-   * @throws RestApiException
-   */
-  BinaryResult getArchive(ArchiveFormat format) throws RestApiException;
-
-  abstract class MergeListRequest {
-    private boolean addLinks;
-    private int uninterestingParent = 1;
-
-    public abstract List<CommitInfo> get() throws RestApiException;
-
-    public MergeListRequest withLinks() {
-      this.addLinks = true;
-      return this;
-    }
-
-    public MergeListRequest withUninterestingParent(int uninterestingParent) {
-      this.uninterestingParent = uninterestingParent;
-      return this;
-    }
-
-    public boolean getAddLinks() {
-      return addLinks;
-    }
-
-    public int getUninterestingParent() {
-      return uninterestingParent;
-    }
-  }
-
-  /**
-   * A default implementation which allows source compatibility when adding new methods to the
-   * interface.
-   */
-  class NotImplemented implements RevisionApi {
-    @Deprecated
-    @Override
-    public void delete() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public ReviewResult review(ReviewInput in) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void submit(SubmitInput in) throws RestApiException {
-      throw new NotImplementedException();
-    }
 
     @Deprecated
-    @Override
-    public void publish() throws RestApiException {
-      throw new NotImplementedException();
+    void delete() throws RestApiException;
+
+    String description() throws RestApiException;
+
+    void description(String description) throws RestApiException;
+
+    ReviewResult review(ReviewInput in) throws RestApiException;
+
+    default void submit() throws RestApiException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    @Override
-    public ChangeApi cherryPick(CherryPickInput in) throws RestApiException {
-      throw new NotImplementedException();
+    void submit(SubmitInput in) throws RestApiException;
+
+    default BinaryResult submitPreview() throws RestApiException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    @Override
-    public ChangeInfo cherryPickAsInfo(CherryPickInput in) throws RestApiException {
-      throw new NotImplementedException();
+    BinaryResult submitPreview(String format) throws RestApiException;
+
+    @Deprecated
+    void publish() throws RestApiException;
+
+    ChangeApi cherryPick(CherryPickInput in) throws RestApiException;
+
+    ChangeInfo cherryPickAsInfo(CherryPickInput in) throws RestApiException;
+
+    default ChangeApi rebase() throws RestApiException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    @Override
-    public ChangeApi rebase(RebaseInput in) throws RestApiException {
-      throw new NotImplementedException();
+    ChangeApi rebase(RebaseInput in) throws RestApiException;
+
+    boolean canRebase() throws RestApiException;
+
+    RevisionReviewerApi reviewer(String id) throws RestApiException;
+
+    void setReviewed(String path, boolean reviewed) throws RestApiException;
+
+    Set<String> reviewed() throws RestApiException;
+
+    default Map<String, FileInfo> files() throws RestApiException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    @Override
-    public boolean canRebase() throws RestApiException {
-      throw new NotImplementedException();
+    Map<String, FileInfo> files(@Nullable String base) throws RestApiException;
+
+    Map<String, FileInfo> files(int parentNum) throws RestApiException;
+
+    List<String> queryFiles(String query) throws RestApiException;
+
+    FileApi file(String path);
+
+    CommitInfo commit(boolean addLinks) throws RestApiException;
+
+    MergeableInfo mergeable() throws RestApiException;
+
+    MergeableInfo mergeableOtherBranches() throws RestApiException;
+
+    Map<String, List<CommentInfo>> comments() throws RestApiException;
+
+    Map<String, List<RobotCommentInfo>> robotComments() throws RestApiException;
+
+    Map<String, List<CommentInfo>> drafts() throws RestApiException;
+
+    List<CommentInfo> commentsAsList() throws RestApiException;
+
+    List<CommentInfo> draftsAsList() throws RestApiException;
+
+    List<RobotCommentInfo> robotCommentsAsList() throws RestApiException;
+
+    /**
+     * Applies the indicated fix by creating a new change edit or integrating the fix with the
+     * existing change edit. If no change edit exists before this call, the fix must refer to the
+     * current patch set. If a change edit exists, the fix must refer to the patch set on which the
+     * change edit is based.
+     *
+     * @param fixId the ID of the fix which should be applied
+     * @throws RestApiException if the fix couldn't be applied
+     */
+    EditInfo applyFix(String fixId) throws RestApiException;
+
+    Map<String, DiffInfo> getFixPreview(String fixId) throws RestApiException;
+
+    DraftApi createDraft(DraftInput in) throws RestApiException;
+
+    DraftApi draft(String id) throws RestApiException;
+
+    CommentApi comment(String id) throws RestApiException;
+
+    RobotCommentApi robotComment(String id) throws RestApiException;
+
+    String etag() throws RestApiException;
+
+    /**
+     * Returns patch of revision.
+     */
+    BinaryResult patch() throws RestApiException;
+
+    BinaryResult patch(String path) throws RestApiException;
+
+    Map<String, ActionInfo> actions() throws RestApiException;
+
+    SubmitType submitType() throws RestApiException;
+
+    SubmitType testSubmitType(TestSubmitRuleInput in) throws RestApiException;
+
+    TestSubmitRuleInfo testSubmitRule(TestSubmitRuleInput in) throws RestApiException;
+
+    MergeListRequest getMergeList() throws RestApiException;
+
+    RelatedChangesInfo related() throws RestApiException;
+
+    /**
+     * Returns votes on the revision.
+     */
+    ListMultimap<String, ApprovalInfo> votes() throws RestApiException;
+
+    /**
+     * Retrieves the revision as an archive.
+     *
+     * @param format the format of the archive
+     * @return the archive as {@link BinaryResult}
+     * @throws RestApiException
+     */
+    BinaryResult getArchive(ArchiveFormat format) throws RestApiException;
+
+    abstract class MergeListRequest {
+
+        private boolean addLinks;
+
+        private int uninterestingParent = 1;
+
+        public abstract List<CommitInfo> get() throws RestApiException;
+
+        public MergeListRequest withLinks() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public MergeListRequest withUninterestingParent(int uninterestingParent) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public boolean getAddLinks() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public int getUninterestingParent() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
 
-    @Override
-    public RevisionReviewerApi reviewer(String id) throws RestApiException {
-      throw new NotImplementedException();
-    }
+    /**
+     * A default implementation which allows source compatibility when adding new methods to the
+     * interface.
+     */
+    class NotImplemented implements RevisionApi {
 
-    @Override
-    public void setReviewed(String path, boolean reviewed) throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Deprecated
+        @Override
+        public void delete() throws RestApiException {
+            throw new NotImplementedException();
+        }
 
-    @Override
-    public Set<String> reviewed() throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public ReviewResult review(ReviewInput in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public MergeableInfo mergeable() throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public void submit(SubmitInput in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public MergeableInfo mergeableOtherBranches() throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Deprecated
+        @Override
+        public void publish() throws RestApiException {
+            throw new NotImplementedException();
+        }
 
-    @Override
-    public Map<String, FileInfo> files(String base) throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public ChangeApi cherryPick(CherryPickInput in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public Map<String, FileInfo> files(int parentNum) throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public ChangeInfo cherryPickAsInfo(CherryPickInput in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public List<String> queryFiles(String query) throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public ChangeApi rebase(RebaseInput in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public FileApi file(String path) {
-      throw new NotImplementedException();
-    }
+        @Override
+        public boolean canRebase() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public CommitInfo commit(boolean addLinks) throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public RevisionReviewerApi reviewer(String id) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public Map<String, List<CommentInfo>> comments() throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public void setReviewed(String path, boolean reviewed) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public Map<String, List<RobotCommentInfo>> robotComments() throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public Set<String> reviewed() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public List<CommentInfo> commentsAsList() throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public MergeableInfo mergeable() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public List<CommentInfo> draftsAsList() throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public MergeableInfo mergeableOtherBranches() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public List<RobotCommentInfo> robotCommentsAsList() throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public Map<String, FileInfo> files(String base) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public EditInfo applyFix(String fixId) throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public Map<String, FileInfo> files(int parentNum) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public Map<String, DiffInfo> getFixPreview(String fixId) throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public List<String> queryFiles(String query) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public Map<String, List<CommentInfo>> drafts() throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public FileApi file(String path) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public DraftApi createDraft(DraftInput in) throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public CommitInfo commit(boolean addLinks) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public DraftApi draft(String id) throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public Map<String, List<CommentInfo>> comments() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public CommentApi comment(String id) throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public Map<String, List<RobotCommentInfo>> robotComments() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public RobotCommentApi robotComment(String id) throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public List<CommentInfo> commentsAsList() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public BinaryResult patch() throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public List<CommentInfo> draftsAsList() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public BinaryResult patch(String path) throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public List<RobotCommentInfo> robotCommentsAsList() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public Map<String, ActionInfo> actions() throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public EditInfo applyFix(String fixId) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public SubmitType submitType() throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public Map<String, DiffInfo> getFixPreview(String fixId) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public BinaryResult submitPreview(String format) throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public Map<String, List<CommentInfo>> drafts() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public SubmitType testSubmitType(TestSubmitRuleInput in) throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public DraftApi createDraft(DraftInput in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public TestSubmitRuleInfo testSubmitRule(TestSubmitRuleInput in) throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public DraftApi draft(String id) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public MergeListRequest getMergeList() throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public CommentApi comment(String id) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public RelatedChangesInfo related() throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public RobotCommentApi robotComment(String id) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public ListMultimap<String, ApprovalInfo> votes() throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public BinaryResult patch() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public void description(String description) throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public BinaryResult patch(String path) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public String description() throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public Map<String, ActionInfo> actions() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public String etag() throws RestApiException {
-      throw new NotImplementedException();
-    }
+        @Override
+        public SubmitType submitType() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    @Override
-    public BinaryResult getArchive(ArchiveFormat format) throws RestApiException {
-      throw new NotImplementedException();
+        @Override
+        public BinaryResult submitPreview(String format) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public SubmitType testSubmitType(TestSubmitRuleInput in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public TestSubmitRuleInfo testSubmitRule(TestSubmitRuleInput in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public MergeListRequest getMergeList() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public RelatedChangesInfo related() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public ListMultimap<String, ApprovalInfo> votes() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void description(String description) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public String description() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public String etag() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public BinaryResult getArchive(ArchiveFormat format) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
-  }
 }

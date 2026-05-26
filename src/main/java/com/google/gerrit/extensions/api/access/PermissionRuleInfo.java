@@ -16,38 +16,32 @@ package com.google.gerrit.extensions.api.access;
 import java.util.Objects;
 
 public class PermissionRuleInfo {
-  public enum Action {
-    ALLOW,
-    DENY,
-    BLOCK,
-    INTERACTIVE,
-    BATCH
-  }
 
-  public Action action;
-  public Boolean force;
-  public Integer min;
-  public Integer max;
+    public enum Action {
 
-  public PermissionRuleInfo(Action action, Boolean force) {
-    this.action = action;
-    this.force = force;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (obj instanceof PermissionRuleInfo) {
-      PermissionRuleInfo p = (PermissionRuleInfo) obj;
-      return Objects.equals(action, p.action)
-          && Objects.equals(force, p.force)
-          && Objects.equals(min, p.min)
-          && Objects.equals(max, p.max);
+        ALLOW, DENY, BLOCK, INTERACTIVE, BATCH
     }
-    return false;
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(action, force, min, max);
-  }
+    public Action action;
+
+    public Boolean force;
+
+    public Integer min;
+
+    public Integer max;
+
+    public PermissionRuleInfo(Action action, Boolean force) {
+        this.action = action;
+        this.force = force;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

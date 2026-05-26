@@ -11,11 +11,9 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.common;
 
 import static com.google.common.base.MoreObjects.toStringHelper;
-
 import com.google.common.collect.ComparisonChain;
 import java.util.Objects;
 
@@ -28,55 +26,47 @@ import java.util.Objects;
  * user identities in external systems.
  */
 public class AccountExternalIdInfo implements Comparable<AccountExternalIdInfo> {
-  /** The external ID key, formatted as {@code <scheme>:<ID>}. */
-  public String identity;
 
-  /** The email address of the external ID. */
-  public String emailAddress;
+    /**
+     * The external ID key, formatted as {@code <scheme>:<ID>}.
+     */
+    public String identity;
 
-  /**
-   * Whether the external ID is trusted.
-   *
-   * <p>Also see {@link
-   * com.google.gerrit.server.config.AuthConfig#isIdentityTrustable(java.util.Collection)}.
-   */
-  public Boolean trusted;
+    /**
+     * The email address of the external ID.
+     */
+    public String emailAddress;
 
-  /** Whether the external ID can be deleted by the calling user. */
-  public Boolean canDelete;
+    /**
+     * Whether the external ID is trusted.
+     *
+     * <p>Also see {@link
+     * com.google.gerrit.server.config.AuthConfig#isIdentityTrustable(java.util.Collection)}.
+     */
+    public Boolean trusted;
 
-  @Override
-  public int compareTo(AccountExternalIdInfo a) {
-    return ComparisonChain.start()
-        .compare(a.identity, identity)
-        .compare(a.emailAddress, emailAddress)
-        .result();
-  }
+    /**
+     * Whether the external ID can be deleted by the calling user.
+     */
+    public Boolean canDelete;
 
-  @Override
-  public boolean equals(Object o) {
-    if (o instanceof AccountExternalIdInfo) {
-      AccountExternalIdInfo a = (AccountExternalIdInfo) o;
-      return (Objects.equals(a.identity, identity))
-          && (Objects.equals(a.emailAddress, emailAddress))
-          && (Objects.equals(a.trusted, trusted))
-          && (Objects.equals(a.canDelete, canDelete));
+    @Override
+    public int compareTo(AccountExternalIdInfo a) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return false;
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(identity, emailAddress, trusted, canDelete);
-  }
+    @Override
+    public boolean equals(Object o) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public String toString() {
-    return toStringHelper(this)
-        .add("identity", identity)
-        .add("emailAddress", emailAddress)
-        .add("trusted", trusted)
-        .add("canDelete", canDelete)
-        .toString();
-  }
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.changes;
 
 import com.google.gerrit.extensions.api.changes.DraftApi;
@@ -30,17 +29,18 @@ import com.urswolfer.gerrit.client.rest.http.changes.parsers.CommentsParser;
 public class DraftApiRestClient extends DraftApi.NotImplemented implements DraftApi {
 
     private final GerritRestClient gerritRestClient;
+
     private final ChangeApiRestClient changeApiRestClient;
+
     private final RevisionApiRestClient revisionApiRestClient;
+
     private final CommentsParser commentsParser;
+
     private final CommentInfo commentInfo;
+
     private final String id;
 
-    public DraftApiRestClient(GerritRestClient gerritRestClient,
-                              ChangeApiRestClient changeApiRestClient,
-                              RevisionApiRestClient revisionApiRestClient,
-                              CommentsParser commentsParser,
-                              CommentInfo commentInfo) {
+    public DraftApiRestClient(GerritRestClient gerritRestClient, ChangeApiRestClient changeApiRestClient, RevisionApiRestClient revisionApiRestClient, CommentsParser commentsParser, CommentInfo commentInfo) {
         this.gerritRestClient = gerritRestClient;
         this.changeApiRestClient = changeApiRestClient;
         this.revisionApiRestClient = revisionApiRestClient;
@@ -49,11 +49,7 @@ public class DraftApiRestClient extends DraftApi.NotImplemented implements Draft
         this.id = null;
     }
 
-    public DraftApiRestClient(GerritRestClient gerritRestClient,
-                              ChangeApiRestClient changeApiRestClient,
-                              RevisionApiRestClient revisionApiRestClient,
-                              CommentsParser commentsParser,
-                              String id) {
+    public DraftApiRestClient(GerritRestClient gerritRestClient, ChangeApiRestClient changeApiRestClient, RevisionApiRestClient revisionApiRestClient, CommentsParser commentsParser, String id) {
         this.gerritRestClient = gerritRestClient;
         this.changeApiRestClient = changeApiRestClient;
         this.revisionApiRestClient = revisionApiRestClient;
@@ -64,27 +60,20 @@ public class DraftApiRestClient extends DraftApi.NotImplemented implements Draft
 
     @Override
     public CommentInfo update(DraftInput in) throws RestApiException {
-        String json = gerritRestClient.getGson().toJson(in);
-        JsonElement jsonElement = gerritRestClient.putRequest(getUrl(), json);
-        return commentsParser.parseSingleCommentInfo(jsonElement.getAsJsonObject());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void delete() throws RestApiException {
-        gerritRestClient.deleteRequest(getUrl());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public CommentInfo get() throws RestApiException {
-        if (commentInfo != null) {
-            return commentInfo;
-        }
-        JsonElement jsonElement = gerritRestClient.getRequest(getUrl());
-        return commentsParser.parseSingleCommentInfo(jsonElement.getAsJsonObject());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private String getUrl() {
-        return "/changes/" + changeApiRestClient.id() + "/revisions/" + revisionApiRestClient.revision()
-                + "/drafts/" + (commentInfo != null ? commentInfo.id : id);
+        return "/changes/" + changeApiRestClient.id() + "/revisions/" + revisionApiRestClient.revision() + "/drafts/" + (commentInfo != null ? commentInfo.id : id);
     }
 }

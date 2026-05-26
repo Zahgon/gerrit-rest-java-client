@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.changes;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -22,226 +21,220 @@ import com.google.gerrit.extensions.common.ChangeInput;
 import com.google.gerrit.extensions.restapi.NotImplementedException;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gwtorm.server.StandardKeyEncoder;
-
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
 public interface Changes {
-  /**
-   * Look up a change by numeric ID.
-   *
-   * <p><strong>Note:</strong> This method eagerly reads the change. Methods that mutate the change
-   * do not necessarily re-read the change. Therefore, calling a getter method on an instance after
-   * calling a mutation method on that same instance is not guaranteed to reflect the mutation. It
-   * is not recommended to store references to {@code ChangeApi} instances.
-   *
-   * @param id change number.
-   * @return API for accessing the change.
-   * @throws RestApiException if an error occurred.
-   */
-  ChangeApi id(int id) throws RestApiException;
 
-  /**
-   * Look up a change by string ID.
-   *
-   * @see #id(int)
-   * @param id any identifier supported by the REST API, including change number, Change-Id, or
-   *     project~branch~Change-Id triplet.
-   * @return API for accessing the change.
-   * @throws RestApiException if an error occurred.
-   */
-  ChangeApi id(String id) throws RestApiException;
+    /**
+     * Look up a change by numeric ID.
+     *
+     * <p><strong>Note:</strong> This method eagerly reads the change. Methods that mutate the change
+     * do not necessarily re-read the change. Therefore, calling a getter method on an instance after
+     * calling a mutation method on that same instance is not guaranteed to reflect the mutation. It
+     * is not recommended to store references to {@code ChangeApi} instances.
+     *
+     * @param id change number.
+     * @return API for accessing the change.
+     * @throws RestApiException if an error occurred.
+     */
+    ChangeApi id(int id) throws RestApiException;
 
-  /**
-   * Look up a change by project, branch, and change ID.
-   *
-   * @see #id(int)
-   */
-  ChangeApi id(String project, String branch, String id) throws RestApiException;
+    /**
+     * Look up a change by string ID.
+     *
+     * @see #id(int)
+     * @param id any identifier supported by the REST API, including change number, Change-Id, or
+     *     project~branch~Change-Id triplet.
+     * @return API for accessing the change.
+     * @throws RestApiException if an error occurred.
+     */
+    ChangeApi id(String id) throws RestApiException;
 
-  /**
-   * Look up a change by project and numeric ID.
-   *
-   * @param project project name.
-   * @param id change number.
-   * @see #id(int)
-   */
-  ChangeApi id(String project, int id) throws RestApiException;
+    /**
+     * Look up a change by project, branch, and change ID.
+     *
+     * @see #id(int)
+     */
+    ChangeApi id(String project, String branch, String id) throws RestApiException;
 
-  ChangeApi create(ChangeInput in) throws RestApiException;
+    /**
+     * Look up a change by project and numeric ID.
+     *
+     * @param project project name.
+     * @param id change number.
+     * @see #id(int)
+     */
+    ChangeApi id(String project, int id) throws RestApiException;
 
-  ChangeInfo createAsInfo(ChangeInput in) throws RestApiException;
+    ChangeApi create(ChangeInput in) throws RestApiException;
 
-  QueryRequest query();
+    ChangeInfo createAsInfo(ChangeInput in) throws RestApiException;
 
-  QueryRequest query(String query);
+    QueryRequest query();
 
-  abstract class QueryRequest {
-    private String query;
-    private int limit;
-    private int start;
-    private String sortkey; // server version < 2.9, needed for change list paging
-    private boolean isNoLimit;
-    private Set<ListChangesOption> options = EnumSet.noneOf(ListChangesOption.class);
-    private ListMultimap<String, String> pluginOptions = ArrayListMultimap.create();
+    QueryRequest query(String query);
 
-    public abstract List<ChangeInfo> get() throws RestApiException;
+    abstract class QueryRequest {
 
-    public QueryRequest withQuery(String query) {
-      this.query = query;
-      return this;
+        private String query;
+
+        private int limit;
+
+        private int start;
+
+        // server version < 2.9, needed for change list paging
+        private String sortkey;
+
+        private boolean isNoLimit;
+
+        private Set<ListChangesOption> options = EnumSet.noneOf(ListChangesOption.class);
+
+        private ListMultimap<String, String> pluginOptions = ArrayListMultimap.create();
+
+        public abstract List<ChangeInfo> get() throws RestApiException;
+
+        public QueryRequest withQuery(String query) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public QueryRequest encode() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public QueryRequest withLimit(int limit) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public QueryRequest withNoLimit() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public QueryRequest withStart(int start) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        // server version < 2.9, needed for change list paging
+        public QueryRequest withSortkey(String sortkey) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set an option on the request, appending to existing options.
+         */
+        public QueryRequest withOption(ListChangesOption options) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set options on the request, appending to existing options.
+         */
+        public QueryRequest withOptions(ListChangesOption... options) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set options on the request, replacing existing options.
+         */
+        public QueryRequest withOptions(Set<ListChangesOption> options) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set a plugin option on the request, appending to existing options.
+         */
+        public QueryRequest withPluginOption(String name, String value) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set a plugin option on the request, replacing existing options.
+         */
+        public QueryRequest withPluginOptions(ListMultimap<String, String> options) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public String getQuery() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public int getLimit() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public boolean getNoLimit() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public int getStart() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        // server version < 2.9, needed for change list paging
+        public String getSortkey() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public Set<ListChangesOption> getOptions() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListMultimap<String, String> getPluginOptions() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public String toString() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
 
-    public QueryRequest encode() {
-      query = StandardKeyEncoder.encode(query);
-      return this;
-    }
+    /**
+     * A default implementation which allows source compatibility when adding new methods to the
+     * interface.
+     */
+    class NotImplemented implements Changes {
 
-    public QueryRequest withLimit(int limit) {
-      this.limit = limit;
-      return this;
-    }
+        @Override
+        public ChangeApi id(int id) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    public QueryRequest withNoLimit() {
-      this.isNoLimit = true;
-      return this;
-    }
+        @Override
+        public ChangeApi id(String triplet) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    public QueryRequest withStart(int start) {
-      this.start = start;
-      return this;
-    }
+        @Override
+        public ChangeApi id(String project, String branch, String id) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    // server version < 2.9, needed for change list paging
-    public QueryRequest withSortkey(String sortkey) {
-      this.sortkey = sortkey;
-      return this;
-    }
+        @Override
+        public ChangeApi id(String project, int id) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    /** Set an option on the request, appending to existing options. */
-    public QueryRequest withOption(ListChangesOption options) {
-      this.options.add(options);
-      return this;
-    }
+        @Override
+        public ChangeApi create(ChangeInput in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    /** Set options on the request, appending to existing options. */
-    public QueryRequest withOptions(ListChangesOption... options) {
-      this.options.addAll(Arrays.asList(options));
-      return this;
-    }
+        @Override
+        public ChangeInfo createAsInfo(ChangeInput in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    /** Set options on the request, replacing existing options. */
-    public QueryRequest withOptions(Set<ListChangesOption> options) {
-      this.options = options;
-      return this;
-    }
+        @Override
+        public QueryRequest query() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    /** Set a plugin option on the request, appending to existing options. */
-    public QueryRequest withPluginOption(String name, String value) {
-      this.pluginOptions.put(name, value);
-      return this;
+        @Override
+        public QueryRequest query(String query) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
-
-    /** Set a plugin option on the request, replacing existing options. */
-    public QueryRequest withPluginOptions(ListMultimap<String, String> options) {
-      this.pluginOptions = ArrayListMultimap.create(options);
-      return this;
-    }
-
-    public String getQuery() {
-      return query;
-    }
-
-    public int getLimit() {
-      return limit;
-    }
-
-    public boolean getNoLimit() {
-      return isNoLimit;
-    }
-
-    public int getStart() {
-      return start;
-    }
-
-    // server version < 2.9, needed for change list paging
-    public String getSortkey() {
-      return sortkey;
-    }
-
-    public Set<ListChangesOption> getOptions() {
-      return options;
-    }
-
-    public ListMultimap<String, String> getPluginOptions() {
-      return pluginOptions;
-    }
-
-    @Override
-    public String toString() {
-      StringBuilder sb = new StringBuilder(getClass().getSimpleName()).append('{').append(query);
-      if (limit != 0) {
-        sb.append(", limit=").append(limit);
-      }
-      if (start != 0) {
-        sb.append(", start=").append(start);
-      }
-      if (!options.isEmpty()) {
-        sb.append("options=").append(options);
-      }
-      sb.append('}');
-      if (isNoLimit == true) {
-        sb.append(" --no-limit");
-      }
-      return sb.toString();
-    }
-  }
-
-  /**
-   * A default implementation which allows source compatibility when adding new methods to the
-   * interface.
-   */
-  class NotImplemented implements Changes {
-    @Override
-    public ChangeApi id(int id) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public ChangeApi id(String triplet) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public ChangeApi id(String project, String branch, String id) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public ChangeApi id(String project, int id) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public ChangeApi create(ChangeInput in) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public ChangeInfo createAsInfo(ChangeInput in) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public QueryRequest query() {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public QueryRequest query(String query) {
-      throw new NotImplementedException();
-    }
-  }
 }

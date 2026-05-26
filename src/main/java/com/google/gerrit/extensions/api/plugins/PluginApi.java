@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.plugins;
 
 import com.google.gerrit.extensions.common.PluginInfo;
@@ -19,37 +18,39 @@ import com.google.gerrit.extensions.restapi.NotImplementedException;
 import com.google.gerrit.extensions.restapi.RestApiException;
 
 public interface PluginApi {
-  PluginInfo get() throws RestApiException;
 
-  void enable() throws RestApiException;
+    PluginInfo get() throws RestApiException;
 
-  void disable() throws RestApiException;
+    void enable() throws RestApiException;
 
-  void reload() throws RestApiException;
+    void disable() throws RestApiException;
 
-  /**
-   * A default implementation which allows source compatibility when adding new methods to the
-   * interface.
-   */
-  class NotImplemented implements PluginApi {
-    @Override
-    public PluginInfo get() throws RestApiException {
-      throw new NotImplementedException();
+    void reload() throws RestApiException;
+
+    /**
+     * A default implementation which allows source compatibility when adding new methods to the
+     * interface.
+     */
+    class NotImplemented implements PluginApi {
+
+        @Override
+        public PluginInfo get() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void enable() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void disable() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void reload() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
-
-    @Override
-    public void enable() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void disable() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void reload() throws RestApiException {
-      throw new NotImplementedException();
-    }
-  }
 }

@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.projects;
 
 import com.google.gerrit.extensions.restapi.BinaryResult;
@@ -20,45 +19,49 @@ import com.google.gerrit.extensions.restapi.RestApiException;
 import java.util.List;
 
 public interface BranchApi {
-  BranchApi create(BranchInput in) throws RestApiException;
 
-  BranchInfo get() throws RestApiException;
+    BranchApi create(BranchInput in) throws RestApiException;
 
-  void delete() throws RestApiException;
+    BranchInfo get() throws RestApiException;
 
-  /** Returns the content of a file from the HEAD revision. */
-  BinaryResult file(String path) throws RestApiException;
+    void delete() throws RestApiException;
 
-  List<ReflogEntryInfo> reflog() throws RestApiException;
+    /**
+     * Returns the content of a file from the HEAD revision.
+     */
+    BinaryResult file(String path) throws RestApiException;
 
-  /**
-   * A default implementation which allows source compatibility when adding new methods to the
-   * interface.
-   */
-  class NotImplemented implements BranchApi {
-    @Override
-    public BranchApi create(BranchInput in) throws RestApiException {
-      throw new NotImplementedException();
+    List<ReflogEntryInfo> reflog() throws RestApiException;
+
+    /**
+     * A default implementation which allows source compatibility when adding new methods to the
+     * interface.
+     */
+    class NotImplemented implements BranchApi {
+
+        @Override
+        public BranchApi create(BranchInput in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public BranchInfo get() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void delete() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public BinaryResult file(String path) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public List<ReflogEntryInfo> reflog() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
-
-    @Override
-    public BranchInfo get() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void delete() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public BinaryResult file(String path) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public List<ReflogEntryInfo> reflog() throws RestApiException {
-      throw new NotImplementedException();
-    }
-  }
 }

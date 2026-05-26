@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.accounts;
 
 import com.google.gerrit.extensions.api.changes.StarsInput;
@@ -35,321 +34,318 @@ import java.util.Map;
 import java.util.SortedSet;
 
 public interface AccountApi {
-  AccountInfo get() throws RestApiException;
 
-  AccountDetailInfo detail() throws RestApiException;
+    AccountInfo get() throws RestApiException;
 
-  boolean getActive() throws RestApiException;
+    AccountDetailInfo detail() throws RestApiException;
 
-  void setActive(boolean active) throws RestApiException;
+    boolean getActive() throws RestApiException;
 
-  String getAvatarUrl(int size) throws RestApiException;
+    void setActive(boolean active) throws RestApiException;
 
-  GeneralPreferencesInfo getPreferences() throws RestApiException;
+    String getAvatarUrl(int size) throws RestApiException;
 
-  GeneralPreferencesInfo setPreferences(GeneralPreferencesInfo in) throws RestApiException;
+    GeneralPreferencesInfo getPreferences() throws RestApiException;
 
-  DiffPreferencesInfo getDiffPreferences() throws RestApiException;
+    GeneralPreferencesInfo setPreferences(GeneralPreferencesInfo in) throws RestApiException;
 
-  DiffPreferencesInfo setDiffPreferences(DiffPreferencesInfo in) throws RestApiException;
+    DiffPreferencesInfo getDiffPreferences() throws RestApiException;
 
-  EditPreferencesInfo getEditPreferences() throws RestApiException;
+    DiffPreferencesInfo setDiffPreferences(DiffPreferencesInfo in) throws RestApiException;
 
-  EditPreferencesInfo setEditPreferences(EditPreferencesInfo in) throws RestApiException;
+    EditPreferencesInfo getEditPreferences() throws RestApiException;
 
-  List<ProjectWatchInfo> getWatchedProjects() throws RestApiException;
+    EditPreferencesInfo setEditPreferences(EditPreferencesInfo in) throws RestApiException;
 
-  List<ProjectWatchInfo> setWatchedProjects(List<ProjectWatchInfo> in) throws RestApiException;
+    List<ProjectWatchInfo> getWatchedProjects() throws RestApiException;
 
-  void deleteWatchedProjects(List<ProjectWatchInfo> in) throws RestApiException;
+    List<ProjectWatchInfo> setWatchedProjects(List<ProjectWatchInfo> in) throws RestApiException;
 
-  void starChange(String changeId) throws RestApiException;
+    void deleteWatchedProjects(List<ProjectWatchInfo> in) throws RestApiException;
 
-  void unstarChange(String changeId) throws RestApiException;
+    void starChange(String changeId) throws RestApiException;
 
-  void setStars(String changeId, StarsInput input) throws RestApiException;
+    void unstarChange(String changeId) throws RestApiException;
 
-  SortedSet<String> getStars(String changeId) throws RestApiException;
+    void setStars(String changeId, StarsInput input) throws RestApiException;
 
-  List<ChangeInfo> getStarredChanges() throws RestApiException;
+    SortedSet<String> getStars(String changeId) throws RestApiException;
 
-  List<GroupInfo> getGroups() throws RestApiException;
+    List<ChangeInfo> getStarredChanges() throws RestApiException;
 
-  List<EmailInfo> getEmails() throws RestApiException;
+    List<GroupInfo> getGroups() throws RestApiException;
 
-  void addEmail(EmailInput input) throws RestApiException;
+    List<EmailInfo> getEmails() throws RestApiException;
 
-  void deleteEmail(String email) throws RestApiException;
+    void addEmail(EmailInput input) throws RestApiException;
 
-  EmailApi createEmail(EmailInput emailInput) throws RestApiException;
+    void deleteEmail(String email) throws RestApiException;
 
-  EmailApi email(String email) throws RestApiException;
+    EmailApi createEmail(EmailInput emailInput) throws RestApiException;
 
-  void setStatus(String status) throws RestApiException;
+    EmailApi email(String email) throws RestApiException;
 
-  void setDisplayName(String displayName) throws RestApiException;
+    void setStatus(String status) throws RestApiException;
 
-  List<SshKeyInfo> listSshKeys() throws RestApiException;
+    void setDisplayName(String displayName) throws RestApiException;
 
-  SshKeyInfo addSshKey(String key) throws RestApiException;
+    List<SshKeyInfo> listSshKeys() throws RestApiException;
 
-  void deleteSshKey(int seq) throws RestApiException;
+    SshKeyInfo addSshKey(String key) throws RestApiException;
 
-  Map<String, GpgKeyInfo> listGpgKeys() throws RestApiException;
+    void deleteSshKey(int seq) throws RestApiException;
 
-  Map<String, GpgKeyInfo> putGpgKeys(List<String> add, List<String> remove) throws RestApiException;
+    Map<String, GpgKeyInfo> listGpgKeys() throws RestApiException;
 
-  GpgKeyApi gpgKey(String id) throws RestApiException;
+    Map<String, GpgKeyInfo> putGpgKeys(List<String> add, List<String> remove) throws RestApiException;
 
-  List<AgreementInfo> listAgreements() throws RestApiException;
+    GpgKeyApi gpgKey(String id) throws RestApiException;
 
-  void signAgreement(String agreementName) throws RestApiException;
+    List<AgreementInfo> listAgreements() throws RestApiException;
 
-  void index() throws RestApiException;
+    void signAgreement(String agreementName) throws RestApiException;
 
-  List<AccountExternalIdInfo> getExternalIds() throws RestApiException;
+    void index() throws RestApiException;
 
-  void deleteExternalIds(List<String> externalIds) throws RestApiException;
+    List<AccountExternalIdInfo> getExternalIds() throws RestApiException;
 
-  List<DeletedDraftCommentInfo> deleteDraftComments(DeleteDraftCommentsInput input)
-      throws RestApiException;
+    void deleteExternalIds(List<String> externalIds) throws RestApiException;
 
-  void setName(String name) throws RestApiException;
+    List<DeletedDraftCommentInfo> deleteDraftComments(DeleteDraftCommentsInput input) throws RestApiException;
 
-  /**
-   * Generate a new HTTP password.
-   *
-   * @return the generated password.
-   */
-  String generateHttpPassword() throws RestApiException;
+    void setName(String name) throws RestApiException;
 
-  /**
-   * Set a new HTTP password.
-   *
-   * <p>May only be invoked by administrators.
-   *
-   * @param httpPassword the new password, {@code null} to remove the password.
-   * @return the new password, {@code null} if the password was removed.
-   */
-  String setHttpPassword(String httpPassword) throws RestApiException;
+    /**
+     * Generate a new HTTP password.
+     *
+     * @return the generated password.
+     */
+    String generateHttpPassword() throws RestApiException;
 
-  /**
-   * A default implementation which allows source compatibility when adding new methods to the
-   * interface.
-   */
-  class NotImplemented implements AccountApi {
-    @Override
-    public AccountInfo get() throws RestApiException {
-      throw new NotImplementedException();
+    /**
+     * Set a new HTTP password.
+     *
+     * <p>May only be invoked by administrators.
+     *
+     * @param httpPassword the new password, {@code null} to remove the password.
+     * @return the new password, {@code null} if the password was removed.
+     */
+    String setHttpPassword(String httpPassword) throws RestApiException;
+
+    /**
+     * A default implementation which allows source compatibility when adding new methods to the
+     * interface.
+     */
+    class NotImplemented implements AccountApi {
+
+        @Override
+        public AccountInfo get() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public AccountDetailInfo detail() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public boolean getActive() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void setActive(boolean active) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public String getAvatarUrl(int size) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public GeneralPreferencesInfo getPreferences() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public GeneralPreferencesInfo setPreferences(GeneralPreferencesInfo in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public DiffPreferencesInfo getDiffPreferences() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public DiffPreferencesInfo setDiffPreferences(DiffPreferencesInfo in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public EditPreferencesInfo getEditPreferences() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public EditPreferencesInfo setEditPreferences(EditPreferencesInfo in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public List<ProjectWatchInfo> getWatchedProjects() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public List<ProjectWatchInfo> setWatchedProjects(List<ProjectWatchInfo> in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void deleteWatchedProjects(List<ProjectWatchInfo> in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void starChange(String changeId) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void unstarChange(String changeId) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void setStars(String changeId, StarsInput input) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public SortedSet<String> getStars(String changeId) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public List<ChangeInfo> getStarredChanges() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public List<GroupInfo> getGroups() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public List<EmailInfo> getEmails() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void addEmail(EmailInput input) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void deleteEmail(String email) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public EmailApi createEmail(EmailInput input) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public EmailApi email(String email) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void setStatus(String status) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void setDisplayName(String displayName) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public List<SshKeyInfo> listSshKeys() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public SshKeyInfo addSshKey(String key) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void deleteSshKey(int seq) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public Map<String, GpgKeyInfo> putGpgKeys(List<String> add, List<String> remove) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public GpgKeyApi gpgKey(String id) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public Map<String, GpgKeyInfo> listGpgKeys() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public List<AgreementInfo> listAgreements() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void signAgreement(String agreementName) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void index() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public List<AccountExternalIdInfo> getExternalIds() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void deleteExternalIds(List<String> externalIds) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public List<DeletedDraftCommentInfo> deleteDraftComments(DeleteDraftCommentsInput input) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void setName(String name) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public String generateHttpPassword() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public String setHttpPassword(String httpPassword) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
-
-    @Override
-    public AccountDetailInfo detail() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public boolean getActive() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void setActive(boolean active) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public String getAvatarUrl(int size) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public GeneralPreferencesInfo getPreferences() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public GeneralPreferencesInfo setPreferences(GeneralPreferencesInfo in)
-        throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public DiffPreferencesInfo getDiffPreferences() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public DiffPreferencesInfo setDiffPreferences(DiffPreferencesInfo in) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public EditPreferencesInfo getEditPreferences() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public EditPreferencesInfo setEditPreferences(EditPreferencesInfo in) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public List<ProjectWatchInfo> getWatchedProjects() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public List<ProjectWatchInfo> setWatchedProjects(List<ProjectWatchInfo> in)
-        throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void deleteWatchedProjects(List<ProjectWatchInfo> in) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void starChange(String changeId) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void unstarChange(String changeId) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void setStars(String changeId, StarsInput input) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public SortedSet<String> getStars(String changeId) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public List<ChangeInfo> getStarredChanges() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public List<GroupInfo> getGroups() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public List<EmailInfo> getEmails() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void addEmail(EmailInput input) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void deleteEmail(String email) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public EmailApi createEmail(EmailInput input) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public EmailApi email(String email) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void setStatus(String status) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void setDisplayName(String displayName) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public List<SshKeyInfo> listSshKeys() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public SshKeyInfo addSshKey(String key) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void deleteSshKey(int seq) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public Map<String, GpgKeyInfo> putGpgKeys(List<String> add, List<String> remove)
-        throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public GpgKeyApi gpgKey(String id) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public Map<String, GpgKeyInfo> listGpgKeys() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public List<AgreementInfo> listAgreements() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void signAgreement(String agreementName) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void index() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public List<AccountExternalIdInfo> getExternalIds() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void deleteExternalIds(List<String> externalIds) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public List<DeletedDraftCommentInfo> deleteDraftComments(DeleteDraftCommentsInput input)
-        throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public void setName(String name) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public String generateHttpPassword() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public String setHttpPassword(String httpPassword) throws RestApiException {
-      throw new NotImplementedException();
-    }
-  }
 }

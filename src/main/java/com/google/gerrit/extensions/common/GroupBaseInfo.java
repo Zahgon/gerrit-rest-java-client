@@ -11,17 +11,18 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.common;
 
 import com.google.common.base.MoreObjects;
 
 public class GroupBaseInfo {
-  public String id;
-  public String name;
 
-  @Override
-  public String toString() {
-    return MoreObjects.toStringHelper(this).add("name", name).add("id", id).toString();
-  }
+    public String id;
+
+    public String name;
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

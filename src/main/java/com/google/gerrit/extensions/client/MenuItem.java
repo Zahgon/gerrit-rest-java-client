@@ -11,65 +11,47 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.client;
 
 import java.util.Objects;
 
 public class MenuItem {
-  public final String url;
-  public final String name;
-  public final String target;
-  public final String id;
 
-  public MenuItem(String name, String url) {
-    this(name, url, "_blank");
-  }
+    public final String url;
 
-  public MenuItem(String name, String url, String target) {
-    this(name, url, target, null);
-  }
+    public final String name;
 
-  public MenuItem(String name, String url, String target, String id) {
-    this.url = url;
-    this.name = name;
-    this.target = target;
-    this.id = id;
-  }
+    public final String target;
 
-  @Override
-  public boolean equals(Object obj) {
-    if (obj instanceof MenuItem) {
-      MenuItem o = (MenuItem) obj;
-      return Objects.equals(url, o.url)
-          && Objects.equals(name, o.name)
-          && Objects.equals(target, o.target)
-          && Objects.equals(id, o.id);
+    public final String id;
+
+    public MenuItem(String name, String url) {
+        this(name, url, "_blank");
     }
-    return false;
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(url, name, target, id);
-  }
+    public MenuItem(String name, String url, String target) {
+        this(name, url, target, null);
+    }
 
-  @Override
-  public String toString() {
-    return new StringBuilder()
-        .append("MenuItem{")
-        .append("url=")
-        .append(url)
-        .append(',')
-        .append("name=")
-        .append(name)
-        .append(',')
-        .append("target=")
-        .append(target)
-        .append(',')
-        .append("id=")
-        .append(id)
-        .append('}')
-        .toString();
-  }
+    public MenuItem(String name, String url, String target, String id) {
+        this.url = url;
+        this.name = name;
+        this.target = target;
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

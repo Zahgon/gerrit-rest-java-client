@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.projects;
 
 import com.google.gerrit.extensions.common.ProjectInfo;
@@ -19,23 +18,25 @@ import com.google.gerrit.extensions.restapi.NotImplementedException;
 import com.google.gerrit.extensions.restapi.RestApiException;
 
 public interface ChildProjectApi {
-  ProjectInfo get() throws RestApiException;
 
-  ProjectInfo get(boolean recursive) throws RestApiException;
+    ProjectInfo get() throws RestApiException;
 
-  /**
-   * A default implementation which allows source compatibility when adding new methods to the
-   * interface.
-   */
-  class NotImplemented implements ChildProjectApi {
-    @Override
-    public ProjectInfo get() throws RestApiException {
-      throw new NotImplementedException();
+    ProjectInfo get(boolean recursive) throws RestApiException;
+
+    /**
+     * A default implementation which allows source compatibility when adding new methods to the
+     * interface.
+     */
+    class NotImplemented implements ChildProjectApi {
+
+        @Override
+        public ProjectInfo get() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public ProjectInfo get(boolean recursive) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
-
-    @Override
-    public ProjectInfo get(boolean recursive) throws RestApiException {
-      throw new NotImplementedException();
-    }
-  }
 }

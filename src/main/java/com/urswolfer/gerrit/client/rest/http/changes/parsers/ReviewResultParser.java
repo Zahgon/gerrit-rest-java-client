@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.changes.parsers;
 
 import com.google.gerrit.extensions.api.changes.ReviewResult;
@@ -32,6 +31,6 @@ public class ReviewResultParser {
     }
 
     public ReviewResult parseReviewResult(JsonElement result) {
-        return gson.fromJson(result, ReviewResult.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

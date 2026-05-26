@@ -11,48 +11,37 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.common;
 
 import com.google.common.base.MoreObjects;
 import java.util.Objects;
 
 public class SubmitRequirementInfo {
-  public final String status;
-  public final String fallbackText;
-  public final String type;
 
-  public SubmitRequirementInfo(String status, String fallbackText, String type) {
-    this.status = status;
-    this.fallbackText = fallbackText;
-    this.type = type;
-  }
+    public final String status;
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+    public final String fallbackText;
+
+    public final String type;
+
+    public SubmitRequirementInfo(String status, String fallbackText, String type) {
+        this.status = status;
+        this.fallbackText = fallbackText;
+        this.type = type;
     }
-    if (!(o instanceof SubmitRequirementInfo)) {
-      return false;
+
+    @Override
+    public boolean equals(Object o) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    SubmitRequirementInfo that = (SubmitRequirementInfo) o;
-    return Objects.equals(status, that.status)
-        && Objects.equals(fallbackText, that.fallbackText)
-        && Objects.equals(type, that.type);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(status, fallbackText, type);
-  }
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public String toString() {
-    return MoreObjects.toStringHelper(this)
-        .add("status", status)
-        .add("fallbackText", fallbackText)
-        .add("type", type)
-        .toString();
-  }
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

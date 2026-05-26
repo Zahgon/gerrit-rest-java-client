@@ -11,35 +11,39 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.restapi;
 
 import static java.util.Objects.requireNonNull;
 
-/** Root exception type for REST API failures. */
+/**
+ * Root exception type for REST API failures.
+ */
 public class RestApiException extends Exception {
-  private static final long serialVersionUID = 1L;
-  private CacheControl caching = CacheControl.NONE;
 
-  public static RestApiException wrap(String msg, Exception e) {
-    return new RestApiException(msg, e);
-  }
+    private static final long serialVersionUID = 1L;
 
-  protected RestApiException() {}
+    private CacheControl caching = CacheControl.NONE;
 
-  protected RestApiException(String msg) {
-    super(msg);
-  }
+    public static RestApiException wrap(String msg, Exception e) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  protected RestApiException(String msg, Throwable cause) {
-    super(msg, cause);
-  }
+    protected RestApiException() {
+    }
 
-  public CacheControl caching() {
-    return caching;
-  }
+    protected RestApiException(String msg) {
+        super(msg);
+    }
 
-  protected void setCaching(CacheControl caching) {
-    this.caching = requireNonNull(caching);
-  }
+    protected RestApiException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
+
+    public CacheControl caching() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    protected void setCaching(CacheControl caching) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

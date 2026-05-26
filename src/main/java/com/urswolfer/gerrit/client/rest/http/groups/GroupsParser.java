@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.groups;
 
 import com.google.common.reflect.TypeToken;
@@ -21,7 +20,6 @@ import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.common.GroupInfo;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,9 +31,15 @@ import java.util.Map;
  * @author Shawn Stafford
  */
 public class GroupsParser {
-    private static final Type GROUP_MAP_TYPE = new TypeToken<SortedMap<String, GroupInfo>>() {}.getType();
-    private static final Type GROUP_LIST_TYPE = new TypeToken<List<GroupInfo>>() {}.getType();
-    private static final Type ACCOUNT_LIST_TYPE = new TypeToken<List<AccountInfo>>() {}.getType();
+
+    private static final Type GROUP_MAP_TYPE = new TypeToken<SortedMap<String, GroupInfo>>() {
+    }.getType();
+
+    private static final Type GROUP_LIST_TYPE = new TypeToken<List<GroupInfo>>() {
+    }.getType();
+
+    private static final Type ACCOUNT_LIST_TYPE = new TypeToken<List<AccountInfo>>() {
+    }.getType();
 
     private final Gson gson;
 
@@ -44,31 +48,18 @@ public class GroupsParser {
     }
 
     public GroupInfo parseGroupInfo(JsonElement result) {
-        return gson.fromJson(result, GroupInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public AccountInfo parseGroupMember(JsonElement result) {
-        return gson.fromJson(result, AccountInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<GroupInfo> parseGroupInfos(JsonElement result) {
-        if (result.isJsonArray()) {
-            return gson.fromJson(result, GROUP_LIST_TYPE);
-        } else {
-            SortedMap<String, GroupInfo> map = gson.fromJson(result, GROUP_MAP_TYPE);
-            for(Map.Entry<String,GroupInfo> entry : map.entrySet()){
-                entry.getValue().name = entry.getKey();
-            }
-            return new ArrayList<>(map.values());
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<AccountInfo> parseGroupMembers(JsonElement result) {
-        if (!result.isJsonArray()) {
-            return Collections.singletonList(parseGroupMember(result));
-        } else {
-            return gson.fromJson(result, ACCOUNT_LIST_TYPE);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

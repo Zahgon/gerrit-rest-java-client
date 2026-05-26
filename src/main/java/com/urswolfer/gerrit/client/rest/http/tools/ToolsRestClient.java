@@ -13,17 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.tools;
 
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.urswolfer.gerrit.client.rest.http.GerritRestClient;
 import com.urswolfer.gerrit.client.rest.tools.Tools;
 import org.apache.http.HttpResponse;
-
 import java.io.IOException;
 import java.io.InputStream;
-
 import static com.urswolfer.gerrit.client.rest.RestClient.HttpVerb.GET;
 
 /**
@@ -39,11 +36,6 @@ public class ToolsRestClient implements Tools {
 
     @Override
     public InputStream getCommitMessageHook() throws RestApiException {
-        try {
-            HttpResponse response = gerritRestClient.request("/tools/hooks/commit-msg", null, GET);
-            return response.getEntity().getContent();
-        } catch (IOException e) {
-            throw RestApiException.wrap("Failed to get commit message hook.", e);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

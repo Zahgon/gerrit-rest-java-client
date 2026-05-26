@@ -18,18 +18,15 @@ import java.util.Objects;
 
 public class AccessSectionInfo {
 
-  public Map<String, PermissionInfo> permissions;
+    public Map<String, PermissionInfo> permissions;
 
-  @Override
-  public boolean equals(Object obj) {
-    if (obj instanceof AccessSectionInfo) {
-      return Objects.equals(permissions, ((AccessSectionInfo) obj).permissions);
+    @Override
+    public boolean equals(Object obj) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return false;
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(permissions);
-  }
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

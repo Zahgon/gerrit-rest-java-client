@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.accounts;
 
 import com.google.gerrit.extensions.api.accounts.DeleteDraftCommentsInput;
@@ -44,11 +43,9 @@ import com.urswolfer.gerrit.client.rest.http.GerritRestClient;
 import com.urswolfer.gerrit.client.rest.http.changes.parsers.ChangeInfosParser;
 import com.urswolfer.gerrit.client.rest.http.util.BinaryResultUtils;
 import org.apache.http.HttpResponse;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.SortedSet;
-
 import static com.urswolfer.gerrit.client.rest.RestClient.HttpVerb.GET;
 
 /**
@@ -57,17 +54,16 @@ import static com.urswolfer.gerrit.client.rest.RestClient.HttpVerb.GET;
 public class AccountApiRestClient extends AccountApi.NotImplemented implements AccountApi {
 
     private final AccountsParser accountsParser;
+
     private final SshKeysParser sshKeysParser;
+
     private final ChangeInfosParser changeInfosParser;
 
     private final GerritRestClient gerritRestClient;
+
     private final String name;
 
-    public AccountApiRestClient(GerritRestClient gerritRestClient,
-                                AccountsParser accountsParser,
-                                SshKeysParser sshKeysParser,
-                                ChangeInfosParser changeInfosParser,
-                                String name) {
+    public AccountApiRestClient(GerritRestClient gerritRestClient, AccountsParser accountsParser, SshKeysParser sshKeysParser, ChangeInfosParser changeInfosParser, String name) {
         this.gerritRestClient = gerritRestClient;
         this.accountsParser = accountsParser;
         this.sshKeysParser = sshKeysParser;
@@ -77,124 +73,92 @@ public class AccountApiRestClient extends AccountApi.NotImplemented implements A
 
     @Override
     public AccountInfo get() throws RestApiException {
-        JsonElement result = gerritRestClient.getRequest(getRequestPath());
-        return accountsParser.parseAccountInfo(result);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public AccountDetailInfo detail() throws RestApiException {
-        JsonElement result = gerritRestClient.getRequest(getRequestPath() + "/detail");
-        return accountsParser.parseAccountDetailInfo(result);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean getActive() throws RestApiException {
-        JsonElement result = gerritRestClient.getRequest(getRequestPath() + "/active");
-        if(result == null) {
-            return false;
-        }
-        String parsed = result.getAsString();
-        if(parsed == null){
-            return false;
-        }
-        return parsed.equals("ok");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void setActive(boolean active) throws RestApiException {
-        String requestPath = getRequestPath() + "/active";
-        if(active){
-            gerritRestClient.putRequest(requestPath);
-        }else {
-            gerritRestClient.deleteRequest(requestPath);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public GeneralPreferencesInfo getPreferences() throws RestApiException {
-        JsonElement result = gerritRestClient.getRequest(getRequestPath() + "/preferences");
-        return accountsParser.parseGeneralPreferences(result);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public GeneralPreferencesInfo setPreferences(GeneralPreferencesInfo input)
-        throws RestApiException {
-        String body = gerritRestClient.getGson().toJson(input);
-        JsonElement result = gerritRestClient.putRequest(getRequestPath() + "/preferences", body);
-        return accountsParser.parseGeneralPreferences(result);
+    public GeneralPreferencesInfo setPreferences(GeneralPreferencesInfo input) throws RestApiException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public DiffPreferencesInfo getDiffPreferences() throws RestApiException {
-        JsonElement result = gerritRestClient.getRequest(getRequestPath() + "/preferences.diff");
-        return accountsParser.parseDiffPreferences(result);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public DiffPreferencesInfo setDiffPreferences(DiffPreferencesInfo input) throws RestApiException {
-        String body = gerritRestClient.getGson().toJson(input);
-        JsonElement result = gerritRestClient.putRequest(getRequestPath() + "/preferences.diff", body);
-        return accountsParser.parseDiffPreferences(result);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public EditPreferencesInfo getEditPreferences() throws RestApiException {
-        JsonElement result = gerritRestClient.getRequest(getRequestPath() + "/preferences.edit");
-        return accountsParser.parseEditPreferences(result);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public EditPreferencesInfo setEditPreferences(EditPreferencesInfo input) throws RestApiException {
-        String body = gerritRestClient.getGson().toJson(input);
-        JsonElement result = gerritRestClient.putRequest(getRequestPath() + "/preferences.edit", body);
-        return accountsParser.parseEditPreferences(result);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public List<ProjectWatchInfo> getWatchedProjects() throws RestApiException{
-        JsonElement result = gerritRestClient.getRequest(getRequestPath() + "/watched.projects");
-        return accountsParser.parseProjectWatchInfos(result);
+    public List<ProjectWatchInfo> getWatchedProjects() throws RestApiException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public List<ProjectWatchInfo> setWatchedProjects(List<ProjectWatchInfo> in) throws RestApiException{
-        String body = gerritRestClient.getGson().toJson(in);
-        JsonElement result = gerritRestClient.postRequest(getRequestPath() + "/watched.projects", body);
-        return accountsParser.parseProjectWatchInfos(result);
+    public List<ProjectWatchInfo> setWatchedProjects(List<ProjectWatchInfo> in) throws RestApiException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void deleteWatchedProjects(List<ProjectWatchInfo> in) throws RestApiException{
-        String body = gerritRestClient.getGson().toJson(in);
-        gerritRestClient.postRequest(getRequestPath() + "/watched.projects:delete", body);
+    public void deleteWatchedProjects(List<ProjectWatchInfo> in) throws RestApiException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void starChange(String id) throws RestApiException {
-        gerritRestClient.putRequest(createStarredUrl(id));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void unstarChange(String id) throws RestApiException {
-        gerritRestClient.deleteRequest(createStarredUrl(id));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void setStars(String changeId, StarsInput input) throws RestApiException {
-        String body = gerritRestClient.getGson().toJson(input);
-        gerritRestClient.postRequest(createStarsUrl(changeId), body);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public SortedSet<String> getStars(String changeId) throws RestApiException {
-        JsonElement result = gerritRestClient.getRequest(createStarsUrl(changeId));
-        return accountsParser.parseStarLabels(result);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public List<ChangeInfo> getStarredChanges() throws RestApiException {
-        JsonElement response = gerritRestClient.getRequest(getRequestPath() + "/starred.changes");
-        return changeInfosParser.parseChangeInfos(response);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -213,131 +177,102 @@ public class AccountApiRestClient extends AccountApi.NotImplemented implements A
 
     @Override
     public List<EmailInfo> getEmails() throws RestApiException {
-        JsonElement response = gerritRestClient.getRequest(getRequestPath() + "/emails");
-        return accountsParser.parseEmailInfos(response);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteEmail(String email) throws RestApiException {
-        email(email).delete();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public EmailApi createEmail(String email) throws RestApiException {
-        EmailInput emailInput = new EmailInput();
-        emailInput.email = email;
-        return createEmail(emailInput);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public EmailApi createEmail(EmailInput input) throws RestApiException {
-        String body = gerritRestClient.getGson().toJson(input);
-        gerritRestClient.putRequest(getRequestPath() + "/emails/" + input.email, body);
-        return email(input.email);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public EmailApi email(String email) throws RestApiException {
-        return new EmailApiRestClient(gerritRestClient, accountsParser, name, email);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void setStatus(String status) throws RestApiException {
-        setStatus(new StatusInput(status));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setStatus(StatusInput input) throws RestApiException {
-        String body = gerritRestClient.getGson().toJson(input);
-        gerritRestClient.putRequest(getRequestPath() + "/status", body);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void setDisplayName(String displayName) throws RestApiException {
-        setDisplayName(new DisplayNameInput(displayName));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setDisplayName(DisplayNameInput input) throws RestApiException {
-        String body = gerritRestClient.getGson().toJson(input);
-        gerritRestClient.putRequest(getRequestPath() + "/displayname", body);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BinaryResult downloadAvatar(int size) throws RestApiException {
-        String request = getRequestPath() + "/avatar?s=" + size;
-        try {
-            HttpResponse response = gerritRestClient.request(request, null, GET);
-            return BinaryResultUtils.createBinaryResult(response);
-        } catch (IOException e) {
-            throw RestApiException.wrap("Failed to get avatar.", e);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public SshKeyInfo addSshKey(String key) throws RestApiException {
-        String request = getRequestPath() + "/sshkeys";
-        JsonElement result = gerritRestClient.requestJson(request,key, HttpVerb.POST_TEXT_PLAIN);
-        return sshKeysParser.parseSshKeyInfo(result);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public List<SshKeyInfo> listSshKeys() throws RestApiException {
-        String request = getRequestPath() + "/sshkeys";
-        JsonElement result = gerritRestClient.getRequest(request);
-        return sshKeysParser.parseSshKeyInfos(result);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteSshKey(int seq) throws RestApiException {
-        String request = getRequestPath()+ "/sshkeys/" + seq;
-        gerritRestClient.deleteRequest(request);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void index() throws RestApiException {
-        gerritRestClient.postRequest(getRequestPath() + "/index");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public List<AccountExternalIdInfo> getExternalIds() throws RestApiException {
-        JsonElement result = gerritRestClient.getRequest(getRequestPath() + "/external.ids");
-        return accountsParser.parseAccountExternalIdInfos(result);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteExternalIds(List<String> externalIds) throws RestApiException {
-        String body = gerritRestClient.getGson().toJson(externalIds);
-        gerritRestClient.postRequest(getRequestPath() + "/external.ids:delete", body);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public List<DeletedDraftCommentInfo> deleteDraftComments(DeleteDraftCommentsInput input)
-        throws RestApiException {
-        String body = gerritRestClient.getGson().toJson(input);
-        JsonElement result = gerritRestClient.postRequest(getRequestPath() + "/drafts.delete", body);
-        return accountsParser.parseDeleteDraftCommentInfos(result);
+    public List<DeletedDraftCommentInfo> deleteDraftComments(DeleteDraftCommentsInput input) throws RestApiException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String generateHttpPassword() throws RestApiException {
-        HttpPasswordInput input = new HttpPasswordInput();
-        input.generate = true;
-        return setHttpPassword(input);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String setHttpPassword(String httpPassword) throws RestApiException {
-        HttpPasswordInput input = new HttpPasswordInput();
-        input.httpPassword = httpPassword;
-        return setHttpPassword(input);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String setHttpPassword(HttpPasswordInput input) throws RestApiException {
-        String body = gerritRestClient.getGson().toJson(input);
-        JsonElement result = gerritRestClient.putRequest(getRequestPath() + "/password.http", body);
-        return result.getAsString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void deleteHttpPassword() throws RestApiException {
-        gerritRestClient.deleteRequest(getRequestPath() + "/password.http");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private String getRequestPath() {

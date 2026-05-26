@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.projects;
 
 import com.google.common.collect.ImmutableMap;
@@ -27,7 +26,6 @@ import com.google.gerrit.extensions.common.ProjectInfo;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.urswolfer.gerrit.client.rest.gson.GsonFactory;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +35,9 @@ import java.util.SortedMap;
  * @author Thomas Forrer
  */
 public class ProjectsParser {
-    private static final Type TYPE = new TypeToken<SortedMap<String, ProjectInfo>>() {}.getType();
+
+    private static final Type TYPE = new TypeToken<SortedMap<String, ProjectInfo>>() {
+    }.getType();
 
     private final Gson gson;
 
@@ -46,37 +46,34 @@ public class ProjectsParser {
     }
 
     public SortedMap<String, ProjectInfo> parseProjectInfos(JsonElement result) {
-        return gson.fromJson(result, TYPE);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<ProjectInfo> parseProjectInfosList(JsonElement result) {
-        return new ArrayList<>(parseProjectInfos(result).values());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public ProjectInfo parseSingleProjectInfo(JsonElement result) {
-        return gson.fromJson(result, ProjectInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String generateProjectInput(ProjectInput input) {
-        return gson.toJson(input, ProjectInput.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public ProjectAccessInfo parseProjectAccessInfo(JsonElement result) {
-        return gson.fromJson(result, ProjectAccessInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String generateProjectAccessInput(ProjectAccessInput input) {
-        return gson.toJson(input);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public AccessCheckInfo parseAccessCheckInfo(JsonElement result) {
-        return gson.fromJson(result, AccessCheckInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public ConfigInfo parseConfigInfo(JsonElement result) {
-        Gson gson = GsonFactory.getBuilder()
-        .registerTypeAdapter(ImmutableMap.class, new GsonFactory.ImmutableMapStringListAdaptor())
-        .create();
-        return gson.fromJson(result, ConfigInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

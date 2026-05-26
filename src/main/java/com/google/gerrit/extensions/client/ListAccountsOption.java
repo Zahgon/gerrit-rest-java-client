@@ -11,25 +11,30 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.client;
 
-/** Output options available for retrieval of account details. */
+/**
+ * Output options available for retrieval of account details.
+ */
 public enum ListAccountsOption implements ListOption {
-  /** Return detailed account properties. */
-  DETAILS(0),
 
-  /** Return all secondary emails. */
-  ALL_EMAILS(1);
+    /**
+     * Return detailed account properties.
+     */
+    DETAILS(0),
+    /**
+     * Return all secondary emails.
+     */
+    ALL_EMAILS(1);
 
-  private final int value;
+    private final int value;
 
-  ListAccountsOption(int v) {
-    this.value = v;
-  }
+    ListAccountsOption(int v) {
+        this.value = v;
+    }
 
-  @Override
-  public int getValue() {
-    return value;
-  }
+    @Override
+    public int getValue() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

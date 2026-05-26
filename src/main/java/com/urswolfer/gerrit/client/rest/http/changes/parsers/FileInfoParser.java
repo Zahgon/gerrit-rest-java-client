@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.changes.parsers;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gerrit.extensions.common.FileInfo;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-
 import java.lang.reflect.Type;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -29,7 +27,9 @@ import java.util.Map;
  * @author Thomas Forrer
  */
 public class FileInfoParser {
-    private static final Type TYPE = new TypeToken<LinkedHashMap<String, FileInfo>>() {}.getType();
+
+    private static final Type TYPE = new TypeToken<LinkedHashMap<String, FileInfo>>() {
+    }.getType();
 
     private final Gson gson;
 
@@ -38,6 +38,6 @@ public class FileInfoParser {
     }
 
     public Map<String, FileInfo> parseFileInfos(JsonElement jsonElement) {
-        return gson.fromJson(jsonElement, TYPE);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

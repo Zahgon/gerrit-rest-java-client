@@ -11,27 +11,31 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.changes;
 
 import static com.google.gerrit.extensions.client.ReviewerState.REVIEWER;
-
 import com.google.gerrit.extensions.client.ReviewerState;
 import com.google.gerrit.extensions.restapi.DefaultInput;
 import java.util.Map;
 
 public class AddReviewerInput {
-  @DefaultInput public String reviewer;
-  public Boolean confirmed;
-  public ReviewerState state;
-  public NotifyHandling notify;
-  public Map<RecipientType, NotifyInfo> notifyDetails;
 
-  public boolean confirmed() {
-    return (confirmed != null) ? confirmed : false;
-  }
+    @DefaultInput
+    public String reviewer;
 
-  public ReviewerState state() {
-    return (state != null) ? state : REVIEWER;
-  }
+    public Boolean confirmed;
+
+    public ReviewerState state;
+
+    public NotifyHandling notify;
+
+    public Map<RecipientType, NotifyInfo> notifyDetails;
+
+    public boolean confirmed() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public ReviewerState state() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.gson;
 
 import com.google.common.collect.ImmutableList;
@@ -27,7 +26,6 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
@@ -38,34 +36,21 @@ import java.util.Map;
  */
 public class GsonFactory {
 
-    private GsonFactory() {}
+    private GsonFactory() {
+    }
 
-    public static GsonBuilder getBuilder(){
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Date.class, new DateDeserializer());
-        builder.registerTypeAdapter(Date.class, new DateSerializer());
-        builder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
-        return builder;
+    public static GsonBuilder getBuilder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Gson create() {
-        return getBuilder().create();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static class ImmutableMapStringListAdaptor implements JsonDeserializer<ImmutableMap<String, ImmutableList<String>>> {
-        public ImmutableMap<String, ImmutableList<String>> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-            throws JsonParseException {
-            Map<String, JsonElement> object = json.getAsJsonObject().asMap();
-            return object.entrySet().stream()
-                .collect(ImmutableMap.toImmutableMap(Map.Entry::getKey,
-                    entry -> {
-                        Type listType = new TypeToken<List<String>>() {}.getType();
-                        JsonArray jsonArray = entry.getValue().getAsJsonArray();
-                        List<String> list = new Gson().fromJson(jsonArray, listType);
-                        return ImmutableList.copyOf(list);
-                    }
-                ));
+
+        public ImmutableMap<String, ImmutableList<String>> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
-
 }

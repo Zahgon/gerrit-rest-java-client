@@ -11,67 +11,63 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.common;
 
 import java.sql.Timestamp;
 import java.util.Optional;
 
 public abstract class GroupAuditEventInfo {
-  public enum Type {
-    ADD_USER,
-    REMOVE_USER,
-    ADD_GROUP,
-    REMOVE_GROUP
-  }
 
-  public Type type;
-  public AccountInfo user;
-  public Timestamp date;
+    public enum Type {
 
-  public static UserMemberAuditEventInfo createAddUserEvent(
-      AccountInfo user, Timestamp date, AccountInfo member) {
-    return new UserMemberAuditEventInfo(Type.ADD_USER, user, Optional.of(date), member);
-  }
-
-  public static UserMemberAuditEventInfo createRemoveUserEvent(
-      AccountInfo user, Optional<Timestamp> date, AccountInfo member) {
-    return new UserMemberAuditEventInfo(Type.REMOVE_USER, user, date, member);
-  }
-
-  public static GroupMemberAuditEventInfo createAddGroupEvent(
-      AccountInfo user, Timestamp date, GroupInfo member) {
-    return new GroupMemberAuditEventInfo(Type.ADD_GROUP, user, Optional.of(date), member);
-  }
-
-  public static GroupMemberAuditEventInfo createRemoveGroupEvent(
-      AccountInfo user, Optional<Timestamp> date, GroupInfo member) {
-    return new GroupMemberAuditEventInfo(Type.REMOVE_GROUP, user, date, member);
-  }
-
-  protected GroupAuditEventInfo(Type type, AccountInfo user, Optional<Timestamp> date) {
-    this.type = type;
-    this.user = user;
-    this.date = date.orElse(null);
-  }
-
-  public static class UserMemberAuditEventInfo extends GroupAuditEventInfo {
-    public AccountInfo member;
-
-    private UserMemberAuditEventInfo(
-        Type type, AccountInfo user, Optional<Timestamp> date, AccountInfo member) {
-      super(type, user, date);
-      this.member = member;
+        ADD_USER, REMOVE_USER, ADD_GROUP, REMOVE_GROUP
     }
-  }
 
-  public static class GroupMemberAuditEventInfo extends GroupAuditEventInfo {
-    public GroupInfo member;
+    public Type type;
 
-    private GroupMemberAuditEventInfo(
-        Type type, AccountInfo user, Optional<Timestamp> date, GroupInfo member) {
-      super(type, user, date);
-      this.member = member;
+    public AccountInfo user;
+
+    public Timestamp date;
+
+    public static UserMemberAuditEventInfo createAddUserEvent(AccountInfo user, Timestamp date, AccountInfo member) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
+
+    public static UserMemberAuditEventInfo createRemoveUserEvent(AccountInfo user, Optional<Timestamp> date, AccountInfo member) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public static GroupMemberAuditEventInfo createAddGroupEvent(AccountInfo user, Timestamp date, GroupInfo member) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public static GroupMemberAuditEventInfo createRemoveGroupEvent(AccountInfo user, Optional<Timestamp> date, GroupInfo member) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    protected GroupAuditEventInfo(Type type, AccountInfo user, Optional<Timestamp> date) {
+        this.type = type;
+        this.user = user;
+        this.date = date.orElse(null);
+    }
+
+    public static class UserMemberAuditEventInfo extends GroupAuditEventInfo {
+
+        public AccountInfo member;
+
+        private UserMemberAuditEventInfo(Type type, AccountInfo user, Optional<Timestamp> date, AccountInfo member) {
+            super(type, user, date);
+            this.member = member;
+        }
+    }
+
+    public static class GroupMemberAuditEventInfo extends GroupAuditEventInfo {
+
+        public GroupInfo member;
+
+        private GroupMemberAuditEventInfo(Type type, AccountInfo user, Optional<Timestamp> date, GroupInfo member) {
+            super(type, user, date);
+            this.member = member;
+        }
+    }
 }

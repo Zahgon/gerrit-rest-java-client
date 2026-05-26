@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.changes.parsers;
 
 import com.google.common.reflect.TypeToken;
@@ -22,7 +21,6 @@ import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.common.ChangeInput;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-
 import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
@@ -32,12 +30,14 @@ import java.util.Set;
  * Parser for the information related to a change.
  *
  * @author Thomas Forrer - EFregnan
- *
  */
 public class ChangeInfosParser {
 
-    private static final Type CHANGEINFO_TYPE = new TypeToken<List<ChangeInfo>>() {}.getType();
-    private static final Type HASHTAG_TYPE = new TypeToken<Set<String>>() {}.getType();
+    private static final Type CHANGEINFO_TYPE = new TypeToken<List<ChangeInfo>>() {
+    }.getType();
+
+    private static final Type HASHTAG_TYPE = new TypeToken<Set<String>>() {
+    }.getType();
 
     private final Gson gson;
 
@@ -46,25 +46,22 @@ public class ChangeInfosParser {
     }
 
     public List<ChangeInfo> parseChangeInfos(JsonElement result) {
-        if (!result.isJsonArray()) {
-            return Collections.singletonList(parseSingleChangeInfo(result));
-        }
-        return gson.fromJson(result, CHANGEINFO_TYPE);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public ChangeInfo parseSingleChangeInfo(JsonElement result) {
-        return gson.fromJson(result, ChangeInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String generateChangeInput(ChangeInput input) {
-        return gson.toJson(input, ChangeInput.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public Set<String> parseHashtags(JsonElement result) {
-        return gson.fromJson(result, HASHTAG_TYPE);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public IncludedInInfo parseIncludedInInfos(JsonElement jsonElement) {
-        return gson.fromJson(jsonElement, IncludedInInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

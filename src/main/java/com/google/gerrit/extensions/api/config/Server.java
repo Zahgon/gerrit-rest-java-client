@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.config;
 
 import com.google.gerrit.extensions.client.DiffPreferencesInfo;
@@ -24,83 +23,82 @@ import com.google.gerrit.extensions.restapi.RestApiException;
 import java.util.List;
 
 public interface Server {
-  /** @return Version of server. */
-  String getVersion() throws RestApiException;
 
-  ServerInfo getInfo() throws RestApiException;
+    /**
+     * @return Version of server.
+     */
+    String getVersion() throws RestApiException;
 
-  GeneralPreferencesInfo getDefaultPreferences() throws RestApiException;
+    ServerInfo getInfo() throws RestApiException;
 
-  GeneralPreferencesInfo setDefaultPreferences(GeneralPreferencesInfo in) throws RestApiException;
+    GeneralPreferencesInfo getDefaultPreferences() throws RestApiException;
 
-  DiffPreferencesInfo getDefaultDiffPreferences() throws RestApiException;
+    GeneralPreferencesInfo setDefaultPreferences(GeneralPreferencesInfo in) throws RestApiException;
 
-  DiffPreferencesInfo setDefaultDiffPreferences(DiffPreferencesInfo in) throws RestApiException;
+    DiffPreferencesInfo getDefaultDiffPreferences() throws RestApiException;
 
-  EditPreferencesInfo getDefaultEditPreferences() throws RestApiException;
+    DiffPreferencesInfo setDefaultDiffPreferences(DiffPreferencesInfo in) throws RestApiException;
 
-  EditPreferencesInfo setDefaultEditPreferences(EditPreferencesInfo in) throws RestApiException;
+    EditPreferencesInfo getDefaultEditPreferences() throws RestApiException;
 
-  ConsistencyCheckInfo checkConsistency(ConsistencyCheckInput in) throws RestApiException;
+    EditPreferencesInfo setDefaultEditPreferences(EditPreferencesInfo in) throws RestApiException;
 
-//  List<TopMenu.MenuEntry> topMenus() throws RestApiException;
+    ConsistencyCheckInfo checkConsistency(ConsistencyCheckInput in) throws RestApiException;
 
-  /**
-   * A default implementation which allows source compatibility when adding new methods to the
-   * interface.
-   */
-  class NotImplemented implements Server {
-    @Override
-    public String getVersion() throws RestApiException {
-      throw new NotImplementedException();
+    //  List<TopMenu.MenuEntry> topMenus() throws RestApiException;
+    /**
+     * A default implementation which allows source compatibility when adding new methods to the
+     * interface.
+     */
+    class NotImplemented implements Server {
+
+        @Override
+        public String getVersion() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public ServerInfo getInfo() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public GeneralPreferencesInfo getDefaultPreferences() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public GeneralPreferencesInfo setDefaultPreferences(GeneralPreferencesInfo in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public DiffPreferencesInfo getDefaultDiffPreferences() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public DiffPreferencesInfo setDefaultDiffPreferences(DiffPreferencesInfo in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public EditPreferencesInfo getDefaultEditPreferences() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public EditPreferencesInfo setDefaultEditPreferences(EditPreferencesInfo in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public ConsistencyCheckInfo checkConsistency(ConsistencyCheckInput in) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+        //    @Override
+        //    public List<TopMenu.MenuEntry> topMenus() throws RestApiException {
+        //      throw new NotImplementedException();
+        //    }
     }
-
-    @Override
-    public ServerInfo getInfo() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public GeneralPreferencesInfo getDefaultPreferences() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public GeneralPreferencesInfo setDefaultPreferences(GeneralPreferencesInfo in)
-        throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public DiffPreferencesInfo getDefaultDiffPreferences() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public DiffPreferencesInfo setDefaultDiffPreferences(DiffPreferencesInfo in)
-        throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public EditPreferencesInfo getDefaultEditPreferences() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public EditPreferencesInfo setDefaultEditPreferences(EditPreferencesInfo in)
-        throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public ConsistencyCheckInfo checkConsistency(ConsistencyCheckInput in) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-//    @Override
-//    public List<TopMenu.MenuEntry> topMenus() throws RestApiException {
-//      throw new NotImplementedException();
-//    }
-  }
 }

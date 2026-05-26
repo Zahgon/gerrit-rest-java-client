@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.changes;
 
 import com.google.gerrit.extensions.api.changes.ChangeEditApi;
@@ -29,10 +28,8 @@ import com.urswolfer.gerrit.client.rest.http.GerritRestClient;
 import com.urswolfer.gerrit.client.rest.http.changes.parsers.CommitInfosParser;
 import com.urswolfer.gerrit.client.rest.http.util.BinaryResultUtils;
 import org.apache.http.HttpResponse;
-
 import java.io.IOException;
 import java.util.Optional;
-
 import static com.urswolfer.gerrit.client.rest.RestClient.HttpVerb.GET;
 
 /**
@@ -41,6 +38,7 @@ import static com.urswolfer.gerrit.client.rest.RestClient.HttpVerb.GET;
 public class ChangeEditApiRestClient extends ChangeEditApi.NotImplemented implements ChangeEditApi {
 
     private final GerritRestClient gerritRestClient;
+
     private final String id;
 
     private final CommitInfosParser commitInfosParser;
@@ -53,114 +51,88 @@ public class ChangeEditApiRestClient extends ChangeEditApi.NotImplemented implem
 
     @Override
     public Optional<EditInfo> get() throws RestApiException {
-        JsonElement result = gerritRestClient.getRequest(getRequestPath());
-        if(result.isJsonNull()){
-            return Optional.empty();
-        }
-        return Optional.of(commitInfosParser.parseEditInfo(result));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void delete() throws RestApiException {
-        gerritRestClient.deleteRequest(getRequestPath());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void rebase() throws RestApiException {
-        String request = getRequestPath() + ":rebase";
-        gerritRestClient.postRequest(request);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void publish() throws RestApiException{
-        publish(new PublishChangeEditInput());
+    public void publish() throws RestApiException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void publish(PublishChangeEditInput input) throws RestApiException {
-        String request = getRequestPath() + ":publish";
-        String json = gerritRestClient.getGson().toJson(input);
-        gerritRestClient.postRequest(request,json);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Optional<BinaryResult> getFile(String filePath) throws RestApiException {
-        String request = getRequestPath() + "/" + filePath;
-        try {
-            HttpResponse response = gerritRestClient.request(request, null, GET);
-            return Optional.of(BinaryResultUtils.createBinaryResult(response));
-        } catch (IOException e) {
-            throw RestApiException.wrap("Failed to get file content.", e);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void renameFile(String oldFilePath, String newFilePath) throws RestApiException {
-        ChangeEditInput input = new ChangeEditInput();
-        input.old_path = oldFilePath;
-        input.new_path = newFilePath;
-        changeFile(input);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void restoreFile(String filePath) throws RestApiException {
-        ChangeEditInput input = new ChangeEditInput();
-        input.restore_path = filePath;
-        changeFile(input);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void changeFile(ChangeEditInput input) throws RestApiException {
         String json = gerritRestClient.getGson().toJson(input);
-        gerritRestClient.postRequest(getRequestPath(),json);
+        gerritRestClient.postRequest(getRequestPath(), json);
     }
 
     @Override
     public void modifyFile(String filePath, FileContentInput input) throws RestApiException {
-        String encodedPath = Url.encode(filePath);
-        String request = getRequestPath() + "/" + encodedPath;
-        try {
-            gerritRestClient.request(request, input.binary_content, HttpVerb.PUT_TEXT_PLAIN);
-        } catch (IOException e) {
-            throw RestApiException.wrap("Failed to modify file.", e);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteFile(String filePath) throws RestApiException {
-        String encodedPath = Url.encode(filePath);
-        String request = getRequestPath() + "/" + encodedPath;
-        gerritRestClient.deleteRequest(request);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public String getCommitMessage() throws RestApiException{
-        String request = getRequestPath() + ":message";
-        JsonElement result = gerritRestClient.getRequest(request);
-        return result.getAsString();
+    public String getCommitMessage() throws RestApiException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void modifyCommitMessage(String newCommitMessage) throws RestApiException {
-        ChangeEditMessageInput input = new ChangeEditMessageInput();
-        input.message = newCommitMessage;
-        modifyCommitMessage(input);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void modifyCommitMessage(ChangeEditMessageInput input) throws RestApiException {
-        String request = getRequestPath() + ":message";
-        String json = gerritRestClient.getGson().toJson(input);
-        gerritRestClient.putRequest(request,json);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected String getRequestPath() { return "/changes/" + id + "/edit"; }
+    protected String getRequestPath() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
     protected static class ChangeEditInput {
+
         public String restore_path;
+
         public String old_path;
+
         public String new_path;
     }
 
     public static class ChangeEditMessageInput {
+
         public String message;
     }
 }

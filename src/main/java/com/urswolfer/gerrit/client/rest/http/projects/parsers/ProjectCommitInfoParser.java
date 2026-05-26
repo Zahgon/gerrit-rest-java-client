@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.projects.parsers;
 
 import com.google.gerrit.extensions.api.changes.IncludedInInfo;
@@ -33,11 +32,10 @@ public class ProjectCommitInfoParser {
     }
 
     public CommitInfo parseSingleCommitInfo(JsonElement result) {
-        return gson.fromJson(result, CommitInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-
     public IncludedInInfo parseIncludedInInfo(JsonElement jsonElement) {
-        return gson.fromJson(jsonElement, IncludedInInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

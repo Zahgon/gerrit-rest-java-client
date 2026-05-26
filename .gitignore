@@ -19,3 +19,8 @@ target/
 
 #TestNG
 test-output/
+
+.aider*
+logs/
+.commit0_scripts/
+.github/workflows/

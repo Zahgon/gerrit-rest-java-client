@@ -11,11 +11,9 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.changes;
 
 import static com.google.gerrit.extensions.client.ReviewerState.REVIEWER;
-
 import com.google.gerrit.extensions.client.Comment;
 import com.google.gerrit.extensions.client.ReviewerState;
 import com.google.gerrit.extensions.common.FixSuggestionInfo;
@@ -25,194 +23,183 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/** Input passed to {@code POST /changes/[id]/revisions/[id]/review}. */
+/**
+ * Input passed to {@code POST /changes/[id]/revisions/[id]/review}.
+ */
 public class ReviewInput {
-  @DefaultInput public String message;
 
-  public String tag;
+    @DefaultInput
+    public String message;
 
-  public Map<String, Short> labels;
-  public Map<String, List<CommentInput>> comments;
-  public Map<String, List<RobotCommentInput>> robotComments;
+    public String tag;
 
-  /**
-   * How to process draft comments already in the database that were not also described in this
-   * input request.
-   *
-   * <p>If not set, the default is {@link DraftHandling#KEEP}. If {@link #onBehalfOf} is set, then
-   * no other value besides {@code KEEP} is allowed.
-   */
-  public DraftHandling drafts;
+    public Map<String, Short> labels;
 
-  /** Who to send email notifications to after review is stored. */
-  public NotifyHandling notify;
+    public Map<String, List<CommentInput>> comments;
 
-  public Map<RecipientType, NotifyInfo> notifyDetails;
+    public Map<String, List<RobotCommentInput>> robotComments;
 
-  /** If true check to make sure that the comments being posted aren't already present. */
-  public boolean omitDuplicateComments;
+    /**
+     * How to process draft comments already in the database that were not also described in this
+     * input request.
+     *
+     * <p>If not set, the default is {@link DraftHandling#KEEP}. If {@link #onBehalfOf} is set, then
+     * no other value besides {@code KEEP} is allowed.
+     */
+    public DraftHandling drafts;
 
-  /**
-   * Account ID, name, email address or username of another user. The review will be posted/updated
-   * on behalf of this named user instead of the caller. Caller must have the labelAs-$NAME
-   * permission granted for each label that appears in {@link #labels}. This is in addition to the
-   * named user also needing to have permission to use the labels.
-   */
-  public String onBehalfOf;
+    /**
+     * Who to send email notifications to after review is stored.
+     */
+    public NotifyHandling notify;
 
-  /** Reviewers that should be added to this change. */
-  public List<AddReviewerInput> reviewers;
+    public Map<RecipientType, NotifyInfo> notifyDetails;
 
-  /**
-   * If true mark the change as work in progress. It is an error for both {@link #workInProgress}
-   * and {@link #ready} to be true.
-   */
-  public boolean workInProgress;
+    /**
+     * If true check to make sure that the comments being posted aren't already present.
+     */
+    public boolean omitDuplicateComments;
 
-  /**
-   * If true mark the change as ready for review. It is an error for both {@link #workInProgress}
-   * and {@link #ready} to be true.
-   */
-  public boolean ready;
+    /**
+     * Account ID, name, email address or username of another user. The review will be posted/updated
+     * on behalf of this named user instead of the caller. Caller must have the labelAs-$NAME
+     * permission granted for each label that appears in {@link #labels}. This is in addition to the
+     * named user also needing to have permission to use the labels.
+     */
+    public String onBehalfOf;
 
-  /** Users that should be added to the attention set of this change. */
-  public List<AttentionSetInput> addToAttentionSet;
+    /**
+     * Reviewers that should be added to this change.
+     */
+    public List<AddReviewerInput> reviewers;
 
-  /** Users that should be removed from the attention set of this change. */
-  public List<AttentionSetInput> removeFromAttentionSet;
+    /**
+     * If true mark the change as work in progress. It is an error for both {@link #workInProgress}
+     * and {@link #ready} to be true.
+     */
+    public boolean workInProgress;
 
-  /**
-   * Users in the attention set will only be added and removed based on {@link #addToAttentionSet}
-   * and {@link #removeFromAttentionSet}. Normally, they are also added and removed when some events
-   * occur. E.g, adding/removing reviewers, marking a change ready for review or work in progress,
-   * and replying on changes.
-   */
-  public boolean ignoreAutomaticAttentionSetRules;
+    /**
+     * If true mark the change as ready for review. It is an error for both {@link #workInProgress}
+     * and {@link #ready} to be true.
+     */
+    public boolean ready;
 
-  public enum DraftHandling {
-    /** Leave pending drafts alone. */
-    KEEP,
+    /**
+     * Users that should be added to the attention set of this change.
+     */
+    public List<AttentionSetInput> addToAttentionSet;
 
-    /** Publish pending drafts on this revision only. */
-    PUBLISH,
+    /**
+     * Users that should be removed from the attention set of this change.
+     */
+    public List<AttentionSetInput> removeFromAttentionSet;
 
-    /** Publish pending drafts on all revisions. */
-    PUBLISH_ALL_REVISIONS
-  }
+    /**
+     * Users in the attention set will only be added and removed based on {@link #addToAttentionSet}
+     * and {@link #removeFromAttentionSet}. Normally, they are also added and removed when some events
+     * occur. E.g, adding/removing reviewers, marking a change ready for review or work in progress,
+     * and replying on changes.
+     */
+    public boolean ignoreAutomaticAttentionSetRules;
 
-  public static class CommentInput extends Comment {}
+    public enum DraftHandling {
 
-  public static class RobotCommentInput extends CommentInput {
-    public String robotId;
-    public String robotRunId;
-    public String url;
-    public Map<String, String> properties;
-    public List<FixSuggestionInfo> fixSuggestions;
-  }
-
-  public ReviewInput message(String msg) {
-    message = msg != null && !msg.isEmpty() ? msg : null;
-    return this;
-  }
-
-  public ReviewInput label(String name, short value) {
-    if (name == null || name.isEmpty()) {
-      throw new IllegalArgumentException();
+        /**
+         * Leave pending drafts alone.
+         */
+        KEEP,
+        /**
+         * Publish pending drafts on this revision only.
+         */
+        PUBLISH,
+        /**
+         * Publish pending drafts on all revisions.
+         */
+        PUBLISH_ALL_REVISIONS
     }
-    if (labels == null) {
-      labels = new LinkedHashMap<>(4);
+
+    public static class CommentInput extends Comment {
     }
-    labels.put(name, value);
-    return this;
-  }
 
-  public ReviewInput label(String name, int value) {
-    if (value < Short.MIN_VALUE || value > Short.MAX_VALUE) {
-      throw new IllegalArgumentException();
+    public static class RobotCommentInput extends CommentInput {
+
+        public String robotId;
+
+        public String robotRunId;
+
+        public String url;
+
+        public Map<String, String> properties;
+
+        public List<FixSuggestionInfo> fixSuggestions;
     }
-    return label(name, (short) value);
-  }
 
-  public ReviewInput label(String name) {
-    return label(name, (short) 1);
-  }
-
-  public ReviewInput reviewer(String reviewer) {
-    return reviewer(reviewer, REVIEWER, false);
-  }
-
-  public ReviewInput reviewer(String reviewer, ReviewerState state, boolean confirmed) {
-    AddReviewerInput input = new AddReviewerInput();
-    input.reviewer = reviewer;
-    input.state = state;
-    input.confirmed = confirmed;
-    if (reviewers == null) {
-      reviewers = new ArrayList<>();
+    public ReviewInput message(String msg) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    reviewers.add(input);
-    return this;
-  }
 
-  public ReviewInput addUserToAttentionSet(String user, String reason) {
-    AttentionSetInput input = new AttentionSetInput();
-    input.user = user;
-    input.reason = reason;
-    if (addToAttentionSet == null) {
-      addToAttentionSet = new ArrayList<>();
+    public ReviewInput label(String name, short value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    addToAttentionSet.add(input);
-    return this;
-  }
 
-  public ReviewInput removeUserFromAttentionSet(String user, String reason) {
-    AttentionSetInput input = new AttentionSetInput();
-    input.user = user;
-    input.reason = reason;
-    if (removeFromAttentionSet == null) {
-      removeFromAttentionSet = new ArrayList<>();
+    public ReviewInput label(String name, int value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    removeFromAttentionSet.add(input);
-    return this;
-  }
 
-  public ReviewInput blockAutomaticAttentionSetRules() {
-    ignoreAutomaticAttentionSetRules = true;
-    return this;
-  }
+    public ReviewInput label(String name) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  public ReviewInput setWorkInProgress(boolean workInProgress) {
-    this.workInProgress = workInProgress;
-    ready = !workInProgress;
-    return this;
-  }
+    public ReviewInput reviewer(String reviewer) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  public ReviewInput setReady(boolean ready) {
-    this.ready = ready;
-    workInProgress = !ready;
-    return this;
-  }
+    public ReviewInput reviewer(String reviewer, ReviewerState state, boolean confirmed) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  public static ReviewInput recommend() {
-    return new ReviewInput().label("Code-Review", 1);
-  }
+    public ReviewInput addUserToAttentionSet(String user, String reason) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  public static ReviewInput dislike() {
-    return new ReviewInput().label("Code-Review", -1);
-  }
+    public ReviewInput removeUserFromAttentionSet(String user, String reason) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  public static ReviewInput noScore() {
-    return new ReviewInput().label("Code-Review", 0);
-  }
+    public ReviewInput blockAutomaticAttentionSetRules() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  public static ReviewInput approve() {
-    return new ReviewInput().label("Code-Review", 2);
-  }
+    public ReviewInput setWorkInProgress(boolean workInProgress) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  public static ReviewInput reject() {
-    return new ReviewInput().label("Code-Review", -2);
-  }
+    public ReviewInput setReady(boolean ready) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  public static ReviewInput create() {
-    return new ReviewInput();
-  }
+    public static ReviewInput recommend() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public static ReviewInput dislike() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public static ReviewInput noScore() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public static ReviewInput approve() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public static ReviewInput reject() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public static ReviewInput create() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

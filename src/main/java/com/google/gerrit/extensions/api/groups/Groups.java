@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.groups;
 
 import com.google.gerrit.extensions.client.ListGroupsOption;
@@ -27,301 +26,306 @@ import java.util.Map;
 import java.util.Set;
 
 public interface Groups {
-  /**
-   * Look up a group by ID.
-   *
-   * <p><strong>Note:</strong> This method eagerly reads the group. Methods that mutate the group do
-   * not necessarily re-read the group. Therefore, calling a getter method on an instance after
-   * calling a mutation method on that same instance is not guaranteed to reflect the mutation. It
-   * is not recommended to store references to {@code groupApi} instances.
-   *
-   * @param id any identifier supported by the REST API, including group name or UUID.
-   * @return API for accessing the group.
-   * @throws RestApiException if an error occurred.
-   */
-  GroupApi id(String id) throws RestApiException;
-
-  /** Create a new group with the given name and default options. */
-  GroupApi create(String name) throws RestApiException;
-
-  /** Create a new group. */
-  GroupApi create(GroupInput input) throws RestApiException;
-
-  /** @return new request for listing groups. */
-  ListRequest list();
-
-  /**
-   * Query groups.
-   *
-   * <p>Example code: {@code query().withQuery("inname:test").withLimit(10).get()}
-   *
-   * @return API for setting parameters and getting result.
-   */
-  QueryRequest query();
-
-  /**
-   * Query groups.
-   *
-   * <p>Shortcut API for {@code query().withQuery(String)}.
-   *
-   * @see #query()
-   */
-  QueryRequest query(String query);
-
-  abstract class ListRequest {
-    private final EnumSet<ListGroupsOption> options = EnumSet.noneOf(ListGroupsOption.class);
-    private final List<String> projects = new ArrayList<>();
-    private final List<String> groups = new ArrayList<>();
-
-    private boolean visibleToAll;
-    private String user;
-    private boolean owned;
-    private int limit;
-    private int start;
-    private String substring;
-    private String suggest;
-    private String regex;
-    private String ownedBy;
-
-    public List<GroupInfo> get() throws RestApiException {
-      Map<String, GroupInfo> map = getAsMap();
-      List<GroupInfo> result = new ArrayList<>(map.size());
-      for (Map.Entry<String, GroupInfo> e : map.entrySet()) {
-        // ListGroups "helpfully" nulls out names when converting to a map.
-        e.getValue().name = e.getKey();
-        result.add(e.getValue());
-      }
-      return Collections.unmodifiableList(result);
-    }
-
-    public abstract Map<String, GroupInfo> getAsMap() throws RestApiException;
-
-    public ListRequest addOption(ListGroupsOption option) {
-      options.add(option);
-      return this;
-    }
-
-    public ListRequest addOptions(ListGroupsOption... options) {
-      return addOptions(Arrays.asList(options));
-    }
-
-    public ListRequest addOptions(Iterable<ListGroupsOption> options) {
-      for (ListGroupsOption option : options) {
-        this.options.add(option);
-      }
-      return this;
-    }
-
-    public ListRequest withProject(String project) {
-      projects.add(project);
-      return this;
-    }
-
-    public ListRequest addGroup(String uuid) {
-      groups.add(uuid);
-      return this;
-    }
-
-    public ListRequest withVisibleToAll(boolean visible) {
-      visibleToAll = visible;
-      return this;
-    }
-
-    public ListRequest withUser(String user) {
-      this.user = user;
-      return this;
-    }
-
-    public ListRequest withOwned(boolean owned) {
-      this.owned = owned;
-      return this;
-    }
-
-    public ListRequest withLimit(int limit) {
-      this.limit = limit;
-      return this;
-    }
-
-    public ListRequest withStart(int start) {
-      this.start = start;
-      return this;
-    }
-
-    public ListRequest withSubstring(String substring) {
-      this.substring = substring;
-      return this;
-    }
-
-    public ListRequest withRegex(String regex) {
-      this.regex = regex;
-      return this;
-    }
-
-    public ListRequest withSuggest(String suggest) {
-      this.suggest = suggest;
-      return this;
-    }
-
-    public ListRequest withOwnedBy(String ownedBy) {
-      this.ownedBy = ownedBy;
-      return this;
-    }
-
-    public Set<ListGroupsOption> getOptions() {
-      return options;
-    }
-
-    public List<String> getProjects() {
-      return Collections.unmodifiableList(projects);
-    }
-
-    public List<String> getGroups() {
-      return Collections.unmodifiableList(groups);
-    }
-
-    public boolean getVisibleToAll() {
-      return visibleToAll;
-    }
-
-    public String getUser() {
-      return user;
-    }
-
-    public boolean getOwned() {
-      return owned;
-    }
-
-    public int getLimit() {
-      return limit;
-    }
-
-    public int getStart() {
-      return start;
-    }
-
-    public String getSubstring() {
-      return substring;
-    }
-
-    public String getRegex() {
-      return regex;
-    }
-
-    public String getSuggest() {
-      return suggest;
-    }
-
-    public String getOwnedBy() {
-      return ownedBy;
-    }
-  }
-
-  /**
-   * API for setting parameters and getting result. Used for {@code query()}.
-   *
-   * @see #query()
-   */
-  abstract class QueryRequest {
-    private String query;
-    private int limit;
-    private int start;
-    private Set<ListGroupsOption> options = EnumSet.noneOf(ListGroupsOption.class);
-
-    /** Execute query and returns the matched groups as list. */
-    public abstract List<GroupInfo> get() throws RestApiException;
 
     /**
-     * Set query.
+     * Look up a group by ID.
      *
-     * @param query needs to be in human-readable form.
+     * <p><strong>Note:</strong> This method eagerly reads the group. Methods that mutate the group do
+     * not necessarily re-read the group. Therefore, calling a getter method on an instance after
+     * calling a mutation method on that same instance is not guaranteed to reflect the mutation. It
+     * is not recommended to store references to {@code groupApi} instances.
+     *
+     * @param id any identifier supported by the REST API, including group name or UUID.
+     * @return API for accessing the group.
+     * @throws RestApiException if an error occurred.
      */
-    public QueryRequest withQuery(String query) {
-      this.query = query;
-      return this;
+    GroupApi id(String id) throws RestApiException;
+
+    /**
+     * Create a new group with the given name and default options.
+     */
+    GroupApi create(String name) throws RestApiException;
+
+    /**
+     * Create a new group.
+     */
+    GroupApi create(GroupInput input) throws RestApiException;
+
+    /**
+     * @return new request for listing groups.
+     */
+    ListRequest list();
+
+    /**
+     * Query groups.
+     *
+     * <p>Example code: {@code query().withQuery("inname:test").withLimit(10).get()}
+     *
+     * @return API for setting parameters and getting result.
+     */
+    QueryRequest query();
+
+    /**
+     * Query groups.
+     *
+     * <p>Shortcut API for {@code query().withQuery(String)}.
+     *
+     * @see #query()
+     */
+    QueryRequest query(String query);
+
+    abstract class ListRequest {
+
+        private final EnumSet<ListGroupsOption> options = EnumSet.noneOf(ListGroupsOption.class);
+
+        private final List<String> projects = new ArrayList<>();
+
+        private final List<String> groups = new ArrayList<>();
+
+        private boolean visibleToAll;
+
+        private String user;
+
+        private boolean owned;
+
+        private int limit;
+
+        private int start;
+
+        private String substring;
+
+        private String suggest;
+
+        private String regex;
+
+        private String ownedBy;
+
+        public List<GroupInfo> get() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public abstract Map<String, GroupInfo> getAsMap() throws RestApiException;
+
+        public ListRequest addOption(ListGroupsOption option) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest addOptions(ListGroupsOption... options) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest addOptions(Iterable<ListGroupsOption> options) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest withProject(String project) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest addGroup(String uuid) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest withVisibleToAll(boolean visible) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest withUser(String user) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest withOwned(boolean owned) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest withLimit(int limit) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest withStart(int start) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest withSubstring(String substring) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest withRegex(String regex) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest withSuggest(String suggest) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public ListRequest withOwnedBy(String ownedBy) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public Set<ListGroupsOption> getOptions() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public List<String> getProjects() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public List<String> getGroups() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public boolean getVisibleToAll() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public String getUser() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public boolean getOwned() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public int getLimit() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public int getStart() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public String getSubstring() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public String getRegex() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public String getSuggest() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public String getOwnedBy() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
 
     /**
-     * Set limit for returned list of groups. Optional; server-default is used when not provided.
+     * API for setting parameters and getting result. Used for {@code query()}.
+     *
+     * @see #query()
      */
-    public QueryRequest withLimit(int limit) {
-      this.limit = limit;
-      return this;
+    abstract class QueryRequest {
+
+        private String query;
+
+        private int limit;
+
+        private int start;
+
+        private Set<ListGroupsOption> options = EnumSet.noneOf(ListGroupsOption.class);
+
+        /**
+         * Execute query and returns the matched groups as list.
+         */
+        public abstract List<GroupInfo> get() throws RestApiException;
+
+        /**
+         * Set query.
+         *
+         * @param query needs to be in human-readable form.
+         */
+        public QueryRequest withQuery(String query) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set limit for returned list of groups. Optional; server-default is used when not provided.
+         */
+        public QueryRequest withLimit(int limit) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set number of groups to skip. Optional; no groups are skipped when not provided.
+         */
+        public QueryRequest withStart(int start) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set an option on the request, appending to existing options.
+         */
+        public QueryRequest withOption(ListGroupsOption options) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set options on the request, appending to existing options.
+         */
+        public QueryRequest withOptions(ListGroupsOption... options) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set options on the request, replacing existing options.
+         */
+        public QueryRequest withOptions(Set<ListGroupsOption> options) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public String getQuery() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public int getLimit() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public int getStart() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public Set<ListGroupsOption> getOptions() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
 
-    /** Set number of groups to skip. Optional; no groups are skipped when not provided. */
-    public QueryRequest withStart(int start) {
-      this.start = start;
-      return this;
-    }
+    /**
+     * A default implementation which allows source compatibility when adding new methods to the
+     * interface.
+     */
+    class NotImplemented implements Groups {
 
-    /** Set an option on the request, appending to existing options. */
-    public QueryRequest withOption(ListGroupsOption options) {
-      this.options.add(options);
-      return this;
-    }
+        @Override
+        public GroupApi id(String id) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    /** Set options on the request, appending to existing options. */
-    public QueryRequest withOptions(ListGroupsOption... options) {
-      this.options.addAll(Arrays.asList(options));
-      return this;
-    }
+        @Override
+        public GroupApi create(String name) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    /** Set options on the request, replacing existing options. */
-    public QueryRequest withOptions(Set<ListGroupsOption> options) {
-      this.options = options;
-      return this;
-    }
+        @Override
+        public GroupApi create(GroupInput input) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    public String getQuery() {
-      return query;
-    }
+        @Override
+        public ListRequest list() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    public int getLimit() {
-      return limit;
-    }
+        @Override
+        public QueryRequest query() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    public int getStart() {
-      return start;
+        @Override
+        public QueryRequest query(String query) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
-
-    public Set<ListGroupsOption> getOptions() {
-      return options;
-    }
-  }
-
-  /**
-   * A default implementation which allows source compatibility when adding new methods to the
-   * interface.
-   */
-  class NotImplemented implements Groups {
-    @Override
-    public GroupApi id(String id) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public GroupApi create(String name) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public GroupApi create(GroupInput input) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public ListRequest list() {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public QueryRequest query() {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public QueryRequest query(String query) {
-      throw new NotImplementedException();
-    }
-  }
 }

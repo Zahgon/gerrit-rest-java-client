@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http;
 
 import com.urswolfer.gerrit.client.rest.GerritAuthData;
@@ -28,10 +27,10 @@ import org.apache.http.impl.client.HttpClientBuilder;
 public abstract class HttpClientBuilderExtension {
 
     public HttpClientBuilder extend(HttpClientBuilder httpClientBuilder, GerritAuthData authData) {
-        return httpClientBuilder;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public CredentialsProvider extendCredentialProvider(HttpClientBuilder httpClientBuilder, CredentialsProvider credentialsProvider, GerritAuthData authData) {
-        return credentialsProvider;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

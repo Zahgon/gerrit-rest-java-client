@@ -13,11 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.changes;
 
 import com.google.gerrit.extensions.client.ListChangesOption;
-
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -26,7 +24,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class ListChangesOptionByVersion {
+
     static final Map<String, ListChangesOption> MAX_CHANGE_OPTION_BY_VERSION = new HashMap<>();
+
     static final Pattern VERSION_PATTERN = Pattern.compile("(\\d+)\\.(\\d+)\\..*");
 
     static {
@@ -48,32 +48,10 @@ class ListChangesOptionByVersion {
     }
 
     static boolean isSupportedOnVersion(ListChangesOption listChangesOption, String gerritVersion) {
-        Matcher versionMatcher = VERSION_PATTERN.matcher(gerritVersion);
-        if (!versionMatcher.matches()) {
-            // Gerrit development version, assuming to be the latest and greatest
-            return true;
-        }
-
-        ListChangesOption maxOption = MAX_CHANGE_OPTION_BY_VERSION.get(versionMatcher.group(1) + "." + versionMatcher.group(2));
-        if (maxOption == null) {
-            // No known restrictions on known older versions, assuming to be the latest and greatest
-            return true;
-        }
-
-        return listChangesOption.getValue() <= maxOption.getValue();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     static EnumSet<ListChangesOption> allSupported(String gerritVersion) {
-        EnumSet<ListChangesOption> changesOptions = EnumSet.noneOf(ListChangesOption.class);
-        for (Iterator<ListChangesOption> optionsIter = EnumSet.allOf(ListChangesOption.class).iterator(); optionsIter.hasNext(); ) {
-            ListChangesOption option = optionsIter.next();
-            if (isSupportedOnVersion(option, gerritVersion) &&
-                // ListChangesOption.CHECK is for triggering a Gerrit consistency check, which is not the purpose of
-                // getting change details through all possible options.
-                option != ListChangesOption.CHECK) {
-                changesOptions.add(option);
-            }
-        }
-        return changesOptions;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

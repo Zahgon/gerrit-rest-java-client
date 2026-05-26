@@ -11,24 +11,25 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.projects;
 
 import com.google.common.collect.Lists;
 import java.util.List;
 
-/** Commits that will forbidden to be uploaded. */
+/**
+ * Commits that will forbidden to be uploaded.
+ */
 public class BanCommitInput {
-  public List<String> commits;
-  public String reason;
 
-  public static BanCommitInput fromCommits(String firstCommit, String... moreCommits) {
-    return fromCommits(Lists.asList(firstCommit, moreCommits));
-  }
+    public List<String> commits;
 
-  public static BanCommitInput fromCommits(List<String> commits) {
-    BanCommitInput in = new BanCommitInput();
-    in.commits = commits;
-    return in;
-  }
+    public String reason;
+
+    public static BanCommitInput fromCommits(String firstCommit, String... moreCommits) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public static BanCommitInput fromCommits(List<String> commits) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

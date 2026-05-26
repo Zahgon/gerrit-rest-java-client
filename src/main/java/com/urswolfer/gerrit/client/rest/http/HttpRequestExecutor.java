@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.protocol.HttpContext;
-
 import java.io.IOException;
 
 /**
@@ -31,6 +29,6 @@ import java.io.IOException;
 public class HttpRequestExecutor {
 
     public HttpResponse execute(HttpClientBuilder client, HttpRequestBase method, HttpContext context) throws IOException {
-        return client.build().execute(method, context);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

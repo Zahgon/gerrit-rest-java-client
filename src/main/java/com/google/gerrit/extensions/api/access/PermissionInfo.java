@@ -17,28 +17,25 @@ import java.util.Map;
 import java.util.Objects;
 
 public class PermissionInfo {
-  public String label;
-  public Boolean exclusive;
-  public Map<String, PermissionRuleInfo> rules;
 
-  public PermissionInfo(String label, Boolean exclusive) {
-    this.label = label;
-    this.exclusive = exclusive;
-  }
+    public String label;
 
-  @Override
-  public boolean equals(Object obj) {
-    if (obj instanceof PermissionInfo) {
-      PermissionInfo p = (PermissionInfo) obj;
-      return Objects.equals(label, p.label)
-          && Objects.equals(exclusive, p.exclusive)
-          && Objects.equals(rules, p.rules);
+    public Boolean exclusive;
+
+    public Map<String, PermissionRuleInfo> rules;
+
+    public PermissionInfo(String label, Boolean exclusive) {
+        this.label = label;
+        this.exclusive = exclusive;
     }
-    return false;
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(label, exclusive, rules);
-  }
+    @Override
+    public boolean equals(Object obj) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

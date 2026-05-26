@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest;
 
 import com.google.common.base.Suppliers;
@@ -42,114 +41,99 @@ import com.urswolfer.gerrit.client.rest.http.projects.TagInfoParser;
 import com.urswolfer.gerrit.client.rest.http.projects.parsers.ProjectCommitInfoParser;
 import com.urswolfer.gerrit.client.rest.http.tools.ToolsRestClient;
 import com.urswolfer.gerrit.client.rest.tools.Tools;
-
 import java.util.function.Supplier;
 
 /**
  * @author Urs Wolfer
  */
 public class GerritApiImpl extends GerritApi.NotImplemented implements GerritRestApi {
+
     private final GerritRestClient gerritRestClient;
 
     private final Supplier<GroupsRestClient> groupsRestClient = Suppliers.memoize(new com.google.common.base.Supplier<GroupsRestClient>() {
+
         @Override
         public GroupsRestClient get() {
-            return new GroupsRestClient(gerritRestClient, new GroupsParser(gerritRestClient.getGson()));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     });
 
     private final Supplier<AccountsRestClient> accountsRestClient = Suppliers.memoize(new com.google.common.base.Supplier<AccountsRestClient>() {
+
         @Override
         public AccountsRestClient get() {
-            return new AccountsRestClient(gerritRestClient,
-                new AccountsParser(gerritRestClient.getGson()),
-                new SshKeysParser(gerritRestClient.getGson()),
-                new ChangeInfosParser(gerritRestClient.getGson()));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     });
 
     private final Supplier<ChangesRestClient> changesRestClient = Suppliers.memoize(new com.google.common.base.Supplier<ChangesRestClient>() {
+
         @Override
         public ChangesRestClient get() {
-            return new ChangesRestClient(
-                gerritRestClient,
-                new ChangeInfosParser(gerritRestClient.getGson()),
-                new CommentsParser(gerritRestClient.getGson()),
-                new FileInfoParser(gerritRestClient.getGson()),
-                new ReviewerInfosParser(gerritRestClient.getGson()),
-                new ReviewResultParser(gerritRestClient.getGson()),
-                new CommitInfosParser(gerritRestClient.getGson()),
-                new AccountsParser(gerritRestClient.getGson()),
-                new MergeableInfoParser(gerritRestClient.getGson()),
-                new ReviewInfoParser(gerritRestClient.getGson()),
-                new ServerConfigParser(gerritRestClient.getGson()));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     });
 
     private final Supplier<ConfigRestClient> configRestClient = Suppliers.memoize(new com.google.common.base.Supplier<ConfigRestClient>() {
+
         @Override
         public ConfigRestClient get() {
-            return new ConfigRestClient(gerritRestClient,new ServerConfigParser(gerritRestClient.getGson()));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     });
 
     private final Supplier<ProjectsRestClient> projectsRestClient = Suppliers.memoize(new com.google.common.base.Supplier<ProjectsRestClient>() {
+
         @Override
         public ProjectsRestClient get() {
-            return new ProjectsRestClient(
-                gerritRestClient,
-                new ProjectsParser(gerritRestClient.getGson()),
-                new BranchInfoParser(gerritRestClient.getGson()),
-                new TagInfoParser(gerritRestClient.getGson()),
-                new ProjectCommitInfoParser(gerritRestClient.getGson()));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     });
 
     private final Supplier<ToolsRestClient> toolsRestClient = Suppliers.memoize(new com.google.common.base.Supplier<ToolsRestClient>() {
+
         @Override
         public ToolsRestClient get() {
-            return new ToolsRestClient(gerritRestClient);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     });
 
-    public GerritApiImpl(GerritAuthData authData,
-                         HttpRequestExecutor httpRequestExecutor,
-                         HttpClientBuilderExtension... httpClientBuilderExtensions) {
+    public GerritApiImpl(GerritAuthData authData, HttpRequestExecutor httpRequestExecutor, HttpClientBuilderExtension... httpClientBuilderExtensions) {
         this.gerritRestClient = new GerritRestClient(authData, httpRequestExecutor, httpClientBuilderExtensions);
     }
 
     @Override
     public Accounts accounts() {
-        return accountsRestClient.get();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Changes changes() {
-        return changesRestClient.get();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Config config() {
-        return configRestClient.get();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Groups groups() {
-        return groupsRestClient.get();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Projects projects() {
-        return projectsRestClient.get();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Tools tools() {
-        return toolsRestClient.get();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public RestClient restClient() {
-        return gerritRestClient;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.accounts;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gerrit.extensions.common.SshKeyInfo;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-
 import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
@@ -30,7 +28,9 @@ import java.util.List;
  * created on 24/04/2020
  */
 public class SshKeysParser {
-    private static final Type TYPE = new TypeToken<List<SshKeyInfo>>() {}.getType();
+
+    private static final Type TYPE = new TypeToken<List<SshKeyInfo>>() {
+    }.getType();
 
     private final Gson gson;
 
@@ -39,13 +39,10 @@ public class SshKeysParser {
     }
 
     public SshKeyInfo parseSshKeyInfo(JsonElement result) {
-        return gson.fromJson(result, SshKeyInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<SshKeyInfo> parseSshKeyInfos(JsonElement result) {
-        if (!result.isJsonArray()) {
-            return Collections.singletonList(parseSshKeyInfo(result));
-        }
-        return gson.fromJson(result, TYPE);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

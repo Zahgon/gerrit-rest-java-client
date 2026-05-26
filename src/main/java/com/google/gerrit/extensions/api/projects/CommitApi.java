@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.projects;
 
 import com.google.gerrit.extensions.api.changes.ChangeApi;
@@ -22,27 +21,31 @@ import com.google.gerrit.extensions.restapi.NotImplementedException;
 import com.google.gerrit.extensions.restapi.RestApiException;
 
 public interface CommitApi {
-  CommitInfo get() throws RestApiException;
 
-  ChangeApi cherryPick(CherryPickInput input) throws RestApiException;
+    CommitInfo get() throws RestApiException;
 
-  IncludedInInfo includedIn() throws RestApiException;
+    ChangeApi cherryPick(CherryPickInput input) throws RestApiException;
 
-  /** A default implementation for source compatibility when adding new methods to the interface. */
-  class NotImplemented implements CommitApi {
-    @Override
-    public CommitInfo get() throws RestApiException {
-      throw new NotImplementedException();
+    IncludedInInfo includedIn() throws RestApiException;
+
+    /**
+     * A default implementation for source compatibility when adding new methods to the interface.
+     */
+    class NotImplemented implements CommitApi {
+
+        @Override
+        public CommitInfo get() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public ChangeApi cherryPick(CherryPickInput input) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public IncludedInInfo includedIn() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
-
-    @Override
-    public ChangeApi cherryPick(CherryPickInput input) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public IncludedInInfo includedIn() throws RestApiException {
-      throw new NotImplementedException();
-    }
-  }
 }

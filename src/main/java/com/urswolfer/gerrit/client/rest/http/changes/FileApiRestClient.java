@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.changes;
 
 import com.google.common.base.Strings;
@@ -28,12 +27,9 @@ import com.urswolfer.gerrit.client.rest.http.GerritRestClient;
 import com.urswolfer.gerrit.client.rest.http.changes.parsers.CommitInfosParser;
 import com.urswolfer.gerrit.client.rest.http.util.BinaryResultUtils;
 import com.urswolfer.gerrit.client.rest.http.util.UrlUtils;
-
 import org.apache.http.HttpResponse;
-
 import java.io.IOException;
 import java.util.function.Supplier;
-
 import static com.urswolfer.gerrit.client.rest.RestClient.HttpVerb.GET;
 
 /**
@@ -42,21 +38,22 @@ import static com.urswolfer.gerrit.client.rest.RestClient.HttpVerb.GET;
 public class FileApiRestClient extends FileApi.NotImplemented {
 
     private final GerritRestClient gerritRestClient;
+
     private final RevisionApiRestClient revisionApiRestClient;
+
     private final CommitInfosParser commitInfosParser;
+
     private final String path;
 
     private final Supplier<String> requestPath = Suppliers.memoize(new com.google.common.base.Supplier<String>() {
+
         @Override
         public String get() {
-            String encodedPath = Url.encode(path);
-            return revisionApiRestClient.getRequestPath() + "/files/" + encodedPath;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     });
 
-    public FileApiRestClient(GerritRestClient gerritRestClient,
-                             RevisionApiRestClient revisionApiRestClient,
-                             CommitInfosParser commitInfosParser, String path) {
+    public FileApiRestClient(GerritRestClient gerritRestClient, RevisionApiRestClient revisionApiRestClient, CommitInfosParser commitInfosParser, String path) {
         this.gerritRestClient = gerritRestClient;
         this.revisionApiRestClient = revisionApiRestClient;
         this.commitInfosParser = commitInfosParser;
@@ -65,38 +62,27 @@ public class FileApiRestClient extends FileApi.NotImplemented {
 
     @Override
     public BinaryResult content() throws RestApiException {
-        String request = getRequestPath() + "/content";
-        try {
-            HttpResponse response = gerritRestClient.request(request, null, GET);
-            return BinaryResultUtils.createBinaryResult(response);
-        } catch (IOException e) {
-            throw RestApiException.wrap("Failed to get file content.", e);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public DiffInfo diff() throws RestApiException {
-        return diffRequest().get();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public DiffInfo diff(String base) throws RestApiException {
-        return diffRequest().withBase(base).get();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public DiffInfo diff(int parent) throws RestApiException {
-        return diff(diffRequest(), parent);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public DiffRequest diffRequest() throws RestApiException {
-        return new DiffRequest() {
-            @Override
-            public DiffInfo get() throws RestApiException {
-                return FileApiRestClient.this.diff(this);
-            }
-        };
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private DiffInfo diff(DiffRequest diffRequest) throws RestApiException {
@@ -105,7 +91,6 @@ public class FileApiRestClient extends FileApi.NotImplemented {
 
     private DiffInfo diff(DiffRequest diffRequest, int parent) throws RestApiException {
         String query = "";
-
         if (!Strings.isNullOrEmpty(diffRequest.getBase())) {
             query = UrlUtils.appendToUrlQuery(query, "base=" + diffRequest.getBase());
         }
@@ -121,17 +106,15 @@ public class FileApiRestClient extends FileApi.NotImplemented {
         if (parent > 0) {
             query = UrlUtils.appendToUrlQuery(query, "parent=" + parent);
         }
-
-        String url = getRequestPath() +  "/diff";
+        String url = getRequestPath() + "/diff";
         if (!Strings.isNullOrEmpty(query)) {
             url += '?' + query;
         }
-
         JsonElement jsonElement = gerritRestClient.getRequest(url);
         return commitInfosParser.parseDiffInfo(jsonElement);
     }
 
     protected String getRequestPath() {
-        return requestPath.get();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

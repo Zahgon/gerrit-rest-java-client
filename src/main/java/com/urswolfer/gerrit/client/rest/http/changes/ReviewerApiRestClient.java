@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.changes;
 
 import com.google.gerrit.extensions.api.changes.ReviewerApi;
@@ -21,7 +20,6 @@ import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.urswolfer.gerrit.client.rest.http.GerritRestClient;
-
 import java.util.Map;
 
 /**
@@ -30,12 +28,12 @@ import java.util.Map;
 public class ReviewerApiRestClient extends ReviewerApi.NotImplemented implements ReviewerApi {
 
     private final GerritRestClient gerritRestClient;
+
     private final ChangeApiRestClient changeApiRestClient;
+
     private final Integer accountId;
 
-    public ReviewerApiRestClient(GerritRestClient gerritRestClient,
-                                 ChangeApiRestClient changeApiRestClient,
-                                 Integer accountId) {
+    public ReviewerApiRestClient(GerritRestClient gerritRestClient, ChangeApiRestClient changeApiRestClient, Integer accountId) {
         this.gerritRestClient = gerritRestClient;
         this.changeApiRestClient = changeApiRestClient;
         this.accountId = accountId;
@@ -43,18 +41,15 @@ public class ReviewerApiRestClient extends ReviewerApi.NotImplemented implements
 
     @Override
     public Map<String, Short> votes() throws RestApiException {
-        String request = getRequestPath() + "/votes";
-        JsonElement jsonElement = gerritRestClient.getRequest(request);
-        return gerritRestClient.getGson().fromJson(jsonElement, new TypeToken<Map<String, Short>>() {}.getType());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteVote(String label) throws RestApiException {
-        String request = getRequestPath() + "/votes/" + label;
-        gerritRestClient.deleteRequest(request);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected String getRequestPath() {
-        return changeApiRestClient.getRequestPath() + "/reviewers/" + accountId;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -11,48 +11,36 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.projects;
 
 import com.google.common.base.MoreObjects;
 import java.util.Objects;
 
 public class CommentLinkInfo {
-  public String match;
-  public String link;
-  public String html;
-  public Boolean enabled; // null means true
 
-  public transient String name;
+    public String match;
 
-  @Override
-  public boolean equals(Object o) {
-    if (o == this) {
-      return true;
+    public String link;
+
+    public String html;
+
+    // null means true
+    public Boolean enabled;
+
+    public transient String name;
+
+    @Override
+    public boolean equals(Object o) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    if (o instanceof CommentLinkInfo) {
-      CommentLinkInfo that = (CommentLinkInfo) o;
-      return Objects.equals(this.match, that.match)
-          && Objects.equals(this.link, that.link)
-          && Objects.equals(this.html, that.html)
-          && Objects.equals(this.enabled, that.enabled);
+
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return false;
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(match, link, html, enabled);
-  }
-
-  @Override
-  public String toString() {
-    return MoreObjects.toStringHelper(this)
-        .add("name", name)
-        .add("match", match)
-        .add("link", link)
-        .add("html", html)
-        .add("enabled", enabled)
-        .toString();
-  }
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

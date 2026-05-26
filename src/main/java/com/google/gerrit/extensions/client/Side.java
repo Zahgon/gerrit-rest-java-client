@@ -11,19 +11,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.client;
 
 public enum Side {
-  PARENT,
-  REVISION;
 
-  public static Side fromShort(short s) {
-    if (s <= 0) {
-      return PARENT;
-    } else if (s == 1) {
-      return REVISION;
+    PARENT, REVISION;
+
+    public static Side fromShort(short s) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return null;
-  }
 }

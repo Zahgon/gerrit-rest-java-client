@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.changes;
 
 import com.google.common.base.Strings;
@@ -29,13 +28,11 @@ import com.urswolfer.gerrit.client.rest.http.GerritRestClient;
 import com.urswolfer.gerrit.client.rest.http.changes.parsers.*;
 import com.urswolfer.gerrit.client.rest.http.util.BinaryResultUtils;
 import org.apache.http.HttpResponse;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
-
 import static com.urswolfer.gerrit.client.rest.RestClient.HttpVerb.GET;
 
 /**
@@ -44,24 +41,24 @@ import static com.urswolfer.gerrit.client.rest.RestClient.HttpVerb.GET;
 public class RevisionApiRestClient extends RevisionApi.NotImplemented implements RevisionApi {
 
     private final GerritRestClient gerritRestClient;
+
     private final ChangeApiRestClient changeApiRestClient;
+
     private final CommentsParser commentsParser;
+
     private final FileInfoParser fileInfoParser;
+
     private final ReviewResultParser reviewResultParser;
+
     private final CommitInfosParser commitInfosParser;
+
     private final MergeableInfoParser mergeableInfoParser;
+
     private final ReviewInfoParser reviewInfoParser;
+
     private final String revision;
 
-    public RevisionApiRestClient(GerritRestClient gerritRestClient,
-                                 ChangeApiRestClient changeApiRestClient,
-                                 CommentsParser commentsParser,
-                                 FileInfoParser fileInfoParser,
-                                 ReviewResultParser reviewResultParser,
-                                 CommitInfosParser commitInfosParser,
-                                 MergeableInfoParser mergeableInfoParser,
-                                 ReviewInfoParser reviewInfoParser,
-                                 String revision) {
+    public RevisionApiRestClient(GerritRestClient gerritRestClient, ChangeApiRestClient changeApiRestClient, CommentsParser commentsParser, FileInfoParser fileInfoParser, ReviewResultParser reviewResultParser, CommitInfosParser commitInfosParser, MergeableInfoParser mergeableInfoParser, ReviewInfoParser reviewInfoParser, String revision) {
         this.gerritRestClient = gerritRestClient;
         this.changeApiRestClient = changeApiRestClient;
         this.commentsParser = commentsParser;
@@ -74,78 +71,57 @@ public class RevisionApiRestClient extends RevisionApi.NotImplemented implements
     }
 
     public String revision() {
-        return revision;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void delete() throws RestApiException {
-        String request = getRequestPath();
-        gerritRestClient.deleteRequest(request);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ReviewResult review(ReviewInput reviewInput) throws RestApiException {
-        String request = getRequestPath() + "/review";
-        String json = gerritRestClient.getGson().toJson(reviewInput);
-        JsonElement reviewResult = gerritRestClient.postRequest(request, json);
-        return reviewResultParser.parseReviewResult(reviewResult);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void submit() throws RestApiException {
-        submit(new SubmitInput());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void submit(SubmitInput submitInput) throws RestApiException {
-        String request = changeApiRestClient.getRequestPath() + "/submit";
-        String json = gerritRestClient.getGson().toJson(submitInput);
-        gerritRestClient.postRequest(request, json);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void publish() throws RestApiException {
-        String request = getRequestPath() + "/publish";
-        gerritRestClient.postRequest(request);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ChangeApi cherryPick(CherryPickInput in) throws RestApiException {
-        String request = getRequestPath() + "/cherrypick";
-        String json = gerritRestClient.getGson().toJson(in);
-        gerritRestClient.postRequest(request, json);
-        return changeApiRestClient;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ChangeApi rebase() throws RestApiException {
-        return rebase(new RebaseInput());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ChangeApi rebase(RebaseInput in) throws RestApiException {
-        String request = getRequestPath() + "/rebase";
-        String json = gerritRestClient.getGson().toJson(in);
-        gerritRestClient.postRequest(request, json);
-        return changeApiRestClient;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void setReviewed(String path, boolean reviewed) throws RestApiException {
-        String encodedPath = Url.encode(path);
-        String url = String.format("/changes/%s/revisions/%s/files/%s/reviewed", changeApiRestClient.id(), revision, encodedPath);
-        if (reviewed) {
-            gerritRestClient.putRequest(url);
-        } else {
-            gerritRestClient.deleteRequest(url);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public MergeableInfo mergeable() throws RestApiException {
-        String request = getRequestPath() + "/mergeable";
-        JsonElement jsonElement = gerritRestClient.getRequest(request);
-        return mergeableInfoParser.parseMergeableInfo(jsonElement);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -153,19 +129,17 @@ public class RevisionApiRestClient extends RevisionApi.NotImplemented implements
      */
     @Override
     public SortedMap<String, List<CommentInfo>> comments() throws RestApiException {
-        return comments("comments");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public SortedMap<String, List<CommentInfo>> drafts() throws RestApiException {
-        return comments("drafts");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Set<String> reviewed() throws RestApiException {
-        String request = getRequestPath() + "/files?reviewed";
-        JsonElement jsonElement = gerritRestClient.getRequest(request);
-        return reviewInfoParser.parseFileInfos(jsonElement);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private SortedMap<String, List<CommentInfo>> comments(String type) throws RestApiException {
@@ -176,123 +150,85 @@ public class RevisionApiRestClient extends RevisionApi.NotImplemented implements
 
     @Override
     public Map<String, List<RobotCommentInfo>> robotComments() throws RestApiException {
-        String request = getRequestPath() + "/robotcomments/";
-        JsonElement jsonElement = gerritRestClient.getRequest(request);
-        return commentsParser.parseRobotCommentInfos(jsonElement);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public DraftApi createDraft(DraftInput in) throws RestApiException {
-        String request = getRequestPath() + "/drafts";
-        String json = gerritRestClient.getGson().toJson(in);
-        JsonElement jsonElement = gerritRestClient.putRequest(request, json);
-        CommentInfo commentInfo = commentsParser.parseSingleCommentInfo(jsonElement.getAsJsonObject());
-        return new DraftApiRestClient(gerritRestClient, changeApiRestClient, this, commentsParser, commentInfo);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public DraftApi draft(String id) throws RestApiException {
-        return new DraftApiRestClient(gerritRestClient, changeApiRestClient, this, commentsParser, id);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public CommentApi comment(String id) throws RestApiException {
-        return new CommentApiRestClient(gerritRestClient, this, commentsParser, id);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public RobotCommentApi robotComment(String id) throws RestApiException {
-        return new RobotCommentApiRestClient(gerritRestClient, this, commentsParser, id);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     @Override
     public Map<String, FileInfo> files() throws RestApiException {
-        return files(0);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Map<String, FileInfo> files(int parentNum) throws RestApiException {
-        String request = getRequestPath() + "/files";
-        if (parentNum > 0) {
-            request += "?parent=" + parentNum;
-        }
-        JsonElement jsonElement = gerritRestClient.getRequest(request);
-        return fileInfoParser.parseFileInfos(jsonElement);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public FileApi file(String path) {
-        return new FileApiRestClient(gerritRestClient, this, commitInfosParser, path);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public CommitInfo commit(boolean addLinks) throws RestApiException {
-        String request = getRequestPath() + "/commit" + (addLinks ? "?links" : "");
-        JsonElement jsonElement = gerritRestClient.getRequest(request);
-        return commitInfosParser.parseSingleCommitInfo(jsonElement.getAsJsonObject());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BinaryResult patch() throws RestApiException {
-        String request = getRequestPath() + "/patch";
-        try {
-            HttpResponse response = gerritRestClient.request(request, null, GET);
-            return BinaryResultUtils.createBinaryResult(response);
-        } catch (IOException e) {
-            throw RestApiException.wrap("Failed to get patch.", e);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Map<String, ActionInfo> actions() throws RestApiException {
-        String request = getRequestPath() + "/actions";
-        JsonElement jsonElement = gerritRestClient.getRequest(request);
-        return commitInfosParser.parseActionInfos(jsonElement);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public SubmitType submitType() throws RestApiException {
-        String request = getRequestPath() + "/submit_type";
-        JsonElement jsonElement = gerritRestClient.getRequest(request);
-        return gerritRestClient.getGson().fromJson(jsonElement, new TypeToken<SubmitType>() {}.getType());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BinaryResult submitPreview() throws RestApiException {
-        return submitPreview(null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BinaryResult submitPreview(String format) throws RestApiException {
-        String request = getRequestPath() + "/preview_submit";
-        if (!Strings.isNullOrEmpty(format)) {
-            request += "?format=" + format;
-        }
-
-        try {
-            HttpResponse response = gerritRestClient.request(request, null, GET);
-            return BinaryResultUtils.createBinaryResult(response);
-        } catch (IOException e) {
-            throw RestApiException.wrap("Request failed.", e);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public SubmitType testSubmitType(TestSubmitRuleInput in) throws RestApiException {
-        String request = getRequestPath() + "/test.submit_type";
-        String json = gerritRestClient.getGson().toJson(in);
-        JsonElement jsonElement = gerritRestClient.postRequest(request,json);
-        return gerritRestClient.getGson().fromJson(jsonElement, new TypeToken<SubmitType>() {}.getType());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String description() throws RestApiException {
-        String request = getRequestPath() + "/description";
-        return gerritRestClient.getRequest(request).getAsString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected String getRequestPath() {
-        return changeApiRestClient.getRequestPath() + "/revisions/" + revision;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

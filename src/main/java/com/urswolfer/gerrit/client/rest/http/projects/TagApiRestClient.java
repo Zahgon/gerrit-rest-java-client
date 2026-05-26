@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.projects;
 
 import com.google.common.collect.Iterables;
@@ -26,15 +25,16 @@ import com.urswolfer.gerrit.client.rest.http.GerritRestClient;
  * @author Pavel Bely
  */
 public class TagApiRestClient extends TagApi.NotImplemented implements TagApi {
+
     private final GerritRestClient gerritRestClient;
+
     private final TagInfoParser tagInfoParser;
+
     private final ProjectApiRestClient projectApiRestClient;
+
     private final String name;
 
-    public TagApiRestClient(GerritRestClient gerritRestClient,
-                            TagInfoParser tagInfoParser,
-                            ProjectApiRestClient projectApiRestClient,
-                            String name) {
+    public TagApiRestClient(GerritRestClient gerritRestClient, TagInfoParser tagInfoParser, ProjectApiRestClient projectApiRestClient, String name) {
         this.gerritRestClient = gerritRestClient;
         this.tagInfoParser = tagInfoParser;
         this.projectApiRestClient = projectApiRestClient;
@@ -43,23 +43,20 @@ public class TagApiRestClient extends TagApi.NotImplemented implements TagApi {
 
     @Override
     public TagApi create(TagInput in) throws RestApiException {
-        String json = gerritRestClient.getGson().toJson(in);
-        gerritRestClient.putRequest(tagUrl(), json);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public TagInfo get() throws RestApiException {
-        JsonElement jsonElement = gerritRestClient.getRequest(tagUrl());
-        return Iterables.getOnlyElement(tagInfoParser.parseTagInfos(jsonElement));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void delete() throws RestApiException{
-        gerritRestClient.deleteRequest(tagUrl());
+    public void delete() throws RestApiException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected String tagUrl() {
-        return projectApiRestClient.projectsUrl() + "/tags/" + name;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

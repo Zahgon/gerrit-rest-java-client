@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api;
 
 import com.google.gerrit.extensions.api.accounts.Accounts;
@@ -23,51 +22,53 @@ import com.google.gerrit.extensions.api.projects.Projects;
 import com.google.gerrit.extensions.restapi.NotImplementedException;
 
 public interface GerritApi {
-  Accounts accounts();
 
-  Changes changes();
+    Accounts accounts();
 
-  Config config();
+    Changes changes();
 
-  Groups groups();
+    Config config();
 
-  Projects projects();
+    Groups groups();
 
-  Plugins plugins();
+    Projects projects();
 
-  /**
-   * A default implementation which allows source compatibility when adding new methods to the
-   * interface.
-   */
-  class NotImplemented implements GerritApi {
-    @Override
-    public Accounts accounts() {
-      throw new NotImplementedException();
+    Plugins plugins();
+
+    /**
+     * A default implementation which allows source compatibility when adding new methods to the
+     * interface.
+     */
+    class NotImplemented implements GerritApi {
+
+        @Override
+        public Accounts accounts() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public Changes changes() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public Config config() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public Groups groups() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public Projects projects() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public Plugins plugins() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
-
-    @Override
-    public Changes changes() {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public Config config() {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public Groups groups() {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public Projects projects() {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public Plugins plugins() {
-      throw new NotImplementedException();
-    }
-  }
 }

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.projects;
 
 import com.google.common.collect.Iterables;
@@ -27,24 +26,23 @@ import com.google.gson.JsonElement;
 import com.urswolfer.gerrit.client.rest.http.GerritRestClient;
 import com.urswolfer.gerrit.client.rest.http.util.BinaryResultUtils;
 import org.apache.http.HttpResponse;
-
 import java.io.IOException;
-
 import static com.urswolfer.gerrit.client.rest.RestClient.HttpVerb.GET;
 
 /**
  * @author Ingo Rissmann
  */
 public class BranchApiRestClient extends BranchApi.NotImplemented implements BranchApi {
+
     private final GerritRestClient gerritRestClient;
+
     private final BranchInfoParser branchInfoParser;
+
     private final ProjectApiRestClient projectApiRestClient;
+
     private final String name;
 
-    public BranchApiRestClient(GerritRestClient gerritRestClient,
-                               BranchInfoParser branchInfoParser,
-                               ProjectApiRestClient projectApiRestClient,
-                               String name) {
+    public BranchApiRestClient(GerritRestClient gerritRestClient, BranchInfoParser branchInfoParser, ProjectApiRestClient projectApiRestClient, String name) {
         this.gerritRestClient = gerritRestClient;
         this.branchInfoParser = branchInfoParser;
         this.projectApiRestClient = projectApiRestClient;
@@ -53,35 +51,25 @@ public class BranchApiRestClient extends BranchApi.NotImplemented implements Bra
 
     @Override
     public BranchApi create(BranchInput in) throws RestApiException {
-        String json = gerritRestClient.getGson().toJson(in);
-        gerritRestClient.putRequest(branchUrl(), json);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BranchInfo get() throws RestApiException {
-        JsonElement jsonElement = gerritRestClient.getRequest(branchUrl());
-        return Iterables.getOnlyElement(branchInfoParser.parseBranchInfos(jsonElement));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void delete() throws RestApiException {
-        gerritRestClient.deleteRequest(branchUrl());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BinaryResult file(String path) throws RestApiException {
-        String encodedPath = Url.encode(path);
-        String request = branchUrl() + "/files/" + encodedPath + "/content";
-        try {
-            HttpResponse response = gerritRestClient.request(request, null, GET);
-            return BinaryResultUtils.createBinaryResult(response);
-        } catch (IOException e) {
-            throw RestApiException.wrap("Failed to get file content.", e);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected String branchUrl() {
-        return projectApiRestClient.projectsUrl() + "/branches/" + name;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

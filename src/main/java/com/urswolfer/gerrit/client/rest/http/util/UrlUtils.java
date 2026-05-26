@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.util;
 
 import com.google.common.base.Strings;
@@ -22,13 +21,11 @@ import com.google.common.base.Strings;
  * @author Urs Wolfer
  */
 public class UrlUtils {
-    private UrlUtils() {}
+
+    private UrlUtils() {
+    }
 
     public static String appendToUrlQuery(String query, String parameter) {
-        if (!Strings.isNullOrEmpty(query)) {
-            query += "&";
-        }
-        query += parameter;
-        return query;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

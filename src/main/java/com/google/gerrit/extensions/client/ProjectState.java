@@ -11,33 +11,38 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.client;
 
 public enum ProjectState {
-  /** Permits reading project state and contents as well as mutating data. */
-  ACTIVE(true, true),
-  /** Permits reading project state and contents. Does not permit any modifications. */
-  READ_ONLY(true, false),
-  /**
-   * Hides the project as if it was deleted, but makes requests fail with an error message that
-   * reveals the project's existence.
-   */
-  HIDDEN(false, false);
 
-  private final boolean permitsRead;
-  private final boolean permitsWrite;
+    /**
+     * Permits reading project state and contents as well as mutating data.
+     */
+    ACTIVE(true, true),
+    /**
+     * Permits reading project state and contents. Does not permit any modifications.
+     */
+    READ_ONLY(true, false),
+    /**
+     * Hides the project as if it was deleted, but makes requests fail with an error message that
+     * reveals the project's existence.
+     */
+    HIDDEN(false, false);
 
-  ProjectState(boolean permitsRead, boolean permitsWrite) {
-    this.permitsRead = permitsRead;
-    this.permitsWrite = permitsWrite;
-  }
+    private final boolean permitsRead;
 
-  public boolean permitsRead() {
-    return permitsRead;
-  }
+    private final boolean permitsWrite;
 
-  public boolean permitsWrite() {
-    return permitsWrite;
-  }
+    ProjectState(boolean permitsRead, boolean permitsWrite) {
+        this.permitsRead = permitsRead;
+        this.permitsWrite = permitsWrite;
+    }
+
+    public boolean permitsRead() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public boolean permitsWrite() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

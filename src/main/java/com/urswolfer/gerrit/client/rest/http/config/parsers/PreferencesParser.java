@@ -22,23 +22,22 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
 public class PreferencesParser {
+
     protected final Gson gson;
 
     public PreferencesParser(Gson gson) {
         this.gson = gson;
     }
 
-
     public GeneralPreferencesInfo parseGeneralPreferences(JsonElement result) {
-        return gson.fromJson(result, GeneralPreferencesInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public DiffPreferencesInfo parseDiffPreferences(JsonElement result) {
-        return gson.fromJson(result, DiffPreferencesInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public EditPreferencesInfo parseEditPreferences(JsonElement result) {
-        return gson.fromJson(result, EditPreferencesInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

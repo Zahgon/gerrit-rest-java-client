@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.changes;
 
 import com.google.gerrit.extensions.common.RobotCommentInfo;
@@ -19,16 +18,18 @@ import com.google.gerrit.extensions.restapi.NotImplementedException;
 import com.google.gerrit.extensions.restapi.RestApiException;
 
 public interface RobotCommentApi {
-  RobotCommentInfo get() throws RestApiException;
 
-  /**
-   * A default implementation which allows source compatibility when adding new methods to the
-   * interface.
-   */
-  class NotImplemented implements RobotCommentApi {
-    @Override
-    public RobotCommentInfo get() throws RestApiException {
-      throw new NotImplementedException();
+    RobotCommentInfo get() throws RestApiException;
+
+    /**
+     * A default implementation which allows source compatibility when adding new methods to the
+     * interface.
+     */
+    class NotImplemented implements RobotCommentApi {
+
+        @Override
+        public RobotCommentInfo get() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
-  }
 }

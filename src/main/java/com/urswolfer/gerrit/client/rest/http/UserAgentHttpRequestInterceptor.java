@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http;
 
 import com.urswolfer.gerrit.client.rest.Version;
@@ -30,9 +29,6 @@ class UserAgentHttpRequestInterceptor implements HttpRequestInterceptor {
 
     @Override
     public void process(final HttpRequest request, final HttpContext context) {
-        Header existingUserAgent = request.getFirstHeader(HttpHeaders.USER_AGENT);
-        String userAgent = String.format("gerrit-rest-java-client/%s using %s",
-            Version.get(), existingUserAgent.getValue());
-        request.setHeader(HttpHeaders.USER_AGENT, userAgent);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

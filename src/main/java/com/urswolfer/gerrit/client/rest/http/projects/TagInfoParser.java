@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.projects;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gerrit.extensions.api.projects.TagInfo;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-
 import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
@@ -29,7 +27,9 @@ import java.util.List;
  * @author Pavel Bely
  */
 public class TagInfoParser {
-    private static final Type TYPE = new TypeToken<List<TagInfo>>() {}.getType();
+
+    private static final Type TYPE = new TypeToken<List<TagInfo>>() {
+    }.getType();
 
     private final Gson gson;
 
@@ -38,9 +38,6 @@ public class TagInfoParser {
     }
 
     public List<TagInfo> parseTagInfos(JsonElement result) {
-        if (!result.isJsonArray()) {
-            return Collections.singletonList(gson.fromJson(result, TagInfo.class));
-        }
-        return gson.fromJson(result, TYPE);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

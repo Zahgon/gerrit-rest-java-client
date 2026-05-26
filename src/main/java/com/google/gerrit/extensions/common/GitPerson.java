@@ -11,46 +11,33 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.common;
 
 import java.sql.Timestamp;
 import java.util.Objects;
 
 public class GitPerson {
-  public String name;
-  public String email;
-  public Timestamp date;
-  public int tz;
 
-  @Override
-  public boolean equals(Object o) {
-    if (!(o instanceof GitPerson)) {
-      return false;
+    public String name;
+
+    public String email;
+
+    public Timestamp date;
+
+    public int tz;
+
+    @Override
+    public boolean equals(Object o) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    GitPerson p = (GitPerson) o;
-    return Objects.equals(name, p.name)
-        && Objects.equals(email, p.email)
-        && Objects.equals(date, p.date)
-        && tz == p.tz;
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(name, email, date, tz);
-  }
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public String toString() {
-    return getClass().getSimpleName()
-        + "{name="
-        + name
-        + ", email="
-        + email
-        + ", date="
-        + date
-        + ", tz="
-        + tz
-        + "}";
-  }
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

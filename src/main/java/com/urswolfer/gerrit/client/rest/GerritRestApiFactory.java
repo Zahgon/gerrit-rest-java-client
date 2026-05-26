@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest;
 
 import com.urswolfer.gerrit.client.rest.http.HttpClientBuilderExtension;
@@ -24,14 +23,11 @@ import com.urswolfer.gerrit.client.rest.http.HttpRequestExecutor;
  */
 public class GerritRestApiFactory {
 
-    public GerritRestApi create(GerritAuthData authData,
-                            HttpClientBuilderExtension... httpClientBuilderExtensions) {
-        return create(authData, new HttpRequestExecutor(), httpClientBuilderExtensions);
+    public GerritRestApi create(GerritAuthData authData, HttpClientBuilderExtension... httpClientBuilderExtensions) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public GerritRestApi create(GerritAuthData authData,
-                            HttpRequestExecutor httpRequestExecutor,
-                            HttpClientBuilderExtension... httpClientBuilderExtensions) {
-        return new GerritApiImpl(authData, httpRequestExecutor, httpClientBuilderExtensions);
+    public GerritRestApi create(GerritAuthData authData, HttpRequestExecutor httpRequestExecutor, HttpClientBuilderExtension... httpClientBuilderExtensions) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.projects;
 
 import com.google.gerrit.extensions.api.projects.LabelApi;
@@ -28,7 +27,9 @@ import com.urswolfer.gerrit.client.rest.http.GerritRestClient;
 public class LabelApiRestClient extends LabelApi.NotImplemented implements LabelApi {
 
     private final GerritRestClient gerritRestClient;
+
     private final ProjectApiRestClient projectApiRestClient;
+
     private final String name;
 
     public LabelApiRestClient(GerritRestClient gerritRestClient, ProjectApiRestClient projectApiRestClient, String name) {
@@ -39,12 +40,10 @@ public class LabelApiRestClient extends LabelApi.NotImplemented implements Label
 
     @Override
     public LabelApi create(LabelDefinitionInput input) throws RestApiException {
-        String body = gerritRestClient.getGson().toJson(input);
-        gerritRestClient.putRequest(labelUrl(), body);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected String labelUrl() {
-        return projectApiRestClient.projectsUrl() + "/labels/" + Url.encode(name);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

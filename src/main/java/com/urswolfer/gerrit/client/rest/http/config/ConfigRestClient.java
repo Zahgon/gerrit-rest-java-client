@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.config;
 
 import com.google.gerrit.extensions.api.config.Config;
@@ -25,6 +24,7 @@ import com.urswolfer.gerrit.client.rest.http.config.parsers.ServerConfigParser;
  * @author Urs Wolfer
  */
 public class ConfigRestClient extends Config.NotImplemented implements Config {
+
     private final GerritRestClient gerritRestClient;
 
     private final ServerConfigParser serverConfigParser;
@@ -36,6 +36,6 @@ public class ConfigRestClient extends Config.NotImplemented implements Config {
 
     @Override
     public Server server() {
-        return new ServerRestClient(gerritRestClient, serverConfigParser);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

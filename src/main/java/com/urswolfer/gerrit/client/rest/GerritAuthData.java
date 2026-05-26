@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest;
 
 import com.google.common.base.Strings;
@@ -26,6 +25,7 @@ import com.google.common.base.Strings;
  * @author Thomas Forrer
  */
 public interface GerritAuthData {
+
     /**
      * Username used for login.
      */
@@ -71,9 +71,13 @@ public interface GerritAuthData {
      * Note: It is not related to HTTP basic access authentication.
      */
     public class Basic implements GerritAuthData {
+
         private final String host;
+
         private final String login;
+
         private final String password;
+
         private final boolean httpPassword;
 
         /**
@@ -107,27 +111,27 @@ public interface GerritAuthData {
 
         @Override
         public boolean isHttpPassword() {
-            return httpPassword;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public String getLogin() {
-            return login;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public String getPassword() {
-            return password;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public String getHost() {
-            return host;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public boolean isLoginAndPasswordAvailable() {
-            return !Strings.isNullOrEmpty(getLogin()) && !Strings.isNullOrEmpty(getPassword());
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         private String stripTrailingSlash(String host) {

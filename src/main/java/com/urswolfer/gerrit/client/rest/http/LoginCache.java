@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http;
 
 import com.google.common.base.Optional;
@@ -27,13 +26,18 @@ import org.apache.http.protocol.HttpCoreContext;
  * @author Urs Wolfer
  */
 public class LoginCache {
+
     private final BasicCookieStore cookieStore;
+
     private final GerritAuthData authData;
+
     private boolean githubOAuthDetected;
 
     private Optional<String> gerritAuthOptional = Optional.absent();
+
     // remember when host does not support gerrit-auth login method so we don't have to try again
     private boolean hostSupportsGerritAuth = true;
+
     private String lastConnection;
 
     public LoginCache(GerritAuthData authData, BasicCookieStore cookieStore) {
@@ -42,34 +46,27 @@ public class LoginCache {
     }
 
     public void setGerritAuthOptional(Optional<String> gerritAuthOptional) {
-        this.gerritAuthOptional = gerritAuthOptional;
-        this.hostSupportsGerritAuth = gerritAuthOptional.isPresent();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public Optional<String> getGerritAuthOptional() {
-        invalidateLoginDataOnNewSettings();
-        return gerritAuthOptional;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean getHostSupportsGerritAuth() {
-        invalidateLoginDataOnNewSettings();
-        return hostSupportsGerritAuth;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void invalidate() {
-        lastConnection = null;
-        gerritAuthOptional = Optional.absent();
-        hostSupportsGerritAuth = true;
-        cookieStore.clear();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean isGithubOAuthDetected() {
-        return githubOAuthDetected;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean isGitHubOAuthRequested(HttpContext loginContext) {
-        HttpUriRequest lastRequest = (HttpUriRequest) loginContext.getAttribute(HttpCoreContext.HTTP_REQUEST);
-        return githubOAuthDetected || (githubOAuthDetected = (lastRequest != null && lastRequest.getURI().getPath().contains("github-plugin")));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**

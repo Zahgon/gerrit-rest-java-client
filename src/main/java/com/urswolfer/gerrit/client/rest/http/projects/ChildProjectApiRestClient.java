@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.projects;
 
 import com.google.gerrit.extensions.api.projects.ChildProjectApi;
@@ -28,7 +27,9 @@ public class ChildProjectApiRestClient extends ChildProjectApi.NotImplemented im
     private final GerritRestClient gerritRestClient;
 
     private final ProjectsParser projectsParser;
+
     private final String name;
+
     private final String parentUrl;
 
     public ChildProjectApiRestClient(GerritRestClient gerritRestClient, ProjectsParser projectsParser, String parentUrl, String name) {
@@ -40,21 +41,15 @@ public class ChildProjectApiRestClient extends ChildProjectApi.NotImplemented im
 
     @Override
     public ProjectInfo get() throws RestApiException {
-        return get(false);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ProjectInfo get(boolean recursive) throws RestApiException {
-        String requestUrl = childProjectUrl();
-        if (recursive) {
-            requestUrl = requestUrl + "?recursive";
-        }
-        JsonElement jsonElement = gerritRestClient.getRequest(requestUrl);
-        return projectsParser.parseSingleProjectInfo(jsonElement);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected String childProjectUrl() {
-        return parentUrl + "/children/" + Url.encode(name);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

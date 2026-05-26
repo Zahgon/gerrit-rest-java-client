@@ -11,49 +11,24 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.client;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.EnumSet;
 import java.util.Set;
 
-/** Enum that can be expressed as a bitset in query parameters. */
+/**
+ * Enum that can be expressed as a bitset in query parameters.
+ */
 public interface ListOption {
-  int getValue();
 
-  static <T extends Enum<T> & ListOption> EnumSet<T> fromBits(Class<T> clazz, int v) {
-    EnumSet<T> r = EnumSet.noneOf(clazz);
-    T[] values;
-    try {
-      @SuppressWarnings("unchecked")
-      T[] tmp = (T[]) clazz.getMethod("values").invoke(null);
-      values = tmp;
-    } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-      throw new IllegalStateException(e);
-    }
-    for (T o : values) {
-      if ((v & (1 << o.getValue())) != 0) {
-        r.add(o);
-        v &= ~(1 << o.getValue());
-      }
-      if (v == 0) {
-        return r;
-      }
-    }
-    if (v != 0) {
-      throw new IllegalArgumentException(
-          "unknown " + clazz.getName() + ": " + Integer.toHexString(v));
-    }
-    return r;
-  }
+    int getValue();
 
-  static <T extends Enum<T> & ListOption> String toHex(Set<T> options) {
-    int v = 0;
-    for (T option : options) {
-      v |= 1 << option.getValue();
+    static <T extends Enum<T> & ListOption> EnumSet<T> fromBits(Class<T> clazz, int v) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    return Integer.toHexString(v);
-  }
+    static <T extends Enum<T> & ListOption> String toHex(Set<T> options) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

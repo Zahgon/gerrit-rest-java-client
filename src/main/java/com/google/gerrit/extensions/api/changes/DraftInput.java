@@ -11,26 +11,22 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.changes;
 
 import com.google.gerrit.extensions.client.Comment;
 import java.util.Objects;
 
 public class DraftInput extends Comment {
-  public String tag;
 
-  @Override
-  public boolean equals(Object o) {
-    if (super.equals(o)) {
-      DraftInput di = (DraftInput) o;
-      return Objects.equals(tag, di.tag);
+    public String tag;
+
+    @Override
+    public boolean equals(Object o) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return false;
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(super.hashCode(), tag);
-  }
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

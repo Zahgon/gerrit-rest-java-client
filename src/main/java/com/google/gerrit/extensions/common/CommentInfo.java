@@ -11,28 +11,26 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.common;
 
 import com.google.gerrit.extensions.client.Comment;
 import java.util.Objects;
 
 public class CommentInfo extends Comment {
-  public AccountInfo author;
-  public String tag;
-  public String changeMessageId;
 
-  @Override
-  public boolean equals(Object o) {
-    if (super.equals(o)) {
-      CommentInfo ci = (CommentInfo) o;
-      return Objects.equals(author, ci.author) && Objects.equals(tag, ci.tag);
+    public AccountInfo author;
+
+    public String tag;
+
+    public String changeMessageId;
+
+    @Override
+    public boolean equals(Object o) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return false;
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(super.hashCode(), author, tag);
-  }
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

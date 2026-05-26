@@ -11,25 +11,30 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.client;
 
-/** Output options available when using {@code /groups/} RPCs. */
+/**
+ * Output options available when using {@code /groups/} RPCs.
+ */
 public enum ListGroupsOption implements ListOption {
-  /** Return information on the direct group members. */
-  MEMBERS(0),
 
-  /** Return information on the directly included groups. */
-  INCLUDES(1);
+    /**
+     * Return information on the direct group members.
+     */
+    MEMBERS(0),
+    /**
+     * Return information on the directly included groups.
+     */
+    INCLUDES(1);
 
-  private final int value;
+    private final int value;
 
-  ListGroupsOption(int v) {
-    this.value = v;
-  }
+    ListGroupsOption(int v) {
+        this.value = v;
+    }
 
-  @Override
-  public int getValue() {
-    return value;
-  }
+    @Override
+    public int getValue() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.accounts;
 
 import com.google.common.reflect.TypeToken;
@@ -26,7 +25,6 @@ import com.google.gerrit.extensions.common.EmailInfo;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.urswolfer.gerrit.client.rest.http.config.parsers.PreferencesParser;
-
 import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
@@ -36,53 +34,62 @@ import java.util.SortedSet;
  * @author Thomas Forrer
  */
 public class AccountsParser extends PreferencesParser {
-    private static final Type TYPE = new TypeToken<List<AccountInfo>>() {}.getType();
-    private static final Type EMAIL_TYPE = new TypeToken<List<EmailInfo>>() {}.getType();
-    private static final Type EXTERNAL_ID_TYPE = new TypeToken<List<AccountExternalIdInfo>>() {}.getType();
-    private static final Type DELETE_DRAFT_TYPE = new TypeToken<List<DeletedDraftCommentInfo>>() {}.getType();
-    private static final Type PROJECT_WATCH_TYPE = new TypeToken<List<ProjectWatchInfo>>() {}.getType();
-    private static final Type STAR_TYPE = new TypeToken<SortedSet<String>>() {}.getType();
+
+    private static final Type TYPE = new TypeToken<List<AccountInfo>>() {
+    }.getType();
+
+    private static final Type EMAIL_TYPE = new TypeToken<List<EmailInfo>>() {
+    }.getType();
+
+    private static final Type EXTERNAL_ID_TYPE = new TypeToken<List<AccountExternalIdInfo>>() {
+    }.getType();
+
+    private static final Type DELETE_DRAFT_TYPE = new TypeToken<List<DeletedDraftCommentInfo>>() {
+    }.getType();
+
+    private static final Type PROJECT_WATCH_TYPE = new TypeToken<List<ProjectWatchInfo>>() {
+    }.getType();
+
+    private static final Type STAR_TYPE = new TypeToken<SortedSet<String>>() {
+    }.getType();
 
     public AccountsParser(Gson gson) {
         super(gson);
     }
 
     public AccountInfo parseAccountInfo(JsonElement result) {
-        return gson.fromJson(result, AccountInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<AccountInfo> parseAccountInfos(JsonElement result) {
-        if (!result.isJsonArray()) {
-            return Collections.singletonList(parseAccountInfo(result));
-        }
-        return gson.fromJson(result, TYPE);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public AccountDetailInfo parseAccountDetailInfo(JsonElement result) {
-        return gson.fromJson(result, AccountDetailInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public List<ProjectWatchInfo> parseProjectWatchInfos(JsonElement result){
-        return gson.fromJson(result,PROJECT_WATCH_TYPE);
+    public List<ProjectWatchInfo> parseProjectWatchInfos(JsonElement result) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public SortedSet<String> parseStarLabels(JsonElement result) {
-        return gson.fromJson(result,STAR_TYPE);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public List<EmailInfo> parseEmailInfos(JsonElement result){
-        return gson.fromJson(result, EMAIL_TYPE);
+    public List<EmailInfo> parseEmailInfos(JsonElement result) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public EmailInfo parseSingleEmailInfo(JsonElement result) {
-        return gson.fromJson(result, EmailInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public List<AccountExternalIdInfo> parseAccountExternalIdInfos(JsonElement result){
-        return gson.fromJson(result, EXTERNAL_ID_TYPE);
+    public List<AccountExternalIdInfo> parseAccountExternalIdInfos(JsonElement result) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public List<DeletedDraftCommentInfo> parseDeleteDraftCommentInfos(JsonElement result){
-        return gson.fromJson(result, DELETE_DRAFT_TYPE);
+    public List<DeletedDraftCommentInfo> parseDeleteDraftCommentInfos(JsonElement result) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -10,7 +10,6 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.methods.HttpRequestWrapper;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.protocol.HttpContext;
-
 import java.net.URI;
 
 /**
@@ -23,6 +22,7 @@ import java.net.URI;
  * @author Urs Wolfer
  */
 class PreemptiveAuthHttpRequestInterceptor implements HttpRequestInterceptor {
+
     static final String PREEMPTIVE_AUTH = "preemptive-auth";
 
     private GerritAuthData authData;
@@ -33,31 +33,22 @@ class PreemptiveAuthHttpRequestInterceptor implements HttpRequestInterceptor {
 
     @Override
     public void process(final HttpRequest request, final HttpContext context) {
-        // never ever send credentials preemptively to a host which is not the configured Gerrit host
-        if (!isForGerritHost(request)) {
-            return;
-        }
-
-        AuthState authState = (AuthState) context.getAttribute(HttpClientContext.TARGET_AUTH_STATE);
-
-        // if no auth scheme available yet, try to initialize it preemptively
-        if (authState.getAuthScheme() == null) {
-            AuthScheme authScheme = (AuthScheme) context.getAttribute(PREEMPTIVE_AUTH);
-            UsernamePasswordCredentials creds = new UsernamePasswordCredentials(authData.getLogin(), authData.getPassword());
-            authState.update(authScheme, creds);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Checks if request is intended for Gerrit host.
      */
     private boolean isForGerritHost(HttpRequest request) {
-        if (!(request instanceof HttpRequestWrapper)) return false;
+        if (!(request instanceof HttpRequestWrapper))
+            return false;
         HttpRequest originalRequest = ((HttpRequestWrapper) request).getOriginal();
-        if (!(originalRequest instanceof HttpRequestBase)) return false;
+        if (!(originalRequest instanceof HttpRequestBase))
+            return false;
         URI uri = ((HttpRequestBase) originalRequest).getURI();
         URI authDataUri = URI.create(authData.getHost());
-        if (uri == null || uri.getHost() == null) return false;
+        if (uri == null || uri.getHost() == null)
+            return false;
         boolean hostEquals = uri.getHost().equals(authDataUri.getHost());
         boolean portEquals = uri.getPort() == authDataUri.getPort();
         return hostEquals && portEquals;

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http;
 
 import com.google.gerrit.extensions.restapi.RestApiException;
@@ -22,7 +21,9 @@ import com.google.gerrit.extensions.restapi.RestApiException;
  * @author Urs Wolfer
  */
 public class HttpStatusException extends RestApiException {
+
     private final int statusCode;
+
     private final String statusText;
 
     public HttpStatusException(int statusCode, String statusText, String message) {
@@ -32,10 +33,10 @@ public class HttpStatusException extends RestApiException {
     }
 
     public int getStatusCode() {
-        return statusCode;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getStatusText() {
-        return statusText;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

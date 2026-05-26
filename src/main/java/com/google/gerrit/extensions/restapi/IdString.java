@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.restapi;
 
 /**
@@ -20,52 +19,60 @@ package com.google.gerrit.extensions.restapi;
  * <p>Identifiers are URL encoded and usually need to be decoded.
  */
 public class IdString {
-  /** Construct an identifier from an already encoded string. */
-  public static IdString fromUrl(String id) {
-    return new IdString(id);
-  }
 
-  /** Construct an identifier from an already decoded string. */
-  public static IdString fromDecoded(String id) {
-    return new IdString(Url.encode(id));
-  }
-
-  private final String urlEncoded;
-
-  private IdString(String s) {
-    urlEncoded = s;
-  }
-
-  /** @return the decoded value of the string. */
-  public String get() {
-    return Url.decode(urlEncoded);
-  }
-
-  /** @return true if the string is the empty string. */
-  public boolean isEmpty() {
-    return urlEncoded.isEmpty();
-  }
-
-  /** @return the original URL encoding supplied by the client. */
-  public String encoded() {
-    return urlEncoded;
-  }
-
-  @Override
-  public int hashCode() {
-    return urlEncoded.hashCode();
-  }
-
-  @Override
-  public boolean equals(Object other) {
-    if (other instanceof IdString) {
-      return urlEncoded.equals(((IdString) other).urlEncoded);
+    /**
+     * Construct an identifier from an already encoded string.
+     */
+    public static IdString fromUrl(String id) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return false;
-  }
 
-  @Override
-  public String toString() {
-    return encoded();
-  }
+    /**
+     * Construct an identifier from an already decoded string.
+     */
+    public static IdString fromDecoded(String id) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    private final String urlEncoded;
+
+    private IdString(String s) {
+        urlEncoded = s;
+    }
+
+    /**
+     * @return the decoded value of the string.
+     */
+    public String get() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * @return true if the string is the empty string.
+     */
+    public boolean isEmpty() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * @return the original URL encoding supplied by the client.
+     */
+    public String encoded() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

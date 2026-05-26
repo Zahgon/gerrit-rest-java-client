@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.projects;
 
 import com.google.common.base.Strings;
@@ -45,26 +44,26 @@ import com.google.gson.JsonElement;
 import com.urswolfer.gerrit.client.rest.http.GerritRestClient;
 import com.urswolfer.gerrit.client.rest.http.projects.parsers.ProjectCommitInfoParser;
 import com.urswolfer.gerrit.client.rest.http.util.UrlUtils;
-
 import java.util.List;
 
 /**
  * @author Thomas Forrer
  */
 public class ProjectApiRestClient extends ProjectApi.NotImplemented implements ProjectApi {
+
     private final GerritRestClient gerritRestClient;
+
     private final ProjectsParser projectsParser;
+
     private final BranchInfoParser branchInfoParser;
+
     private final TagInfoParser tagInfoParser;
+
     private final ProjectCommitInfoParser projectCommitInfoParser;
+
     private final String name;
 
-    public ProjectApiRestClient(GerritRestClient gerritRestClient,
-                                ProjectsParser projectsParser,
-                                BranchInfoParser branchInfoParser,
-                                TagInfoParser tagInfoParser,
-                                ProjectCommitInfoParser projectCommitInfoParser,
-                                String name) {
+    public ProjectApiRestClient(GerritRestClient gerritRestClient, ProjectsParser projectsParser, BranchInfoParser branchInfoParser, TagInfoParser tagInfoParser, ProjectCommitInfoParser projectCommitInfoParser, String name) {
         this.gerritRestClient = gerritRestClient;
         this.projectsParser = projectsParser;
         this.branchInfoParser = branchInfoParser;
@@ -75,91 +74,62 @@ public class ProjectApiRestClient extends ProjectApi.NotImplemented implements P
 
     @Override
     public ProjectApi create() throws RestApiException {
-        gerritRestClient.putRequest(projectsUrl());
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ProjectApi create(ProjectInput in) throws RestApiException {
-        String body = gerritRestClient.getGson().toJson(in);
-        gerritRestClient.putRequest(projectsUrl(), body);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ProjectInfo get() {
-        try {
-            JsonElement jsonElement = gerritRestClient.getRequest(projectsUrl());
-            return projectsParser.parseSingleProjectInfo(jsonElement);
-        } catch (RestApiException e) {
-            throw new RuntimeException(e);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String description() throws RestApiException {
-        JsonElement result = gerritRestClient.getRequest(projectsUrl()+"/description");
-        return result.getAsString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ProjectAccessInfo access() throws RestApiException {
-        String request = projectsUrl() + "/access";
-        JsonElement result = gerritRestClient.getRequest(request);
-        return projectsParser.parseProjectAccessInfo(result);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ProjectAccessInfo access(ProjectAccessInput p) throws RestApiException {
-        String request = projectsUrl() + "/access";
-        String params = projectsParser.generateProjectAccessInput(p);
-        JsonElement result = gerritRestClient.postRequest(request, params);
-        return projectsParser.parseProjectAccessInfo(result);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public AccessCheckInfo checkAccess(AccessCheckInput in) throws RestApiException {
-        String request = projectsUrl() + "/check.access";
-        String params = gerritRestClient.getGson().toJson(in);
-        JsonElement result = gerritRestClient.postRequest(request, params);
-        return projectsParser.parseAccessCheckInfo(result);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ConfigInfo config() throws RestApiException {
-        String request = projectsUrl() + "/config";
-        JsonElement result = gerritRestClient.getRequest(request);
-        return projectsParser.parseConfigInfo(result);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ConfigInfo config(ConfigInput in) throws RestApiException {
-        String request = projectsUrl() + "/config";
-        String body = gerritRestClient.getGson().toJson(in);
-        JsonElement result = gerritRestClient.putRequest(request, body);
-        return projectsParser.parseConfigInfo(result);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void description(DescriptionInput in) throws RestApiException {
-        String request = projectsUrl() + "/description";
-        String body = gerritRestClient.getGson().toJson(in);
-        gerritRestClient.putRequest(request, body);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ListRefsRequest<BranchInfo> branches() {
-        return new ListRefsRequest<BranchInfo>() {
-            @Override
-            public List<BranchInfo> get() throws RestApiException {
-                return ProjectApiRestClient.this.getBranches(this);
-            }
-        };
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BranchApi branch(String ref) throws RestApiException {
-        return new BranchApiRestClient(gerritRestClient, branchInfoParser, this, ref);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private List<BranchInfo> getBranches(ListRefsRequest<BranchInfo> lbr) throws RestApiException {
@@ -170,17 +140,12 @@ public class ProjectApiRestClient extends ProjectApi.NotImplemented implements P
 
     @Override
     public ListRefsRequest<TagInfo> tags() {
-        return new ListRefsRequest<TagInfo>() {
-            @Override
-            public List<TagInfo> get() throws RestApiException {
-                return ProjectApiRestClient.this.getTagInfos(this);
-            }
-        };
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public TagApi tag(String ref) throws RestApiException {
-        return new TagApiRestClient(gerritRestClient, tagInfoParser, this, ref);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private List<TagInfo> getTagInfos(ListRefsRequest<TagInfo> lrr) throws RestApiException {
@@ -191,93 +156,70 @@ public class ProjectApiRestClient extends ProjectApi.NotImplemented implements P
 
     @Override
     public List<ProjectInfo> children() throws RestApiException {
-        return children(false);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public List<ProjectInfo> children(boolean recursive) throws RestApiException {
-        String request = projectsUrl() + "/children";
-        if(recursive){
-            request = request + "?recursive";
-        }
-        JsonElement children = gerritRestClient.getRequest(request);
-        return projectsParser.parseProjectInfosList(children);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ChildProjectApi child(String name) {
-        return new ChildProjectApiRestClient(gerritRestClient, projectsParser, projectsUrl(), name);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public CommitApi commit(String commit) {
-        return new CommitApiRestClient(gerritRestClient, this, projectCommitInfoParser, commit);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String head() throws RestApiException {
-        JsonElement result = gerritRestClient.getRequest(projectsUrl()+"/HEAD");
-        return result.getAsString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void head(String head) throws RestApiException {
-        String request = projectsUrl() + "/HEAD";
-        HeadInput input = new HeadInput();
-        input.ref = head;
-        String body = gerritRestClient.getGson().toJson(input);
-        gerritRestClient.putRequest(request, body);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String parent() throws RestApiException {
-        JsonElement result = gerritRestClient.getRequest(projectsUrl()+"/parent");
-        return result.getAsString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void parent(String parent) throws RestApiException {
-        String request = projectsUrl() + "/parent";
-        ParentInput input = new ParentInput();
-        input.parent = parent;
-        String body = gerritRestClient.getGson().toJson(input);
-        gerritRestClient.putRequest(request, body);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void index(boolean indexChildren) throws RestApiException {
-        String request = projectsUrl() + "/index";
-        IndexProjectInput input = new IndexProjectInput();
-        input.indexChildren = indexChildren;
-        String body = gerritRestClient.getGson().toJson(input);
-        gerritRestClient.postRequest(request, body);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void indexChanges() throws RestApiException {
-        String request = projectsUrl() + "/index.changes";
-        gerritRestClient.postRequest(request);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public LabelApi label(String labelName) throws RestApiException {
-        return new LabelApiRestClient(gerritRestClient, this, labelName);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void labels(BatchLabelInput input) throws RestApiException {
-        String request = projectsUrl() + "/labels";
-        String body = gerritRestClient.getGson().toJson(input);
-        gerritRestClient.postRequest(request, body);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected String projectsUrl() {
-        return "/projects/" + Url.encode(name);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private String branchesUrl(ListRefsRequest<BranchInfo> lbr) {
         String query = "";
-
         if (lbr.getLimit() != 0) {
             query = UrlUtils.appendToUrlQuery(query, "n=" + lbr.getLimit());
         }
@@ -290,7 +232,6 @@ public class ProjectApiRestClient extends ProjectApi.NotImplemented implements P
         if (!Strings.isNullOrEmpty(lbr.getRegex())) {
             query = UrlUtils.appendToUrlQuery(query, "r=" + lbr.getRegex());
         }
-
         String url = "/branches";
         if (!Strings.isNullOrEmpty(query)) {
             url += '?' + query;
@@ -300,7 +241,6 @@ public class ProjectApiRestClient extends ProjectApi.NotImplemented implements P
 
     private String tagsUrl(ListRefsRequest<TagInfo> lrr) {
         String query = "";
-
         if (lrr.getLimit() != 0) {
             query = UrlUtils.appendToUrlQuery(query, "n=" + lrr.getLimit());
         }
@@ -310,7 +250,6 @@ public class ProjectApiRestClient extends ProjectApi.NotImplemented implements P
         if (!Strings.isNullOrEmpty(lrr.getSubstring()) || !Strings.isNullOrEmpty(lrr.getRegex())) {
             throw new NotImplementedException();
         }
-
         String url = "/tags";
         if (!Strings.isNullOrEmpty(query)) {
             url += '?' + query;

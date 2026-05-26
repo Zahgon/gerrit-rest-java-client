@@ -11,41 +11,39 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.changes;
 
 import com.google.common.base.MoreObjects;
 import java.util.List;
 import java.util.Objects;
 
-/** Detailed information about who should be notified about an update. */
+/**
+ * Detailed information about who should be notified about an update.
+ */
 public class NotifyInfo {
-  public List<String> accounts;
 
-  /**
-   * @param accounts may be either just a list of: account IDs, Full names, usernames, or emails.
-   *     Also could be a list of those: "Full name <email@example.com>" or "Full name (<ID>)"
-   */
-  public NotifyInfo(List<String> accounts) {
-    this.accounts = accounts;
-  }
+    public List<String> accounts;
 
-  @Override
-  public boolean equals(Object o) {
-    if (!(o instanceof NotifyInfo)) {
-      return false;
+    /**
+     * @param accounts may be either just a list of: account IDs, Full names, usernames, or emails.
+     *     Also could be a list of those: "Full name <email@example.com>" or "Full name (<ID>)"
+     */
+    public NotifyInfo(List<String> accounts) {
+        this.accounts = accounts;
     }
-    NotifyInfo other = (NotifyInfo) o;
-    return Objects.equals(other.accounts, accounts);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(accounts);
-  }
+    @Override
+    public boolean equals(Object o) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public String toString() {
-    return MoreObjects.toStringHelper(this).add("accounts", accounts).toString();
-  }
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

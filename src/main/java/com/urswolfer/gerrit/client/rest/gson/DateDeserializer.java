@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.gson;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.util.Date;
@@ -29,13 +27,9 @@ import java.util.Date;
  * @author Urs Wolfer
  */
 public class DateDeserializer extends DateFormatter implements JsonDeserializer<Date> {
+
     @Override
     public Date deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) {
-        String date = jsonElement.getAsString();
-        try {
-            return DATE_FORMAT.get().parse(date);
-        } catch (ParseException e) {
-            throw new JsonParseException(e);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

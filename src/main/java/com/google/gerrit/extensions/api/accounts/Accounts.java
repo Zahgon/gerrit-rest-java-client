@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.accounts;
 
 import com.google.gerrit.extensions.client.ListAccountsOption;
@@ -24,242 +23,260 @@ import java.util.List;
 import java.util.Set;
 
 public interface Accounts {
-  /**
-   * Look up an account by ID.
-   *
-   * <p><strong>Note:</strong> This method eagerly reads the account. Methods that mutate the
-   * account do not necessarily re-read the account. Therefore, calling a getter method on an
-   * instance after calling a mutation method on that same instance is not guaranteed to reflect the
-   * mutation. It is not recommended to store references to {@code AccountApi} instances.
-   *
-   * @param id any identifier supported by the REST API, including numeric ID, email, or username.
-   * @return API for accessing the account.
-   * @throws RestApiException if an error occurred.
-   */
-  AccountApi id(String id) throws RestApiException;
-
-  /** @see #id(String) */
-  AccountApi id(int id) throws RestApiException;
-
-  /**
-   * Look up the account of the current in-scope user.
-   *
-   * @see #id(String)
-   */
-  AccountApi self() throws RestApiException;
-
-  /** Create a new account with the given username and default options. */
-  AccountApi create(String username) throws RestApiException;
-
-  /** Create a new account. */
-  AccountApi create(AccountInput input) throws RestApiException;
-
-  /**
-   * Suggest users for a given query.
-   *
-   * <p>Example code: {@code suggestAccounts().withQuery("Reviewer").withLimit(5).get()}
-   *
-   * @return API for setting parameters and getting result.
-   */
-  SuggestAccountsRequest suggestAccounts() throws RestApiException;
-
-  /**
-   * Suggest users for a given query.
-   *
-   * <p>Shortcut API for {@code suggestAccounts().withQuery(String)}.
-   *
-   * @see #suggestAccounts()
-   */
-  SuggestAccountsRequest suggestAccounts(String query) throws RestApiException;
-
-  /**
-   * Query users.
-   *
-   * <p>Example code: {@code query().withQuery("name:John email:example.com").withLimit(5).get()}
-   *
-   * @return API for setting parameters and getting result.
-   */
-  QueryRequest query() throws RestApiException;
-
-  /**
-   * Query users.
-   *
-   * <p>Shortcut API for {@code query().withQuery(String)}.
-   *
-   * @see #query()
-   */
-  QueryRequest query(String query) throws RestApiException;
-
-  /**
-   * API for setting parameters and getting result. Used for {@code suggestAccounts()}.
-   *
-   * @see #suggestAccounts()
-   */
-  abstract class SuggestAccountsRequest {
-    private String query;
-    private int limit;
-
-    /** Execute query and return a list of accounts. */
-    public abstract List<AccountInfo> get() throws RestApiException;
 
     /**
-     * Set query.
+     * Look up an account by ID.
      *
-     * @param query needs to be in human-readable form.
-     */
-    public SuggestAccountsRequest withQuery(String query) {
-      this.query = query;
-      return this;
-    }
-
-    /**
-     * Set limit for returned list of accounts. Optional; server-default is used when not provided.
-     */
-    public SuggestAccountsRequest withLimit(int limit) {
-      this.limit = limit;
-      return this;
-    }
-
-    public String getQuery() {
-      return query;
-    }
-
-    public int getLimit() {
-      return limit;
-    }
-  }
-
-  /**
-   * API for setting parameters and getting result. Used for {@code query()}.
-   *
-   * @see #query()
-   */
-  abstract class QueryRequest {
-    private String query;
-    private int limit;
-    private int start;
-    private boolean suggest;
-    private Set<ListAccountsOption> options = EnumSet.noneOf(ListAccountsOption.class);
-
-    /** Execute query and return a list of accounts. */
-    public abstract List<AccountInfo> get() throws RestApiException;
-
-    /**
-     * Set query.
+     * <p><strong>Note:</strong> This method eagerly reads the account. Methods that mutate the
+     * account do not necessarily re-read the account. Therefore, calling a getter method on an
+     * instance after calling a mutation method on that same instance is not guaranteed to reflect the
+     * mutation. It is not recommended to store references to {@code AccountApi} instances.
      *
-     * @param query needs to be in human-readable form.
+     * @param id any identifier supported by the REST API, including numeric ID, email, or username.
+     * @return API for accessing the account.
+     * @throws RestApiException if an error occurred.
      */
-    public QueryRequest withQuery(String query) {
-      this.query = query;
-      return this;
+    AccountApi id(String id) throws RestApiException;
+
+    /**
+     * @see #id(String)
+     */
+    AccountApi id(int id) throws RestApiException;
+
+    /**
+     * Look up the account of the current in-scope user.
+     *
+     * @see #id(String)
+     */
+    AccountApi self() throws RestApiException;
+
+    /**
+     * Create a new account with the given username and default options.
+     */
+    AccountApi create(String username) throws RestApiException;
+
+    /**
+     * Create a new account.
+     */
+    AccountApi create(AccountInput input) throws RestApiException;
+
+    /**
+     * Suggest users for a given query.
+     *
+     * <p>Example code: {@code suggestAccounts().withQuery("Reviewer").withLimit(5).get()}
+     *
+     * @return API for setting parameters and getting result.
+     */
+    SuggestAccountsRequest suggestAccounts() throws RestApiException;
+
+    /**
+     * Suggest users for a given query.
+     *
+     * <p>Shortcut API for {@code suggestAccounts().withQuery(String)}.
+     *
+     * @see #suggestAccounts()
+     */
+    SuggestAccountsRequest suggestAccounts(String query) throws RestApiException;
+
+    /**
+     * Query users.
+     *
+     * <p>Example code: {@code query().withQuery("name:John email:example.com").withLimit(5).get()}
+     *
+     * @return API for setting parameters and getting result.
+     */
+    QueryRequest query() throws RestApiException;
+
+    /**
+     * Query users.
+     *
+     * <p>Shortcut API for {@code query().withQuery(String)}.
+     *
+     * @see #query()
+     */
+    QueryRequest query(String query) throws RestApiException;
+
+    /**
+     * API for setting parameters and getting result. Used for {@code suggestAccounts()}.
+     *
+     * @see #suggestAccounts()
+     */
+    abstract class SuggestAccountsRequest {
+
+        private String query;
+
+        private int limit;
+
+        /**
+         * Execute query and return a list of accounts.
+         */
+        public abstract List<AccountInfo> get() throws RestApiException;
+
+        /**
+         * Set query.
+         *
+         * @param query needs to be in human-readable form.
+         */
+        public SuggestAccountsRequest withQuery(String query) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set limit for returned list of accounts. Optional; server-default is used when not provided.
+         */
+        public SuggestAccountsRequest withLimit(int limit) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public String getQuery() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public int getLimit() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
 
     /**
-     * Set limit for returned list of accounts. Optional; server-default is used when not provided.
+     * API for setting parameters and getting result. Used for {@code query()}.
+     *
+     * @see #query()
      */
-    public QueryRequest withLimit(int limit) {
-      this.limit = limit;
-      return this;
+    abstract class QueryRequest {
+
+        private String query;
+
+        private int limit;
+
+        private int start;
+
+        private boolean suggest;
+
+        private Set<ListAccountsOption> options = EnumSet.noneOf(ListAccountsOption.class);
+
+        /**
+         * Execute query and return a list of accounts.
+         */
+        public abstract List<AccountInfo> get() throws RestApiException;
+
+        /**
+         * Set query.
+         *
+         * @param query needs to be in human-readable form.
+         */
+        public QueryRequest withQuery(String query) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set limit for returned list of accounts. Optional; server-default is used when not provided.
+         */
+        public QueryRequest withLimit(int limit) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set number of accounts to skip. Optional; no accounts are skipped when not provided.
+         */
+        public QueryRequest withStart(int start) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public QueryRequest withSuggest(boolean suggest) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set an option on the request, appending to existing options.
+         */
+        public QueryRequest withOption(ListAccountsOption options) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set options on the request, appending to existing options.
+         */
+        public QueryRequest withOptions(ListAccountsOption... options) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        /**
+         * Set options on the request, replacing existing options.
+         */
+        public QueryRequest withOptions(Set<ListAccountsOption> options) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public String getQuery() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public int getLimit() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public int getStart() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public boolean getSuggest() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public Set<ListAccountsOption> getOptions() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
 
-    /** Set number of accounts to skip. Optional; no accounts are skipped when not provided. */
-    public QueryRequest withStart(int start) {
-      this.start = start;
-      return this;
-    }
+    /**
+     * A default implementation which allows source compatibility when adding new methods to the
+     * interface.
+     */
+    class NotImplemented implements Accounts {
 
-    public QueryRequest withSuggest(boolean suggest) {
-      this.suggest = suggest;
-      return this;
-    }
+        @Override
+        public AccountApi id(String id) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    /** Set an option on the request, appending to existing options. */
-    public QueryRequest withOption(ListAccountsOption options) {
-      this.options.add(options);
-      return this;
-    }
+        @Override
+        public AccountApi id(int id) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    /** Set options on the request, appending to existing options. */
-    public QueryRequest withOptions(ListAccountsOption... options) {
-      this.options.addAll(Arrays.asList(options));
-      return this;
-    }
+        @Override
+        public AccountApi self() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    /** Set options on the request, replacing existing options. */
-    public QueryRequest withOptions(Set<ListAccountsOption> options) {
-      this.options = options;
-      return this;
-    }
+        @Override
+        public AccountApi create(String username) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    public String getQuery() {
-      return query;
-    }
+        @Override
+        public AccountApi create(AccountInput input) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    public int getLimit() {
-      return limit;
-    }
+        @Override
+        public SuggestAccountsRequest suggestAccounts() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    public int getStart() {
-      return start;
-    }
+        @Override
+        public SuggestAccountsRequest suggestAccounts(String query) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    public boolean getSuggest() {
-      return suggest;
-    }
+        @Override
+        public QueryRequest query() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
 
-    public Set<ListAccountsOption> getOptions() {
-      return options;
+        @Override
+        public QueryRequest query(String query) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
-  }
-
-  /**
-   * A default implementation which allows source compatibility when adding new methods to the
-   * interface.
-   */
-  class NotImplemented implements Accounts {
-    @Override
-    public AccountApi id(String id) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public AccountApi id(int id) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public AccountApi self() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public AccountApi create(String username) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public AccountApi create(AccountInput input) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public SuggestAccountsRequest suggestAccounts() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public SuggestAccountsRequest suggestAccounts(String query) throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public QueryRequest query() throws RestApiException {
-      throw new NotImplementedException();
-    }
-
-    @Override
-    public QueryRequest query(String query) throws RestApiException {
-      throw new NotImplementedException();
-    }
-  }
 }

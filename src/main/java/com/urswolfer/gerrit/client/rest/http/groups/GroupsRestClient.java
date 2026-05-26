@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.groups;
 
 import com.google.common.base.Strings;
@@ -27,7 +26,6 @@ import com.google.gerrit.extensions.restapi.Url;
 import com.google.gson.JsonElement;
 import com.urswolfer.gerrit.client.rest.http.GerritRestClient;
 import com.urswolfer.gerrit.client.rest.http.util.UrlUtils;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.SortedMap;
@@ -39,6 +37,7 @@ import java.util.TreeMap;
 public class GroupsRestClient extends Groups.NotImplemented implements Groups {
 
     private final GerritRestClient gerritRestClient;
+
     private final GroupsParser groupsParser;
 
     public GroupsRestClient(GerritRestClient gerritRestClient, GroupsParser groupsParser) {
@@ -48,40 +47,22 @@ public class GroupsRestClient extends Groups.NotImplemented implements Groups {
 
     @Override
     public GroupApi id(String id) throws RestApiException {
-        return new GroupApiRestClient(gerritRestClient, groupsParser, id);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public GroupApi create(String name) throws RestApiException {
-        GroupInput groupInput = new GroupInput();
-        groupInput.name = name;
-        return create(groupInput);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public GroupApi create(GroupInput input) throws RestApiException {
-        String restPath = GroupApiRestClient.getBaseRequestPath() + "/" + Url.encode(input.name);
-        String body = gerritRestClient.getGson().toJson(input);
-        JsonElement result = gerritRestClient.putRequest(restPath, body);
-        GroupInfo info = groupsParser.parseGroupInfo(result);
-        return new GroupApiRestClient(gerritRestClient, groupsParser, info.id);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ListRequest list() {
-        return new ListRequest() {
-            @Override
-            public SortedMap<String, GroupInfo> getAsMap() throws RestApiException {
-                SortedMap<String, GroupInfo> map = new TreeMap<>();
-                List<GroupInfo> list = GroupsRestClient.this.list(this);
-                if (list != null) {
-                    for (GroupInfo group : list) {
-                        map.put(group.id, group);
-                    }
-                }
-                return map;
-            }
-        };
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private List<GroupInfo> list(ListRequest listParameter) throws RestApiException {
@@ -102,7 +83,6 @@ public class GroupsRestClient extends Groups.NotImplemented implements Groups {
             // 3. Not compatible with visible-to-all, owned, user, match, q, or S
             query = UrlUtils.appendToUrlQuery(query, "suggest=" + listParameter.getSuggest());
         }
-
         if (listParameter.getVisibleToAll()) {
             throw new NotImplementedException();
         }
@@ -121,7 +101,6 @@ public class GroupsRestClient extends Groups.NotImplemented implements Groups {
         if (!Strings.isNullOrEmpty(listParameter.getSubstring())) {
             throw new NotImplementedException();
         }
-
         String url = GroupApiRestClient.getBaseRequestPath() + "/";
         if (!Strings.isNullOrEmpty(query)) {
             url += '?' + query;
@@ -136,46 +115,18 @@ public class GroupsRestClient extends Groups.NotImplemented implements Groups {
 
     @Override
     public QueryRequest query() {
-        return new QueryRequest() {
-            @Override
-            public List<GroupInfo> get() throws RestApiException {
-                return GroupsRestClient.this.query(this);
-            }
-        };
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * this method may does not support Gerrit versions lower than 3.2.0
      */
     protected List<GroupInfo> query(QueryRequest queryRequest) throws RestApiException {
-        String query = "";
-        if (!Strings.isNullOrEmpty(queryRequest.getQuery())) {
-            query = UrlUtils.appendToUrlQuery(query, "query=" + queryRequest.getQuery());
-        }
-        if (queryRequest.getLimit() > 0) {
-            query = UrlUtils.appendToUrlQuery(query, "limit=" + queryRequest.getLimit());
-        }
-        if (queryRequest.getStart() > 0) {
-            query = UrlUtils.appendToUrlQuery(query, "start=" + queryRequest.getStart());
-        }
-        if (!queryRequest.getOptions().isEmpty()) {
-            throw new NotImplementedException();
-        }
-
-        String url = GroupApiRestClient.getBaseRequestPath() + "/";
-        if (!Strings.isNullOrEmpty(query)) {
-            url += '?' + query;
-        }
-        JsonElement result = gerritRestClient.getRequest(url);
-        if (result == null) {
-            return Collections.emptyList();
-        } else {
-            return groupsParser.parseGroupInfos(result);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public QueryRequest query(String query) {
-        return query().withQuery(query);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

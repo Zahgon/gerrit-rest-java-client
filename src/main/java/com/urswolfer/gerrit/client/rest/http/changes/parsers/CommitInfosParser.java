@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.changes.parsers;
 
 import com.google.common.reflect.TypeToken;
@@ -24,7 +23,6 @@ import com.google.gerrit.extensions.common.EditInfo;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
 import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
@@ -39,9 +37,14 @@ import java.util.TreeMap;
  */
 public class CommitInfosParser {
 
-    private static final Type ACTION_TYPE = new TypeToken<TreeMap<String, ActionInfo>>() {}.getType();
-    private static final Type COMMIT_INFO_TYPE = new TypeToken<List<CommitInfo>>() {}.getType();
-    private static final Type EDIT_INFO_TYPE = new TypeToken<List<EditInfo>>() {}.getType();
+    private static final Type ACTION_TYPE = new TypeToken<TreeMap<String, ActionInfo>>() {
+    }.getType();
+
+    private static final Type COMMIT_INFO_TYPE = new TypeToken<List<CommitInfo>>() {
+    }.getType();
+
+    private static final Type EDIT_INFO_TYPE = new TypeToken<List<EditInfo>>() {
+    }.getType();
 
     private final Gson gson;
 
@@ -50,32 +53,26 @@ public class CommitInfosParser {
     }
 
     public SortedMap<String, ActionInfo> parseActionInfos(JsonElement result) {
-        return gson.fromJson(result, ACTION_TYPE);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public DiffInfo parseDiffInfo(JsonElement jsonElement) {
-        return gson.fromJson(jsonElement, DiffInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<CommitInfo> parseCommitInfos(JsonElement result) {
-        if (!result.isJsonArray()) {
-            return Collections.singletonList(gson.fromJson(result, CommitInfo.class));
-        }
-        return gson.fromJson(result, COMMIT_INFO_TYPE);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public CommitInfo parseSingleCommitInfo(JsonObject result) {
-        return gson.fromJson(result, CommitInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<EditInfo> parseEditInfos(JsonElement result) {
-        if (!result.isJsonArray()) {
-            return Collections.singletonList(gson.fromJson(result,  EditInfo.class));
-        }
-        return gson.fromJson(result, EDIT_INFO_TYPE);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public EditInfo parseEditInfo(JsonElement jsonElement){
-        return gson.fromJson(jsonElement, EditInfo.class);
+    public EditInfo parseEditInfo(JsonElement jsonElement) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

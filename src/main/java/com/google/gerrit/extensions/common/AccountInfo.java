@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.common;
 
 import com.google.common.base.MoreObjects;
@@ -27,97 +26,90 @@ import java.util.Objects;
  * are defined in {@link AccountDetailInfo}.
  */
 public class AccountInfo {
-  /** The numeric ID of the account. */
-  public Integer _accountId;
 
-  /** The full name of the user. */
-  public String name;
+    /**
+     * The numeric ID of the account.
+     */
+    public Integer _accountId;
 
-  /**
-   * The display name of the user. This allows users to control how their name is displayed in the
-   * UI. It will likely be unset for most users. This account property is just a way to opt out of
-   * the host wide default strategy of choosing the display name, see
-   * accounts.accountDefaultDisplayName in the server config. The default strategy is not applied by
-   * the backend. The display name will just be left unset, and the client has to load and apply the
-   * default strategy.
-   */
-  public String displayName;
+    /**
+     * The full name of the user.
+     */
+    public String name;
 
-  /** The preferred email address of the user. */
-  public String email;
+    /**
+     * The display name of the user. This allows users to control how their name is displayed in the
+     * UI. It will likely be unset for most users. This account property is just a way to opt out of
+     * the host wide default strategy of choosing the display name, see
+     * accounts.accountDefaultDisplayName in the server config. The default strategy is not applied by
+     * the backend. The display name will just be left unset, and the client has to load and apply the
+     * default strategy.
+     */
+    public String displayName;
 
-  /** List of the secondary email addresses of the user. */
-  public List<String> secondaryEmails;
+    /**
+     * The preferred email address of the user.
+     */
+    public String email;
 
-  /** The username of the user. */
-  public String username;
+    /**
+     * List of the secondary email addresses of the user.
+     */
+    public List<String> secondaryEmails;
 
-  /** List of avatars of the user. */
-  public List<AvatarInfo> avatars;
+    /**
+     * The username of the user.
+     */
+    public String username;
 
-  /**
-   * Whether the query would deliver more results if not limited. Only set on the last account that
-   * is returned as a query result.
-   */
-  public Boolean _moreAccounts;
+    /**
+     * List of avatars of the user.
+     */
+    public List<AvatarInfo> avatars;
 
-  /** Status message of the account (e.g. 'OOO' for out-of-office). */
-  public String status;
+    /**
+     * Whether the query would deliver more results if not limited. Only set on the last account that
+     * is returned as a query result.
+     */
+    public Boolean _moreAccounts;
 
-  /** Whether the account is inactive. */
-  public Boolean inactive;
+    /**
+     * Status message of the account (e.g. 'OOO' for out-of-office).
+     */
+    public String status;
 
-  public AccountInfo(Integer id) {
-    this._accountId = id;
-  }
+    /**
+     * Whether the account is inactive.
+     */
+    public Boolean inactive;
 
-  /** To be used ONLY in connection with unregistered reviewers and CCs. */
-  public AccountInfo(String name, String email) {
-    this.name = name;
-    this.email = email;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (o instanceof AccountInfo) {
-      AccountInfo accountInfo = (AccountInfo) o;
-      return Objects.equals(_accountId, accountInfo._accountId)
-          && Objects.equals(name, accountInfo.name)
-          && Objects.equals(displayName, accountInfo.displayName)
-          && Objects.equals(email, accountInfo.email)
-          && Objects.equals(secondaryEmails, accountInfo.secondaryEmails)
-          && Objects.equals(username, accountInfo.username)
-          && Objects.equals(avatars, accountInfo.avatars)
-          && Objects.equals(_moreAccounts, accountInfo._moreAccounts)
-          && Objects.equals(status, accountInfo.status);
+    public AccountInfo(Integer id) {
+        this._accountId = id;
     }
-    return false;
-  }
 
-  @Override
-  public String toString() {
-    return MoreObjects.toStringHelper(this)
-        .add("id", _accountId)
-        .add("name", name)
-        .add("displayname", displayName)
-        .add("email", email)
-        .add("username", username)
-        .toString();
-  }
+    /**
+     * To be used ONLY in connection with unregistered reviewers and CCs.
+     */
+    public AccountInfo(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(
-        _accountId,
-        name,
-        displayName,
-        email,
-        secondaryEmails,
-        username,
-        avatars,
-        _moreAccounts,
-        status);
-  }
+    @Override
+    public boolean equals(Object o) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  protected AccountInfo() {}
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    protected AccountInfo() {
+    }
 }

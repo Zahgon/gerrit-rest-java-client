@@ -11,23 +11,26 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.config;
 
 import com.google.gerrit.extensions.restapi.NotImplementedException;
 
 public interface Config {
-  /** @return An API for getting server related configurations. */
-  Server server();
 
-  /**
-   * A default implementation which allows source compatibility when adding new methods to the
-   * interface.
-   */
-  class NotImplemented implements Config {
-    @Override
-    public Server server() {
-      throw new NotImplementedException();
+    /**
+     * @return An API for getting server related configurations.
+     */
+    Server server();
+
+    /**
+     * A default implementation which allows source compatibility when adding new methods to the
+     * interface.
+     */
+    class NotImplemented implements Config {
+
+        @Override
+        public Server server() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
-  }
 }

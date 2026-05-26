@@ -11,80 +11,83 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.config;
 
 import java.util.List;
 import java.util.Objects;
 
 public class ConsistencyCheckInfo {
-  public CheckAccountsResultInfo checkAccountsResult;
-  public CheckAccountExternalIdsResultInfo checkAccountExternalIdsResult;
-  public CheckGroupsResultInfo checkGroupsResult;
 
-  public static class CheckAccountsResultInfo {
-    public List<ConsistencyProblemInfo> problems;
+    public CheckAccountsResultInfo checkAccountsResult;
 
-    public CheckAccountsResultInfo(List<ConsistencyProblemInfo> problems) {
-      this.problems = problems;
-    }
-  }
+    public CheckAccountExternalIdsResultInfo checkAccountExternalIdsResult;
 
-  public static class CheckAccountExternalIdsResultInfo {
-    public List<ConsistencyProblemInfo> problems;
+    public CheckGroupsResultInfo checkGroupsResult;
 
-    public CheckAccountExternalIdsResultInfo(List<ConsistencyProblemInfo> problems) {
-      this.problems = problems;
-    }
-  }
+    public static class CheckAccountsResultInfo {
 
-  public static class CheckGroupsResultInfo {
-    public List<ConsistencyProblemInfo> problems;
+        public List<ConsistencyProblemInfo> problems;
 
-    public CheckGroupsResultInfo(List<ConsistencyProblemInfo> problems) {
-      this.problems = problems;
-    }
-  }
-
-  public static class ConsistencyProblemInfo {
-    public enum Status {
-      ERROR,
-      WARNING,
+        public CheckAccountsResultInfo(List<ConsistencyProblemInfo> problems) {
+            this.problems = problems;
+        }
     }
 
-    public final Status status;
-    public final String message;
+    public static class CheckAccountExternalIdsResultInfo {
 
-    public ConsistencyProblemInfo(Status status, String message) {
-      this.status = status;
-      this.message = message;
+        public List<ConsistencyProblemInfo> problems;
+
+        public CheckAccountExternalIdsResultInfo(List<ConsistencyProblemInfo> problems) {
+            this.problems = problems;
+        }
     }
 
-    @Override
-    public boolean equals(Object o) {
-      if (o instanceof ConsistencyProblemInfo) {
-        ConsistencyProblemInfo other = ((ConsistencyProblemInfo) o);
-        return Objects.equals(status, other.status) && Objects.equals(message, other.message);
-      }
-      return false;
+    public static class CheckGroupsResultInfo {
+
+        public List<ConsistencyProblemInfo> problems;
+
+        public CheckGroupsResultInfo(List<ConsistencyProblemInfo> problems) {
+            this.problems = problems;
+        }
     }
 
-    @Override
-    public int hashCode() {
-      return Objects.hash(status, message);
-    }
+    public static class ConsistencyProblemInfo {
 
-    @Override
-    public String toString() {
-      return status.name() + ": " + message;
-    }
+        public enum Status {
 
-    public static ConsistencyProblemInfo warning(String fmt, Object... args) {
-      return new ConsistencyProblemInfo(Status.WARNING, String.format(fmt, args));
-    }
+            ERROR, WARNING
+        }
 
-    public static ConsistencyProblemInfo error(String fmt, Object... args) {
-      return new ConsistencyProblemInfo(Status.ERROR, String.format(fmt, args));
+        public final Status status;
+
+        public final String message;
+
+        public ConsistencyProblemInfo(Status status, String message) {
+            this.status = status;
+            this.message = message;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public int hashCode() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public String toString() {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public static ConsistencyProblemInfo warning(String fmt, Object... args) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        public static ConsistencyProblemInfo error(String fmt, Object... args) {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
-  }
 }

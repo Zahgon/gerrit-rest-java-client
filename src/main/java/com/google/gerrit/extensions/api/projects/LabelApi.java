@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.api.projects;
 
 import com.google.gerrit.common.Nullable;
@@ -21,41 +20,43 @@ import com.google.gerrit.extensions.restapi.NotImplementedException;
 import com.google.gerrit.extensions.restapi.RestApiException;
 
 public interface LabelApi {
-  LabelApi create(LabelDefinitionInput input) throws RestApiException;
 
-  LabelDefinitionInfo get() throws RestApiException;
+    LabelApi create(LabelDefinitionInput input) throws RestApiException;
 
-  LabelDefinitionInfo update(LabelDefinitionInput input) throws RestApiException;
+    LabelDefinitionInfo get() throws RestApiException;
 
-  default void delete() throws RestApiException {
-    delete(null);
-  }
+    LabelDefinitionInfo update(LabelDefinitionInput input) throws RestApiException;
 
-  void delete(@Nullable String commitMessage) throws RestApiException;
-
-  /**
-   * A default implementation which allows source compatibility when adding new methods to the
-   * interface.
-   */
-  class NotImplemented implements LabelApi {
-    @Override
-    public LabelApi create(LabelDefinitionInput input) throws RestApiException {
-      throw new NotImplementedException();
+    default void delete() throws RestApiException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    @Override
-    public LabelDefinitionInfo get() throws RestApiException {
-      throw new NotImplementedException();
-    }
+    void delete(@Nullable String commitMessage) throws RestApiException;
 
-    @Override
-    public LabelDefinitionInfo update(LabelDefinitionInput input) throws RestApiException {
-      throw new NotImplementedException();
-    }
+    /**
+     * A default implementation which allows source compatibility when adding new methods to the
+     * interface.
+     */
+    class NotImplemented implements LabelApi {
 
-    @Override
-    public void delete(@Nullable String commitMessage) throws RestApiException {
-      throw new NotImplementedException();
+        @Override
+        public LabelApi create(LabelDefinitionInput input) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public LabelDefinitionInfo get() throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public LabelDefinitionInfo update(LabelDefinitionInput input) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
+
+        @Override
+        public void delete(@Nullable String commitMessage) throws RestApiException {
+            throw new UnsupportedOperationException("STUB: not implemented");
+        }
     }
-  }
 }

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest;
 
 import java.io.IOException;
@@ -37,7 +36,8 @@ public class Version {
         }
     }
 
-    private Version() {}
+    private Version() {
+    }
 
     private static String getVersionFromProperties() throws IOException {
         InputStream inputStream = Version.class.getResourceAsStream("/version.properties");
@@ -51,6 +51,6 @@ public class Version {
     }
 
     public static String get() {
-        return VERSION;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

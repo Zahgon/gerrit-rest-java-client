@@ -20,17 +20,17 @@ import com.google.gerrit.extensions.common.ServerInfo;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
-public class ServerConfigParser extends PreferencesParser{
+public class ServerConfigParser extends PreferencesParser {
 
     public ServerConfigParser(Gson gson) {
         super(gson);
     }
 
     public ServerInfo parseServerInfo(JsonElement result) {
-        return gson.fromJson(result, ServerInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public ConsistencyCheckInfo parseConsistencyInfo(JsonElement result) {
-        return gson.fromJson(result, ConsistencyCheckInfo.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

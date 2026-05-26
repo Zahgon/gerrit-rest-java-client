@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.changes.parsers;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gerrit.extensions.common.MergeableInfo;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-
 import java.lang.reflect.Type;
 
 /**
@@ -28,14 +26,16 @@ import java.lang.reflect.Type;
  */
 public class MergeableInfoParser {
 
-    private static final Type TYPE = new TypeToken<MergeableInfo>() {}.getType();
+    private static final Type TYPE = new TypeToken<MergeableInfo>() {
+    }.getType();
 
     private final Gson gson;
 
-    public MergeableInfoParser(Gson gson) { this.gson = gson; }
-
-    public MergeableInfo parseMergeableInfo(JsonElement result) {
-        return gson.fromJson(result, TYPE);
+    public MergeableInfoParser(Gson gson) {
+        this.gson = gson;
     }
 
+    public MergeableInfo parseMergeableInfo(JsonElement result) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

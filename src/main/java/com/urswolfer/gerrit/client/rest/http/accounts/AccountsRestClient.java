@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.accounts;
 
 import com.google.gerrit.extensions.api.accounts.AccountInput;
@@ -25,7 +24,6 @@ import com.urswolfer.gerrit.client.rest.accounts.AccountApi;
 import com.urswolfer.gerrit.client.rest.accounts.Accounts;
 import com.urswolfer.gerrit.client.rest.http.GerritRestClient;
 import com.urswolfer.gerrit.client.rest.http.changes.parsers.ChangeInfosParser;
-
 import java.util.List;
 
 /**
@@ -34,12 +32,14 @@ import java.util.List;
 public class AccountsRestClient extends Accounts.NotImplemented implements Accounts {
 
     private final GerritRestClient gerritRestClient;
+
     private final AccountsParser accountsParser;
+
     private final SshKeysParser sshKeysParser;
+
     private final ChangeInfosParser changeInfosParser;
 
-    public AccountsRestClient(GerritRestClient gerritRestClient, AccountsParser accountsParser,
-                              SshKeysParser sshKeysParser, ChangeInfosParser changeInfosParser) {
+    public AccountsRestClient(GerritRestClient gerritRestClient, AccountsParser accountsParser, SshKeysParser sshKeysParser, ChangeInfosParser changeInfosParser) {
         this.gerritRestClient = gerritRestClient;
         this.accountsParser = accountsParser;
         this.sshKeysParser = sshKeysParser;
@@ -48,17 +48,17 @@ public class AccountsRestClient extends Accounts.NotImplemented implements Accou
 
     @Override
     public AccountApi id(String id) throws RestApiException {
-        return new AccountApiRestClient(gerritRestClient, accountsParser, sshKeysParser, changeInfosParser, id);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public AccountApi id(int id) throws RestApiException {
-        return id(String.valueOf(id));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public AccountApi self() throws RestApiException {
-        return id("self");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -66,12 +66,7 @@ public class AccountsRestClient extends Accounts.NotImplemented implements Accou
      */
     @Override
     public SuggestAccountsRequest suggestAccounts() throws RestApiException {
-        return new SuggestAccountsRequest() {
-            @Override
-            public List<AccountInfo> get() throws RestApiException {
-                return AccountsRestClient.this.suggestAccounts(this);
-            }
-        };
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -79,23 +74,17 @@ public class AccountsRestClient extends Accounts.NotImplemented implements Accou
      */
     @Override
     public SuggestAccountsRequest suggestAccounts(String query) throws RestApiException {
-        return suggestAccounts().withQuery(query);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public AccountApi create(String username) throws RestApiException {
-        AccountInput userInput = new AccountInput();
-        userInput.username = username;
-        return create(userInput);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public AccountApi create(AccountInput input) throws RestApiException {
-        String requestPath = String.format("/accounts/%s", Url.encode(input.username));
-        String body = gerritRestClient.getGson().toJson(input);
-        JsonElement result = gerritRestClient.putRequest(requestPath,body);
-        AccountInfo info = accountsParser.parseAccountInfo(result);
-        return new AccountApiRestClient(gerritRestClient, accountsParser, sshKeysParser, changeInfosParser, info.username);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private List<AccountInfo> suggestAccounts(SuggestAccountsRequest r) throws RestApiException {

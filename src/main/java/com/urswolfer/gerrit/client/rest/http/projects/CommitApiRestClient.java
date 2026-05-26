@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.projects;
 
 import com.google.gerrit.extensions.api.changes.IncludedInInfo;
@@ -25,17 +24,17 @@ import com.google.gson.JsonElement;
 import com.urswolfer.gerrit.client.rest.http.GerritRestClient;
 import com.urswolfer.gerrit.client.rest.http.projects.parsers.ProjectCommitInfoParser;
 
-
 public class CommitApiRestClient extends CommitApi.NotImplemented implements CommitApi {
 
     private final GerritRestClient gerritRestClient;
+
     private final ProjectApiRestClient projectApiRestClient;
+
     private final ProjectCommitInfoParser projectCommitInfoParser;
 
     private final String commit;
 
-    public CommitApiRestClient(GerritRestClient gerritRestClient, ProjectApiRestClient projectApiRestClient,
-                               ProjectCommitInfoParser projectCommitInfoParser, String commit) {
+    public CommitApiRestClient(GerritRestClient gerritRestClient, ProjectApiRestClient projectApiRestClient, ProjectCommitInfoParser projectCommitInfoParser, String commit) {
         this.gerritRestClient = gerritRestClient;
         this.projectApiRestClient = projectApiRestClient;
         this.commit = commit;
@@ -44,18 +43,15 @@ public class CommitApiRestClient extends CommitApi.NotImplemented implements Com
 
     @Override
     public CommitInfo get() throws RestApiException {
-        JsonElement jsonElement = gerritRestClient.getRequest(commitURL());
-        return projectCommitInfoParser.parseSingleCommitInfo(jsonElement);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     @Override
     public IncludedInInfo includedIn() throws RestApiException {
-        JsonElement jsonElement = gerritRestClient.getRequest(commitURL() + "/in");
-        return projectCommitInfoParser.parseIncludedInInfo(jsonElement);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected String commitURL() {
-        return projectApiRestClient.projectsUrl() + "/commits/" + Url.encode(commit);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

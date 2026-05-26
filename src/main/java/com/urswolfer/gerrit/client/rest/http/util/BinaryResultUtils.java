@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.util;
 
 import com.google.gerrit.extensions.restapi.BinaryResult;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
-
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -27,14 +25,12 @@ import java.io.InputStream;
  * @author Urs Wolfer
  */
 public class BinaryResultUtils {
-    private BinaryResultUtils() {}
+
+    private BinaryResultUtils() {
+    }
 
     public static BinaryResult createBinaryResult(HttpResponse response) throws IOException {
-        InputStream content = response.getEntity().getContent();
-        BinaryResult binaryResult = BinaryResult.create(content);
-        setContentType(response, binaryResult);
-        setContentEncoding(response, binaryResult);
-        return binaryResult;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static void setContentType(HttpResponse response, BinaryResult binaryResult) {

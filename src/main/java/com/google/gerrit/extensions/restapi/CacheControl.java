@@ -11,59 +11,59 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.restapi;
 
 import java.util.concurrent.TimeUnit;
 
 public class CacheControl {
 
-  public enum Type {
-    @SuppressWarnings("hiding")
-    NONE,
-    PUBLIC,
-    PRIVATE
-  }
+    public enum Type {
 
-  public static final CacheControl NONE = new CacheControl(Type.NONE, 0, null);
+        @SuppressWarnings("hiding")
+        NONE, PUBLIC, PRIVATE
+    }
 
-  public static CacheControl PUBLIC(long age, TimeUnit unit) {
-    return new CacheControl(Type.PUBLIC, age, unit);
-  }
+    public static final CacheControl NONE = new CacheControl(Type.NONE, 0, null);
 
-  public static CacheControl PRIVATE(long age, TimeUnit unit) {
-    return new CacheControl(Type.PRIVATE, age, unit);
-  }
+    public static CacheControl PUBLIC(long age, TimeUnit unit) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  private final Type type;
-  private final long age;
-  private final TimeUnit unit;
-  private boolean mustRevalidate;
+    public static CacheControl PRIVATE(long age, TimeUnit unit) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  private CacheControl(Type type, long age, TimeUnit unit) {
-    this.type = type;
-    this.age = age;
-    this.unit = unit;
-  }
+    private final Type type;
 
-  public Type getType() {
-    return type;
-  }
+    private final long age;
 
-  public long getAge() {
-    return age;
-  }
+    private final TimeUnit unit;
 
-  public TimeUnit getUnit() {
-    return unit;
-  }
+    private boolean mustRevalidate;
 
-  public boolean isMustRevalidate() {
-    return mustRevalidate;
-  }
+    private CacheControl(Type type, long age, TimeUnit unit) {
+        this.type = type;
+        this.age = age;
+        this.unit = unit;
+    }
 
-  public CacheControl setMustRevalidate() {
-    mustRevalidate = true;
-    return this;
-  }
+    public Type getType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public long getAge() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public TimeUnit getUnit() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public boolean isMustRevalidate() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public CacheControl setMustRevalidate() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

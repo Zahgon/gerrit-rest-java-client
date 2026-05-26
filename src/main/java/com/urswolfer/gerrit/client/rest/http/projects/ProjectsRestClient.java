@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.urswolfer.gerrit.client.rest.http.projects;
 
 import com.google.common.base.Strings;
@@ -27,7 +26,6 @@ import com.google.gson.JsonElement;
 import com.urswolfer.gerrit.client.rest.http.GerritRestClient;
 import com.urswolfer.gerrit.client.rest.http.projects.parsers.ProjectCommitInfoParser;
 import com.urswolfer.gerrit.client.rest.http.util.UrlUtils;
-
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -37,16 +35,16 @@ import java.util.TreeMap;
 public class ProjectsRestClient extends Projects.NotImplemented implements Projects {
 
     private final GerritRestClient gerritRestClient;
+
     private final ProjectsParser projectsParser;
+
     private final BranchInfoParser branchInfoParser;
+
     private final TagInfoParser tagInfoParser;
+
     private final ProjectCommitInfoParser projectCommitInfoParser;
 
-    public ProjectsRestClient(GerritRestClient gerritRestClient,
-                              ProjectsParser projectsParser,
-                              BranchInfoParser branchInfoParser,
-                              TagInfoParser tagInfoParser,
-                              ProjectCommitInfoParser projectCommitInfoParser) {
+    public ProjectsRestClient(GerritRestClient gerritRestClient, ProjectsParser projectsParser, BranchInfoParser branchInfoParser, TagInfoParser tagInfoParser, ProjectCommitInfoParser projectCommitInfoParser) {
         this.gerritRestClient = gerritRestClient;
         this.projectsParser = projectsParser;
         this.branchInfoParser = branchInfoParser;
@@ -56,22 +54,16 @@ public class ProjectsRestClient extends Projects.NotImplemented implements Proje
 
     @Override
     public ListRequest list() {
-        return new ListRequest() {
-            @Override
-            public SortedMap<String, ProjectInfo> getAsMap() throws RestApiException {
-                return ProjectsRestClient.this.list(this);
-            }
-        };
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ProjectApi name(String name) throws RestApiException {
-        return new ProjectApiRestClient(gerritRestClient, projectsParser, branchInfoParser, tagInfoParser, projectCommitInfoParser, name);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private SortedMap<String, ProjectInfo> list(ListRequest listParameter) throws RestApiException {
         String query = "";
-
         if (listParameter.getDescription()) {
             query = UrlUtils.appendToUrlQuery(query, "d");
         }
@@ -94,12 +86,10 @@ public class ProjectsRestClient extends Projects.NotImplemented implements Proje
         if (filterType != null && filterType != ListRequest.FilterType.ALL) {
             query = UrlUtils.appendToUrlQuery(query, "type=" + filterType);
         }
-
         String url = "/projects/";
         if (!Strings.isNullOrEmpty(query)) {
             url += '?' + query;
         }
-
         JsonElement result = gerritRestClient.getRequest(url);
         if (result == null) {
             return new TreeMap<>();
@@ -109,21 +99,11 @@ public class ProjectsRestClient extends Projects.NotImplemented implements Proje
 
     @Override
     public ProjectApi create(String name) throws RestApiException {
-        ProjectInput projectInput = new ProjectInput();
-        projectInput.name = name;
-        return create(projectInput);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ProjectApi create(ProjectInput in) throws RestApiException {
-        if (in.name == null) {
-            throw new IllegalArgumentException("Name must be set in project creation input.");
-        }
-
-        String url = String.format("/projects/%s", Url.encode(in.name));
-        String projectInput = projectsParser.generateProjectInput(in);
-        JsonElement result = gerritRestClient.putRequest(url, projectInput);
-        ProjectInfo info = projectsParser.parseSingleProjectInfo(result);
-        return new ProjectApiRestClient(gerritRestClient, projectsParser, branchInfoParser, tagInfoParser, projectCommitInfoParser, info.name);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

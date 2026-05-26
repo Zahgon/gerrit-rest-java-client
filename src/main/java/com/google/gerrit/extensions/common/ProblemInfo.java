@@ -11,43 +11,35 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.gerrit.extensions.common;
 
 import java.util.Objects;
 
 public class ProblemInfo {
-  public enum Status {
-    FIXED,
-    FIX_FAILED
-  }
 
-  public String message;
-  public Status status;
-  public String outcome;
+    public enum Status {
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(message, status, outcome);
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (!(o instanceof ProblemInfo)) {
-      return false;
+        FIXED, FIX_FAILED
     }
-    ProblemInfo p = (ProblemInfo) o;
-    return Objects.equals(message, p.message)
-        && Objects.equals(status, p.status)
-        && Objects.equals(outcome, p.outcome);
-  }
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder(getClass().getSimpleName()).append('[').append(message);
-    if (status != null || outcome != null) {
-      sb.append(" (").append(status).append(": ").append(outcome).append(')');
+    public String message;
+
+    public Status status;
+
+    public String outcome;
+
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return sb.append(']').toString();
-  }
+
+    @Override
+    public boolean equals(Object o) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }
